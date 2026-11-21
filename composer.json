@@ -1,0 +1,16 @@
+{
+    "name": "taizsign/portfolio",
+    "description": "Portfolio de Raphaël — PHP objet sans framework, SQLite",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.2",
+        "ext-pdo_sqlite": "*",
+        "ext-curl": "*",
+        "ext-intl": "*",
+        "ext-simplexml": "*"
+    },
+    "autoload": {
+        "psr-4": { "App\\": "src/" }
+    }
+}

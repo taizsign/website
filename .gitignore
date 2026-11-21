@@ -1,0 +1,5 @@
+/vendor/
+/storage/portfolio.*.sqlite
+/storage/portfolio.*.sqlite.*
+/storage/cache/*
+!/storage/cache/.gitkeep

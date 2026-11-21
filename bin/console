@@ -1,0 +1,97 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/*
+ * Petites commandes d'administration.
+ *
+ *   php bin/console db:build               reconstruit les bases (une par langue) depuis database/
+ *   php bin/console db:query "SQL" [en]    exécute une requête en lecture et affiche le résultat
+ *   php bin/console i18n:check             liste les textes de l'interface pas encore traduits
+ *   php bin/console cache:clear            vide storage/cache (flux RSS)
+ *   php bin/console routes                 liste les routes, dans chaque langue
+ */
+
+require dirname(__DIR__) . '/src/bootstrap.php';
+
+use App\Container;
+use App\I18n\Translator;
+use App\Kernel;
+
+$root = dirname(__DIR__);
+$command = $argv[1] ?? 'help';
+
+switch ($command) {
+    case 'db:build':
+        foreach (array_keys(Translator::LOCALES) as $locale) {
+            $start = hrtime(true);
+            $schema = Container::schema($root, $locale);
+            $schema->rebuild();
+            printf("[%s] base reconstruite en %.0f ms : %s\n", $locale, (hrtime(true) - $start) / 1e6, substr($schema->file(), strlen($root) + 1));
+        }
+        break;
+
+    case 'db:query':
+        $sql = $argv[2] ?? '';
+        $locale = $argv[3] ?? Translator::DEFAULT;
+        if (!preg_match('/^\s*(SELECT|WITH|PRAGMA)\b/i', $sql)) {
+            fwrite(STDERR, "Lecture seule : SELECT, WITH ou PRAGMA uniquement.\n");
+            exit(1);
+        }
+        if (!isset(Translator::LOCALES[$locale])) {
+            fwrite(STDERR, "Langue inconnue : {$locale}\n");
+            exit(1);
+        }
+        $rows = Container::schema($root, $locale)->open()->all($sql);
+        foreach ($rows as $row) {
+            echo implode(' | ', array_map(static fn ($v): string => (string) $v, $row)), "\n";
+        }
+        printf("(%d ligne%s)\n", count($rows), count($rows) > 1 ? 's' : '');
+        break;
+
+    case 'i18n:check':
+        // Toutes les chaînes passées à t() dans les gabarits et le code, comparées à lang/<langue>.php.
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root . '/templates'));
+        $sources = [...iterator_to_array($files), ...glob($root . '/src/*/*.php')];
+        $keys = [];
+        foreach ($sources as $file) {
+            if (!str_ends_with((string) $file, '.php')) {
+                continue;
+            }
+            preg_match_all('/(?:->t|\$t|\(\$this->t\))\(\s*(\'(?:[^\'\\\\]|\\\\.)*\'|"(?:[^"\\\\]|\\\\.)*")/', (string) file_get_contents((string) $file), $m);
+            foreach ($m[1] as $literal) {
+                $keys[stripcslashes(substr($literal, 1, -1))] = substr((string) $file, strlen($root) + 1);
+            }
+        }
+        $missing = 0;
+        foreach (array_keys(Translator::LOCALES) as $locale) {
+            if ($locale === Translator::DEFAULT) {
+                continue;
+            }
+            $translator = new Translator($locale, $root . '/lang');
+            foreach ($keys as $key => $file) {
+                if (!$translator->has($key)) {
+                    printf("[%s] %s\n      %s\n", $locale, $file, $key);
+                    $missing++;
+                }
+            }
+        }
+        printf("%d texte(s) relevé(s), %d sans traduction.\n", count($keys), $missing);
+        exit($missing > 0 ? 1 : 0);
+
+    case 'cache:clear':
+        $files = glob($root . '/storage/cache/*') ?: [];
+        array_map('unlink', array_filter($files, 'is_file'));
+        printf("%d fichier(s) supprimé(s).\n", count($files));
+        break;
+
+    case 'routes':
+        foreach (Kernel::routes()->all() as $route) {
+            printf("%-14s %s\n", $route['name'], implode('   ', $route['patterns']));
+        }
+        break;
+
+    default:
+        echo "Commandes : db:build, db:query \"SELECT …\" [en], i18n:check, cache:clear, routes\n";
+}
