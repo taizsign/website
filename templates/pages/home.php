@@ -86,23 +86,32 @@ $letters = function (string $word, int $offset = 0): string {
             </article>
         </div>
 
+        <?php
+        $rows = [
+            ['acquired', $this->t('compétences acquises'), $this->t("WHERE statut = 'acquis'")],
+            ['learning', $this->t("en cours d'apprentissage"), $this->t("WHERE statut = 'en cours'")],
+            ['goals', $this->t('objectifs pour la suite'), $this->t("WHERE statut = 'objectif'")],
+            ['technologies', $this->t('outils et technologies dans mes 2 projets'), 'SELECT COUNT(*) FROM technology'],
+        ];
+        ?>
         <dl class="figures" data-reveal>
-            <div class="figure">
-                <dt><span data-count="<?= $figures['acquired'] ?>"><?= $figures['acquired'] ?></span></dt>
-                <dd><?= $this->t('compétences acquises') ?><code><?= $this->t("WHERE statut = 'acquis'") ?></code></dd>
-            </div>
-            <div class="figure">
-                <dt><span data-count="<?= $figures['learning'] ?>"><?= $figures['learning'] ?></span></dt>
-                <dd><?= $this->t("en cours d'apprentissage") ?><code><?= $this->t("WHERE statut = 'en cours'") ?></code></dd>
-            </div>
-            <div class="figure">
-                <dt><span data-count="<?= $figures['goals'] ?>"><?= $figures['goals'] ?></span></dt>
-                <dd><?= $this->t('objectifs pour la suite') ?><code><?= $this->t("WHERE statut = 'objectif'") ?></code></dd>
-            </div>
-            <div class="figure">
-                <dt><span data-count="<?= $figures['technologies'] ?>"><?= $figures['technologies'] ?></span></dt>
-                <dd><?= $this->t('outils et technologies dans mes 2 projets') ?><code>SELECT COUNT(*) FROM technology</code></dd>
-            </div>
+            <?php foreach ($rows as [$key, $label, $query]): ?>
+                <div class="figure">
+                    <dt>
+                        <span data-count="<?= $figures[$key] ?>"><?= $figures[$key] ?></span>
+                        <button class="figure__help" type="button" aria-label="<?= $this->t('Voir la liste') ?>" aria-expanded="false" aria-controls="figure-<?= $key ?>">?</button>
+                    </dt>
+                    <dd><?= $label ?><code><?= $query ?></code></dd>
+                    <div class="figure__pop" id="figure-<?= $key ?>">
+                        <input class="figure__search" type="search" placeholder="<?= $this->t('Rechercher') ?>" aria-label="<?= $this->t('Rechercher dans la liste') ?>" autocomplete="off" spellcheck="false">
+                        <ul class="figure__list">
+                            <?php foreach ($details[$key] as $name): ?>
+                                <li><?= $this->e($name) ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </dl>
         <p class="figures__note" data-reveal><?= $this->t('Ces chiffres sortent de la base SQLite qui fait tourner ce site.') ?> <a class="link" href="<?= $this->url('skills') ?>"><?= $this->t('Interroger mes compétences →') ?></a></p>
     </div>

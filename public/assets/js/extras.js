@@ -341,6 +341,77 @@ export function initBunny() {
     })();
 }
 
+/**
+ * Les listes derrière les chiffres de l'accueil.
+ * La fenêtre s'ouvre au survol du « ? » et reste ouverte tant que la souris
+ * ne quitte pas le chiffre ou la fenêtre. La recherche met en violet les noms
+ * qui correspondent, même avec une faute de frappe ou sans les accents.
+ */
+export function initFigures() {
+    const figures = document.querySelectorAll('.figure');
+    if (!figures.length) return;
+
+    const plain = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+
+    // distance d'édition entre deux mots courts (fautes de frappe)
+    function distance(a, b) {
+        const row = Array.from({ length: b.length + 1 }, (_, i) => i);
+        for (let i = 1; i <= a.length; i++) {
+            let prev = row[0];
+            row[0] = i;
+            for (let j = 1; j <= b.length; j++) {
+                const tmp = row[j];
+                row[j] = Math.min(row[j] + 1, row[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+                prev = tmp;
+            }
+        }
+        return row[b.length];
+    }
+
+    // « de près ou de loin » : morceau du nom, lettres dans l'ordre, ou une faute de frappe
+    function matches(name, query) {
+        const text = plain(name);
+        if (text.includes(query)) return true;
+        const words = text.split(/[^a-z0-9#+.]+/).filter(Boolean);
+        const tolerance = query.length >= 6 ? 2 : query.length >= 3 ? 1 : 0;
+        if (tolerance && words.some((w) => distance(w.slice(0, query.length), query) <= tolerance)) return true;
+        if (query.length >= 3) {
+            let i = 0;
+            for (const ch of text.replace(/\s+/g, '')) if (ch === query[i]) i++;
+            if (i === query.length && text.length <= query.length * 3) return true;
+        }
+        return false;
+    }
+
+    figures.forEach((figure) => {
+        const help = figure.querySelector('.figure__help');
+        const input = figure.querySelector('.figure__search');
+        const list = figure.querySelector('.figure__list');
+        if (!help || !input || !list) return;
+        const items = [...list.children];
+
+        const open = () => { figure.classList.add('is-open'); help.setAttribute('aria-expanded', 'true'); };
+        const close = () => {
+            figure.classList.remove('is-open');
+            help.setAttribute('aria-expanded', 'false');
+            if (figure.contains(document.activeElement)) document.activeElement.blur();
+        };
+
+        help.addEventListener('pointerenter', open);
+        help.addEventListener('click', () => (figure.classList.contains('is-open') ? close() : (open(), input.focus())));
+        // la fenêtre est dans le chiffre : quitter l'un sans entrer dans l'autre la ferme
+        figure.addEventListener('pointerleave', close);
+        figure.addEventListener('keydown', (event) => { if (event.key === 'Escape') { close(); help.focus(); } });
+        figure.addEventListener('focusout', (event) => { if (!figure.contains(event.relatedTarget)) figure.classList.remove('is-open'); });
+
+        input.addEventListener('input', () => {
+            const query = plain(input.value);
+            list.classList.toggle('is-searching', query !== '');
+            items.forEach((li) => li.classList.toggle('is-match', query !== '' && matches(li.textContent, query)));
+        });
+    });
+}
+
 /** Vidéo YouTube chargée seulement au clic (pas de cookie avant). */
 export function initVideo() {
     document.querySelectorAll('[data-video]').forEach((box) => {

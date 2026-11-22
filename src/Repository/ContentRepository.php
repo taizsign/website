@@ -81,4 +81,22 @@ final class ContentRepository
 
         return array_map('intval', $row);
     }
+
+    /**
+     * Le détail derrière chaque chiffre : les noms, sans plus.
+     *
+     * @return array{acquired: list<string>, learning: list<string>, goals: list<string>, technologies: list<string>}
+     */
+    public function figureNames(): array
+    {
+        $skills = static fn (array $rows): array => array_column($rows, 'name');
+        $byStatus = fn (string $status): array => $skills($this->db->all('SELECT name FROM skill WHERE status = ? ORDER BY level DESC, id', [$status]));
+
+        return [
+            'acquired'     => $byStatus('acquis'),
+            'learning'     => $byStatus('en cours'),
+            'goals'        => $byStatus('objectif'),
+            'technologies' => $skills($this->db->all('SELECT name FROM technology ORDER BY name COLLATE NOCASE')),
+        ];
+    }
 }

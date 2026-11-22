@@ -21,6 +21,7 @@ final class HomeController extends AbstractController
             'title'    => null,
             'projects' => $this->container->projects()->all(),
             'figures'  => $content->figures(),
+            'details'  => $content->figureNames(),
             'goals'    => $goals['rows'],
             'next'     => $next[0] ?? null,
         ]);

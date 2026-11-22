@@ -632,7 +632,7 @@ a.lang__flag:hover img, a.lang__flag:focus-visible img {
     margin: clamp(64px, 8vw, 112px) 0 20px;
     border-block: 1px solid var(--line);
 }
-.figure { padding: 28px 24px 28px 0; }
+.figure { position: relative; padding: 28px 24px 28px 0; }
 .figure + .figure { padding-left: 24px; border-left: 1px solid var(--line); }
 .figure dt { font-size: clamp(56px, 7vw, 104px); font-weight: 600; letter-spacing: -.06em; line-height: 1; font-variant-numeric: tabular-nums; }
 .figure dd { margin: 12px 0 0; color: var(--muted); font-size: 15px; }
@@ -640,6 +640,44 @@ a.lang__flag:hover img, a.lang__flag:focus-visible img {
     display: block; width: fit-content; margin-top: 8px;
     font-size: 11px; background: none; padding: 0; color: var(--faint); white-space: normal;
 }
+/* le « ? » à côté du chiffre, et la liste qui apparaît au survol */
+.figure dt { display: flex; align-items: flex-start; gap: 10px; }
+.figure__help {
+    margin-top: .06em; padding: 0 2px; border: 0; background: none; cursor: help;
+    font: 600 clamp(30px, 3.2vw, 48px)/1 var(--sans); letter-spacing: 0; color: var(--violet);
+    opacity: .8; transition: opacity .2s, transform .25s var(--ease);
+}
+.figure__help:hover, .figure__help:focus-visible { opacity: 1; transform: rotate(-8deg) scale(1.08); }
+/* la fenêtre : elle reste ouverte tant que la souris est sur le chiffre ou sur elle */
+.figure__pop {
+    position: absolute; z-index: 5; top: calc(100% - 12px); left: 0;
+    width: min(440px, 86vw); padding: 16px 18px 18px;
+    background: var(--dark); color: #e9e9ef; box-shadow: 8px 8px 0 var(--violet-tint);
+    opacity: 0; visibility: hidden; transform: translateY(6px);
+    transition: opacity .18s, transform .22s var(--ease), visibility 0s .22s;
+}
+.figure + .figure .figure__pop { left: 24px; }
+.figure:last-child .figure__pop { left: auto; right: 0; }
+.figure.is-open .figure__pop, html:not(.js) .figure:focus-within .figure__pop { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.figure.is-open .figure__help { opacity: 1; }
+
+.figure__search {
+    width: 100%; margin-bottom: 12px; padding: 9px 12px 9px 34px;
+    border: 1px solid var(--dark-line); border-radius: 0; background: #17171c;
+    color: #fff; font: 14px/1.2 var(--sans); outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9aa8' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='M16 16l4.5 4.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: 11px 50%; background-size: 15px;
+    transition: border-color .2s;
+}
+.figure__search::placeholder { color: var(--dark-muted); }
+.figure__search:focus { border-color: var(--violet-light); }
+.figure__search::-webkit-search-cancel-button { filter: invert(1) opacity(.5); }
+
+.figure__list { columns: 2; column-gap: 22px; font-size: 13.5px; line-height: 1.45; }
+.figure__list li { break-inside: avoid; padding: 3px 0; color: #d6d6de; transition: color .15s, opacity .15s; }
+.figure__list.is-searching li { opacity: .38; }
+.figure__list li.is-match { color: #b293ff; opacity: 1; font-weight: 600; }
+
 .figures__note { font-size: 15px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; }
 
 /* Projets (liste) */
