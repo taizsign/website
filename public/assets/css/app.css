@@ -703,6 +703,12 @@ a.lang__flag:hover img, a.lang__flag:focus-visible img {
 .figure__search::-webkit-search-cancel-button { filter: invert(1) opacity(.5); }
 
 .figure__list { columns: 2; column-gap: 22px; font-size: 13.5px; line-height: 1.45; }
+/* sur petit écran, la fenêtre s'ouvre sous la grille des chiffres, sur toute la largeur */
+@media (max-width: 900px) {
+    .figures { position: relative; }
+    .figure { position: static; }
+    .figure__pop, .figure + .figure .figure__pop, .figure:last-child .figure__pop { top: calc(100% + 8px); left: 0; right: 0; width: auto; }
+}
 .figure__list li { break-inside: avoid; padding: 3px 0; color: #d6d6de; transition: color .15s, opacity .15s; }
 .figure__list.is-searching li { opacity: .38; }
 .figure__list li.is-match { color: #b293ff; opacity: 1; font-weight: 600; }
@@ -1668,10 +1674,17 @@ button.foot__handle { cursor: copy; }
 
 @media (max-width: 640px) {
     body { font-size: 16px; }
-    .project__figure, .arch { overflow-x: auto; }
+    .project__figure, .arch { overflow-x: auto; min-width: 0; }
     .project__figure .topo, .arch .topo { min-width: 620px; }
     .hero__meta { flex-direction: column; gap: 14px; }
     .hero__status { text-align: left; }
+    /* sur petit écran, l'accroche passe sur deux lignes : on laisse de l'air avant le nom */
+    .hero__bottom { margin-top: 44px; }
+    /* zones tactiles d'au moins 40 px de haut */
+    .foot__nav a, .foot__end a { display: inline-block; padding: 10px 0; }
+    .foot__nav, .foot__end { gap: 0 22px; }
+    .lang__flag { padding: 9px 6px; margin: -9px -6px; }
+    .figure__help { padding: 0 10px; margin-left: -6px; }
     .builds { grid-template-columns: minmax(0, 1fr); }
     .build:nth-child(even) { padding-left: 0; border-left: 0; }
     .figures { grid-template-columns: 1fr 1fr; }
