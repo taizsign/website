@@ -60,6 +60,11 @@ $letters = function (string $word, int $offset = 0): string {
     </div>
 
     <a class="hero__scroll" href="#intro" aria-label="<?= $this->t('Descendre') ?>"><span></span></a>
+    <!-- une flèche dessinée à la main, du J de Jacquis vers le bas, si l'on reste en haut -->
+    <svg class="nudge" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-nudge>
+        <path class="nudge__shaft" pathLength="1"/>
+        <path class="nudge__head" pathLength="1"/>
+    </svg>
 </section>
 
 <!-- (01) Qui je suis -->

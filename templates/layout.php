@@ -42,6 +42,7 @@ $alternates = $this->alternates();
 <body id="top">
     <a class="skip" href="#main"><?= $this->t('Aller au contenu') ?></a>
     <canvas class="field" id="field" aria-hidden="true"></canvas>
+    <div class="progress" aria-hidden="true" data-progress><span class="progress__fill"></span><span class="progress__dot"></span></div>
 
     <?= $this->partial('partials/header') ?>
 

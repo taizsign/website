@@ -412,6 +412,71 @@ export function initFigures() {
     });
 }
 
+/**
+ * Au bout de 7 secondes en haut de l'accueil, une flèche dessinée part du J de
+ * « Jacquis » et descend vers l'indicateur de défilement : elle se trace, reste
+ * une seconde, puis s'en va. Une seule fois, et seulement si l'on n'a pas encore
+ * fait défiler la page.
+ */
+export function initNudge() {
+    const nudge = document.querySelector('[data-nudge]');
+    const hero = nudge?.closest('.hero');
+    const letter = hero?.querySelector('.hero__title > span:nth-child(2) .ch');
+    const cue = hero?.querySelector('.hero__scroll');
+    if (!nudge || !letter || !cue || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // le tracé est calculé au moment voulu, d'après la place réelle du J et de l'indicateur
+    function trace() {
+        const box = hero.getBoundingClientRect();
+        const j = letter.getBoundingClientRect();
+        const c = cue.getBoundingClientRect();
+        const x0 = j.left + j.width * .55 - box.left;
+        const y0 = j.bottom + 6 - box.top;
+        const x1 = c.left + c.width / 2 - box.left;
+        const y1 = c.top - 10 - box.top;
+        // un arc qui plonge sous le J, remonte, fait une boucle, puis redescend sur l'indicateur
+        const ax = x0 + (x1 - x0) * .62;
+        const ay = Math.min(y0, y1) - 64;
+        const f = (n) => n.toFixed(1);
+        nudge.setAttribute('viewBox', `0 0 ${f(box.width)} ${f(box.height)}`);
+        nudge.querySelector('.nudge__shaft').setAttribute('d',
+            `M${f(x0)} ${f(y0)} C${f(x0 + 60)} ${f(y0 + 40)} ${f(ax - 130)} ${f(ay + 14)} ${f(ax)} ${f(ay)}`
+            + ' c18 -4 22 -24 6 -26 c-14 -2 -18 18 -2 24'
+            + ` C${f(ax + 70)} ${f(ay - 8)} ${f(x1 + 8)} ${f(y1 - 56)} ${f(x1)} ${f(y1)}`);
+        nudge.querySelector('.nudge__head').setAttribute('d',
+            `M${f(x1 - 11)} ${f(y1 - 12)} q5 6 11 12 q4 -8 11 -14`);
+    }
+
+    setTimeout(() => {
+        if (scrollY > 40 || document.hidden) return;
+        trace();
+        nudge.classList.add('is-playing');
+        nudge.addEventListener('animationend', (event) => {
+            if (event.animationName === 'nudge-out') nudge.classList.remove('is-playing');
+        });
+    }, 7000);
+}
+
+/** Barre de progression de la lecture, le long du bord gauche. */
+export function initProgress() {
+    const bar = document.querySelector('[data-progress]');
+    const fill = bar?.querySelector('.progress__fill');
+    const dot = bar?.querySelector('.progress__dot');
+    if (!fill || !dot) return;
+    let queued = false;
+    const update = () => {
+        queued = false;
+        const max = document.documentElement.scrollHeight - innerHeight;
+        const ratio = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+        fill.style.transform = `scaleY(${ratio})`;
+        dot.style.transform = `translateY(${(ratio * bar.clientHeight).toFixed(1)}px)`;
+    };
+    const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+    addEventListener('scroll', schedule, { passive: true });
+    addEventListener('resize', schedule);
+    update();
+}
+
 /** Vidéo YouTube chargée seulement au clic (pas de cookie avant). */
 export function initVideo() {
     document.querySelectorAll('[data-video]').forEach((box) => {
