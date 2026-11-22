@@ -22,8 +22,8 @@ return [
     [
         'period' => 'Since 2024',
         'kind'   => 'Degree',
-        'title'  => 'BTS SIO SLAM & SISR',
-        'body'   => 'A two-year French higher national diploma in IT services. Application development (C#, PHP, Symfony, SQL) and systems and network infrastructure, with a shared core in cybersecurity (E7 exam).',
+        'title'  => 'BTS SIO SLAM',
+        'body'   => 'A two-year French higher national diploma in IT services, software development track (SLAM). Application development (C#, PHP, Symfony, SQL), with a shared core in systems, networks and cybersecurity (E7 exam).',
         'tags'   => ['Development', 'Systems', 'Networks', 'Cybersecurity'],
     ],
     [

@@ -29,8 +29,8 @@ return [
     [
         'period' => 'Depuis 2024',
         'kind'   => 'Formation',
-        'title'  => 'BTS SIO SLAM & SISR',
-        'body'   => 'Services informatiques aux organisations. Le développement d\'applications (C#, PHP, Symfony, SQL) et l\'infrastructure systèmes et réseaux, avec un socle commun en cybersécurité (épreuve E7).',
+        'title'  => 'BTS SIO SLAM',
+        'body'   => 'Services informatiques aux organisations, option SLAM. Le développement d\'applications (C#, PHP, Symfony, SQL), avec un socle commun en systèmes, réseaux et cybersécurité (épreuve E7).',
         'tags'   => ['Développement', 'Systèmes', 'Réseaux', 'Cybersécurité'],
         'state'  => 'current',
         'at'     => 2024.7,

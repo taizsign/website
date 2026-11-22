@@ -47,23 +47,23 @@ return [
     'Script de déploiement · GitHub Pages'     => 'Setup script · GitHub Pages',
 
     // Accueil
-    'Étudiant BTS SIO SLAM &amp; SISR'         => 'IT student, BTS SIO SLAM &amp; SISR',
+    'Étudiant BTS SIO SLAM'                    => 'IT student, BTS SIO SLAM',
     "Étudiant en BTS SIO à Besançon. J'ai appris à construire des applications, et je m'oriente maintenant vers ce qui les fait tourner, les serveurs, le réseau et les bases de données."
         => "IT student (BTS SIO) in Besançon. I learned how to build applications, and now I'm moving toward what keeps them running, the servers, the network and the databases.",
     'Voir mes projets'                         => 'See my projects',
     'Descendre'                                => 'Scroll down',
-    'En deux mots'                             => 'In short',
-    "Je viens du <em>développement</em>. Je vais vers l'<em>infrastructure</em>. Entre les deux, une conviction&nbsp;: on écrit de meilleures applications quand on sait comment vivent le serveur, le réseau et la base qui les portent."
-        => "I come from <em>development</em>. I'm heading for <em>infrastructure</em>. In between, one conviction: you write better applications when you understand how the server, the network and the database underneath them really behave.",
+    'Qui je suis ?'                            => 'Who am I?',
+    "En 2019 j'ai monté mon premier PC. Depuis, l'informatique est devenue une passion. Elle m'a amené au <em>développement</em> et me pousse aujourd'hui vers l'<em>administration systèmes et réseaux</em>. Chez moi tourne un homelab avec NAS, OPNsense, Proxmox. À côté, un PC pensé pour l'<em>OPSEC</em>, dont j'ai retiré les puces à risque. Il démarre sous Kicksecure, chiffre ses données avec VeraCrypt, sort sur Internet par Mullvad."
+        => "In 2019 I built my first PC. Since then, computing has become a passion. It led me to <em>development</em> and today pushes me towards <em>systems and network administration</em>. At home I run a homelab with a NAS, OPNsense, Proxmox. Next to it sits a PC built for <em>OPSEC</em>, stripped of its risky chips. It boots Kicksecure, encrypts its data with VeraCrypt, reaches the Internet through Mullvad.",
     "Aujourd'hui"                              => 'Today',
-    'BTS SIO, SLAM &amp; SISR. Deux applications livrées de bout en bout&nbsp;: base MySQL, API, client, et mise en production sur mon VPS.'
-        => 'BTS SIO, SLAM &amp; SISR. Two applications delivered end to end: MySQL database, API, client, and deployment to production on my own VPS.',
+    'BTS SIO, option SLAM. Deux applications livrées de bout en bout&nbsp;: base MySQL, API, client, et mise en production sur mon VPS.'
+        => 'BTS SIO, SLAM track. Two applications delivered end to end: MySQL database, API, client, and deployment to production on my own VPS.',
     'Le cap'                                   => "Where I'm headed",
     "Administration systèmes, réseaux et bases de données. Linux, Windows Server, Cisco, PostgreSQL&nbsp;: la liste est longue, je la prends dans l'ordre."
         => "Systems, network and database administration. Linux, Windows Server, Cisco, PostgreSQL: the list is long, and I'm working through it in order.",
     'À côté'                                   => 'On the side',
-    'Un homelab en construction (Proxmox, OPNsense) et un fer à souder, pour réparer et améliorer mon matériel moi-même.'
-        => 'A homelab in progress (Proxmox, OPNsense) and a soldering iron, to repair and upgrade my own hardware.',
+    'Je prépare le TOEIC pour valider mon anglais, ainsi que la certification Cisco CCNA en réseau.'
+        => "I'm preparing for the TOEIC to certify my English, along with the Cisco CCNA networking certification.",
     'compétences acquises'                     => 'skills acquired',
     "WHERE statut = 'acquis'"                  => "WHERE status = 'acquired'",
     "en cours d'apprentissage"                 => 'currently learning',

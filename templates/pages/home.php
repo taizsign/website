@@ -27,7 +27,7 @@ $letters = function (string $word, int $offset = 0): string {
             <li>
                 <!-- toque de diplômé -->
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9.5 12 4.5l10 5-10 5z"/><path d="M6.5 11.8v4.1c0 1.5 2.5 2.8 5.5 2.8s5.5-1.3 5.5-2.8v-4.1M22 9.5v5"/></svg>
-                <?= $this->t('Étudiant BTS SIO SLAM &amp; SISR') ?>
+                <?= $this->t('Étudiant BTS SIO SLAM') ?>
             </li>
             <li>
                 <!-- la citadelle de Besançon -->
@@ -62,19 +62,19 @@ $letters = function (string $word, int $offset = 0): string {
     <a class="hero__scroll" href="#intro" aria-label="<?= $this->t('Descendre') ?>"><span></span></a>
 </section>
 
-<!-- (01) En deux mots -->
+<!-- (01) Qui je suis -->
 <section class="section" id="intro">
     <div class="wrap">
-        <?= $this->rule($this->t('En deux mots')) ?>
+        <?= $this->rule($this->t('Qui je suis ?')) ?>
 
         <p class="statement" data-reveal>
-            <?= $this->t("Je viens du <em>développement</em>. Je vais vers l'<em>infrastructure</em>. Entre les deux, une conviction&nbsp;: on écrit de meilleures applications quand on sait comment vivent le serveur, le réseau et la base qui les portent.") ?>
+            <?= $this->t("En 2019 j'ai monté mon premier PC. Depuis, l'informatique est devenue une passion. Elle m'a amené au <em>développement</em> et me pousse aujourd'hui vers l'<em>administration systèmes et réseaux</em>. Chez moi tourne un homelab avec NAS, OPNsense, Proxmox. À côté, un PC pensé pour l'<em>OPSEC</em>, dont j'ai retiré les puces à risque. Il démarre sous Kicksecure, chiffre ses données avec VeraCrypt, sort sur Internet par Mullvad.") ?>
         </p>
 
         <div class="trio">
             <article class="trio__item" data-reveal>
                 <p class="trio__key"><?= $this->t("Aujourd'hui") ?></p>
-                <p><?= $this->t('BTS SIO, SLAM &amp; SISR. Deux applications livrées de bout en bout&nbsp;: base MySQL, API, client, et mise en production sur mon VPS.') ?></p>
+                <p><?= $this->t('BTS SIO, option SLAM. Deux applications livrées de bout en bout&nbsp;: base MySQL, API, client, et mise en production sur mon VPS.') ?></p>
             </article>
             <article class="trio__item" data-reveal>
                 <p class="trio__key"><?= $this->t('Le cap') ?></p>
@@ -82,7 +82,7 @@ $letters = function (string $word, int $offset = 0): string {
             </article>
             <article class="trio__item" data-reveal>
                 <p class="trio__key"><?= $this->t('À côté') ?></p>
-                <p><?= $this->t('Un homelab en construction (Proxmox, OPNsense) et un fer à souder, pour réparer et améliorer mon matériel moi-même.') ?></p>
+                <p><?= $this->t('Je prépare le TOEIC pour valider mon anglais, ainsi que la certification Cisco CCNA en réseau.') ?></p>
             </article>
         </div>
 
