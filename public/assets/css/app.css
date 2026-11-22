@@ -224,6 +224,10 @@ strong { font-weight: 600; }
     transition: transform .3s var(--spring), background .3s, border-color .3s, color .3s, box-shadow .3s;
 }
 .btn:hover { transform: translateY(-2px); }
+.btn:not(.btn--ghost):hover, .btn:not(.btn--ghost):focus-visible {
+    background: var(--violet); border-color: var(--violet);
+    box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--violet) 70%, transparent);
+}
 .btn:active { transform: translateY(0) scale(.97); transition-duration: .1s; }
 .btn--ghost { background: rgba(255, 255, 255, .75); color: var(--ink); border-color: var(--line); backdrop-filter: blur(4px); }
 .btn--ghost:hover { border-color: var(--ink); }
