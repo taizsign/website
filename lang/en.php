@@ -52,29 +52,29 @@ return [
 
     // Accueil
     'Étudiant BTS SIO SLAM'                    => 'IT student, BTS SIO SLAM',
-    "Étudiant en BTS SIO à Besançon. J'ai appris à construire des applications, et je m'oriente maintenant vers ce qui les fait tourner, les serveurs, le réseau et les bases de données."
-        => "IT student (BTS SIO) in Besançon. I learned how to build applications, and now I'm moving toward what keeps them running, the servers, the network and the databases.",
+    "J'ai appris à construire des applications et m'oriente maintenant vers ce qui les fait tourner. <em>Je recherche une alternance</em> pour continuer dans cette voie."
+        => "I learned how to build applications and I'm now moving toward what keeps them running. <em>I'm looking for a work-study position</em> to keep going in that direction.",
     'Voir mes projets'                         => 'See my projects',
     'Descendre'                                => 'Scroll down',
     'Qui je suis ?'                            => 'Who am I?',
     "En 2019 j'ai monté mon premier PC. Depuis, l'informatique est devenue une passion. Elle m'a amené au <em>développement</em> et me pousse aujourd'hui vers l'<em>administration systèmes et réseaux</em>. Chez moi tourne un homelab avec NAS, OPNsense, Proxmox. À côté, un PC pensé pour l'<em>OPSEC</em>, dont j'ai retiré les puces à risque. Il démarre sous Kicksecure, chiffre ses données avec VeraCrypt, sort sur Internet par Mullvad."
         => "In 2019 I built my first PC. Since then, computing has become a passion. It led me to <em>development</em> and today pushes me towards <em>systems and network administration</em>. At home I run a homelab with a NAS, OPNsense, Proxmox. Next to it sits a PC built for <em>OPSEC</em>, stripped of its risky chips. It boots Kicksecure, encrypts its data with VeraCrypt, reaches the Internet through Mullvad.",
     "Aujourd'hui"                              => 'Today',
-    'BTS SIO, <em>option SLAM</em>. Deux applications livrées de bout en bout&nbsp;: base MySQL, API, client, et <em>mise en production</em> sur mon VPS.'
-        => 'BTS SIO, <em>SLAM track</em>. Two applications delivered end to end: MySQL database, API, client, and <em>deployment to production</em> on my own VPS.',
+    "<em>Deux applications livrées</em> de bout en bout, de la base MySQL à la mise en production sur mon VPS. Prochaine étape, <em>une alternance</em> pour passer de l'autre côté du serveur."
+        => '<em>Two applications delivered</em> end to end, from the MySQL database to production on my own VPS. Next step, <em>a work-study position</em> to move to the other side of the server.',
     'Le cap'                                   => "Where I'm headed",
-    "<em>Administration systèmes, réseaux et bases de données</em>. Linux, Windows Server, Cisco, PostgreSQL&nbsp;: la liste est longue, je la prends dans l'ordre."
-        => "<em>Systems, network and database administration</em>. Linux, Windows Server, Cisco, PostgreSQL: the list is long, and I'm working through it in order.",
+    "Valider l'<em>AZ-900</em>, automatiser mon homelab avec <em>Ansible</em> et le superviser avec <em>Grafana</em>, pour qu'il tourne comme un vrai parc."
+        => 'Pass the <em>AZ-900</em>, automate my homelab with <em>Ansible</em> and monitor it with <em>Grafana</em>, so it runs like a real fleet.',
     'À côté'                                   => 'On the side',
-    'Un <em>homelab</em> avec NAS, OPNsense, Proxmox. Je répare mon matériel moi-même, <em>soudure</em> comprise. En parallèle, je prépare le <em>TOEIC</em> ainsi que la certification <em>Cisco CCNA</em>.'
-        => "A <em>homelab</em> with a NAS, OPNsense, Proxmox. I repair my own hardware, <em>soldering</em> included. Alongside that, I'm preparing for the <em>TOEIC</em> as well as the <em>Cisco CCNA</em> certification.",
+    'Je répare mon matériel moi-même, <em>soudure</em> comprise. En parallèle, je prépare le <em>TOEIC</em> ainsi que la certification <em>Cisco CCNA</em>.'
+        => "I repair my own hardware, <em>soldering</em> included. Alongside that, I'm preparing for the <em>TOEIC</em> as well as the <em>Cisco CCNA</em> certification.",
     'compétences acquises'                     => 'skills acquired',
     "WHERE statut = 'acquis'"                  => "WHERE status = 'acquired'",
     "en cours d'apprentissage"                 => 'currently learning',
     "WHERE statut = 'en cours'"                => "WHERE status = 'learning'",
     'objectifs pour la suite'                  => 'goals for what comes next',
     "WHERE statut = 'objectif'"                => "WHERE status = 'goal'",
-    'technologies dans mes projets'            => 'technologies across my projects',
+    'outils et technologies dans mes 2 projets' => 'tools and technologies across my 2 projects',
     'Ces chiffres sortent de la base SQLite qui fait tourner ce site.' => 'These numbers come straight from the SQLite database that runs this site.',
     'Interroger mes compétences →'             => 'Query my skills →',
     'Du <em>schéma de base</em><br>à la <em>mise en production</em>.' => 'From <em>database schema</em><br>to <em>production</em>.',

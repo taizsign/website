@@ -25,6 +25,7 @@ export function initField(canvas) {
     function resize() {
         dpr = Math.min(devicePixelRatio || 1, 2);
         W = innerWidth; H = innerHeight;
+        if (!W || !H) return; // fenêtre sans taille (onglet caché au chargement) : on attendra le prochain resize
         canvas.width = W * dpr; canvas.height = H * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
@@ -44,6 +45,7 @@ export function initField(canvas) {
 
     function draw(time) {
         raf = 0;
+        if (!base || !base.width || !base.height) return;
         mouse.x += (mouse.tx - mouse.x) * 0.16;
         mouse.y += (mouse.ty - mouse.y) * 0.16;
         mouse.a += (mouse.ta - mouse.a) * 0.08;

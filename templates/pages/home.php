@@ -49,7 +49,7 @@ $letters = function (string $word, int $offset = 0): string {
             <span aria-hidden="true"><?= $letters('Jacquis', 7) ?><span class="hero__semi">;</span></span>
         </h1>
         <div class="hero__intro">
-            <p><?= $this->t("Étudiant en BTS SIO à Besançon. J'ai appris à construire des applications, et je m'oriente maintenant vers ce qui les fait tourner, les serveurs, le réseau et les bases de données.") ?></p>
+            <p><?= $this->t("J'ai appris à construire des applications et m'oriente maintenant vers ce qui les fait tourner. <em>Je recherche une alternance</em> pour continuer dans cette voie.") ?></p>
             <div class="actions">
                 <a class="btn" href="<?= $this->url('projects') ?>"><?= $this->t('Voir mes projets') ?>
                     <span class="arrow" aria-hidden="true"><?= $this->partial('partials/arrow') ?><?= $this->partial('partials/arrow') ?></span>
@@ -74,15 +74,15 @@ $letters = function (string $word, int $offset = 0): string {
         <div class="trio">
             <article class="trio__item" data-reveal>
                 <p class="trio__key"><?= $this->t("Aujourd'hui") ?></p>
-                <p><?= $this->t('BTS SIO, <em>option SLAM</em>. Deux applications livrées de bout en bout&nbsp;: base MySQL, API, client, et <em>mise en production</em> sur mon VPS.') ?></p>
+                <p><?= $this->t("<em>Deux applications livrées</em> de bout en bout, de la base MySQL à la mise en production sur mon VPS. Prochaine étape, <em>une alternance</em> pour passer de l'autre côté du serveur.") ?></p>
             </article>
             <article class="trio__item" data-reveal>
                 <p class="trio__key"><?= $this->t('Le cap') ?></p>
-                <p><?= $this->t("<em>Administration systèmes, réseaux et bases de données</em>. Linux, Windows Server, Cisco, PostgreSQL&nbsp;: la liste est longue, je la prends dans l'ordre.") ?></p>
+                <p><?= $this->t("Valider l'<em>AZ-900</em>, automatiser mon homelab avec <em>Ansible</em> et le superviser avec <em>Grafana</em>, pour qu'il tourne comme un vrai parc.") ?></p>
             </article>
             <article class="trio__item" data-reveal>
                 <p class="trio__key"><?= $this->t('À côté') ?></p>
-                <p><?= $this->t('Un <em>homelab</em> avec NAS, OPNsense, Proxmox. Je répare mon matériel moi-même, <em>soudure</em> comprise. En parallèle, je prépare le <em>TOEIC</em> ainsi que la certification <em>Cisco CCNA</em>.') ?></p>
+                <p><?= $this->t('Je répare mon matériel moi-même, <em>soudure</em> comprise. En parallèle, je prépare le <em>TOEIC</em> ainsi que la certification <em>Cisco CCNA</em>.') ?></p>
             </article>
         </div>
 
@@ -101,7 +101,7 @@ $letters = function (string $word, int $offset = 0): string {
             </div>
             <div class="figure">
                 <dt><span data-count="<?= $figures['technologies'] ?>"><?= $figures['technologies'] ?></span></dt>
-                <dd><?= $this->t('technologies dans mes projets') ?><code>SELECT COUNT(*) FROM technology</code></dd>
+                <dd><?= $this->t('outils et technologies dans mes 2 projets') ?><code>SELECT COUNT(*) FROM technology</code></dd>
             </div>
         </dl>
         <p class="figures__note" data-reveal><?= $this->t('Ces chiffres sortent de la base SQLite qui fait tourner ce site.') ?> <a class="link" href="<?= $this->url('skills') ?>"><?= $this->t('Interroger mes compétences →') ?></a></p>

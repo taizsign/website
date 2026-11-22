@@ -583,7 +583,7 @@ a.lang__flag:hover img, a.lang__flag:focus-visible img {
 }
 
 /* les mots clés passés au surligneur, le trait se dessine à l'apparition */
-.statement em, .trio__item em, .projects-head .h2 em, .cap__title em {
+.statement em, .hero__intro em, .projects-head .h2 em, .cap__title em {
     color: var(--violet-ink);
     padding: 0 .08em; margin: 0 -.08em;
     background: linear-gradient(100deg, rgba(217, 205, 251, .35) 0%, var(--violet-light) 12%, var(--violet-light) 88%, rgba(217, 205, 251, .5) 100%) no-repeat 0 88% / 100% .42em;
@@ -594,12 +594,21 @@ a.lang__flag:hover img, a.lang__flag:focus-visible img {
 .js .statement[data-reveal] em:nth-of-type(2) { transition-delay: .85s; }
 .js .statement[data-reveal] em:nth-of-type(3) { transition-delay: 1.2s; }
 .js .statement[data-reveal].is-visible em { background-size: 100% .42em; }
-.trio__item em { background-size: 100% .62em; background-position: 0 82%; }
-.js .trio__item[data-reveal] em { background-size: 0% .62em; transition: background-size .7s var(--ease) .45s; }
+/* dans les trois blocs, un simple trait sous les mots, plus discret qu'un surligneur */
+.trio__item em {
+    font-style: normal; color: var(--ink);
+    background: linear-gradient(var(--violet), var(--violet)) no-repeat 0 100% / 100% 1.5px;
+    padding-bottom: 1px;
+}
+.js .trio__item[data-reveal] em { background-size: 0% 1.5px; transition: background-size .7s var(--ease) .45s; }
 .js .trio__item[data-reveal] em:nth-of-type(2) { transition-delay: .7s; }
 .js .trio__item[data-reveal] em:nth-of-type(3) { transition-delay: .95s; }
 .js .trio__item[data-reveal] em:nth-of-type(4) { transition-delay: 1.2s; }
-.js .trio__item[data-reveal].is-visible em { background-size: 100% .62em; }
+.js .trio__item[data-reveal].is-visible em { background-size: 100% 1.5px; }
+
+/* l'accroche sous le nom : la recherche d'alternance se surligne à l'arrivée */
+.hero__intro em { color: var(--violet-ink); text-shadow: none; background-size: 100% .5em; background-position: 0 85%; animation: hero-mark 1s var(--ease) 1.6s both; }
+@keyframes hero-mark { from { background-size: 0% .5em; } }
 .projects-head .h2 em, .cap__title em { color: inherit; background-size: 100% .34em; background-position: 0 86%; }
 .js .projects-head .h2[data-reveal] em, .js .cap__title[data-reveal] em { background-size: 0% .34em; transition: background-size 1s var(--ease) .45s; }
 .js .projects-head .h2[data-reveal] em:nth-of-type(2) { transition-delay: .9s; }
@@ -610,7 +619,8 @@ a.lang__flag:hover img, a.lang__flag:focus-visible img {
 @media (prefers-reduced-motion: reduce) {
     .js .projects-head .h2[data-reveal] em, .js .cap__title[data-reveal] em { background-size: 100% .34em; transition: none; }
     .js .statement[data-reveal] em { background-size: 100% .42em; transition: none; }
-    .js .trio__item[data-reveal] em { background-size: 100% .62em; transition: none; }
+    .js .trio__item[data-reveal] em { background-size: 100% 1.5px; transition: none; }
+    .hero__intro em { animation: none; }
 }
 
 .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 64px); }
