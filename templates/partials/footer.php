@@ -43,22 +43,7 @@ $now = new DateTimeImmutable('now', new DateTimeZone('Europe/Paris'));
             </div>
         </div>
 
-        <!-- un lapin saute le long de la ligne du bas, pour le plaisir -->
-        <div class="meadow" aria-hidden="true">
-            <div class="bunny">
-                <span class="bunny__bubble">:D</span>
-                <svg class="bunny__body" viewBox="0 0 44 32">
-                    <ellipse cx="27.5" cy="5.5" rx="2.1" ry="6" transform="rotate(-18 27.5 5.5)"/>
-                    <ellipse cx="32" cy="5.5" rx="2.1" ry="6" transform="rotate(8 32 5.5)"/>
-                    <circle cx="5.5" cy="18.5" r="3.4"/>
-                    <ellipse cx="17" cy="20.5" rx="11.5" ry="8.2"/>
-                    <circle cx="30" cy="15" r="6.4"/>
-                    <ellipse cx="11" cy="28.2" rx="5.6" ry="2.2"/>
-                    <ellipse cx="25" cy="28.4" rx="2.8" ry="1.8"/>
-                    <circle class="bunny__eye" cx="32.4" cy="13.8" r="1.1"/>
-                </svg>
-            </div>
-        </div>
+        <div class="meadow" aria-hidden="true"></div>
 
         <div class="foot__bottom">
             <span>© <?= date('Y') ?> <?= $this->e($site['name']) ?></span>
@@ -72,5 +57,32 @@ $now = new DateTimeImmutable('now', new DateTimeZone('Europe/Paris'));
                 <a href="#top"><?= $this->t('Haut de page') ?> ↑</a>
             </span>
         </div>
+    </div>
+
+    <!-- un lapin qui se promène dans le pied de page, et saute sur le texte -->
+    <div class="bunny" aria-hidden="true">
+        <span class="bunny__bubble">:D</span>
+        <svg class="bunny__body" viewBox="0 -6 48 46">
+            <circle cx="7.5" cy="27" r="4.4" fill="#ffffff"/>
+            <g data-part="leg"><ellipse cx="14" cy="36.4" rx="7.2" ry="3.1" fill="#e4e4ec"/></g>
+            <ellipse cx="19" cy="28" rx="12.6" ry="10.2" fill="#f2f2f7"/>
+            <ellipse cx="29.5" cy="37.2" rx="3.2" ry="2.2" fill="#e4e4ec"/>
+            <g data-part="head">
+                <g data-part="ears">
+                    <g data-part="back-ear"><ellipse cx="28.5" cy="6" rx="2.6" ry="7.6" fill="#e4e4ec"/></g>
+                    <g transform="rotate(6 33 6)">
+                        <ellipse cx="33" cy="5.6" rx="2.9" ry="8" fill="#f2f2f7"/>
+                        <ellipse cx="33" cy="6.4" rx="1.4" ry="5.4" fill="#f4b3cc"/>
+                    </g>
+                </g>
+                <circle cx="33" cy="20" r="8.6" fill="#f2f2f7"/>
+                <ellipse cx="36.6" cy="23.6" rx="2.1" ry="1.25" fill="#f4b3cc" opacity=".75"/>
+                <g data-part="eye">
+                    <ellipse cx="36.2" cy="19" rx="1.5" ry="1.85" fill="#0d0d10"/>
+                    <circle cx="36.7" cy="18.3" r=".55" fill="#ffffff"/>
+                </g>
+                <ellipse cx="41.3" cy="20.8" rx="1.05" ry=".85" fill="#f4b3cc"/>
+            </g>
+        </svg>
     </div>
 </footer>

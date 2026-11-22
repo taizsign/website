@@ -1492,11 +1492,10 @@ button.foot__handle { cursor: copy; }
 
 /* le lapin : un conteneur qui traverse, le corps qui saute */
 .foot { position: relative; overflow: hidden; }
-.meadow { position: relative; height: 34px; clip-path: inset(-60px 0 0 0); }
-.bunny { position: absolute; bottom: 0; left: 0; width: 40px; transform: translateX(-60px); will-change: transform; }
-.bunny__body { display: block; width: 40px; height: auto; fill: #e9e9ef; transform-origin: 50% 100%; }
-.bunny__eye { fill: var(--dark); }
-.bunny__body { cursor: pointer; }
+.meadow { height: 34px; }
+.bunny { position: absolute; top: 0; left: 0; z-index: 2; width: 44px; opacity: 0; transform: translate(-100px, 0); will-change: transform, opacity; pointer-events: none; }
+.bunny .bunny__body { pointer-events: auto; }
+.bunny__body { display: block; width: 44px; height: auto; overflow: visible; transform-origin: 50% 100%; cursor: pointer; }
 .bunny__bubble {
     position: absolute; bottom: calc(100% + 8px); left: 60%;
     padding: 4px 9px; border-radius: 10px 10px 10px 2px; background: #fff; color: var(--dark);
@@ -1506,7 +1505,7 @@ button.foot__handle { cursor: copy; }
 }
 .bunny:hover .bunny__bubble { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-    .bunny { transform: translateX(24px); }
+    .bunny { display: none; }
 }
 .foot__bottom {
     display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;

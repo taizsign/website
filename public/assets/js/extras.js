@@ -32,78 +32,311 @@ export function initClock() {
 }
 
 /**
- * Le lapin du pied de page. Chaque bond a sa propre longueur, sa hauteur et sa durée,
- * avec des pauses de temps en temps : rien ne se répète exactement.
+ * Le lapin du pied de page.
+ *
+ * Le pied de page est vu comme un petit niveau de plateformes : la ligne du bas
+ * sert de sol, et chaque ligne de texte (titre, adresse, phrase, heure) devient
+ * une plateforme sur laquelle il peut sauter, gambader puis redescendre.
+ *
+ * Tout est calculé image par image : un état (position, écrasement, angle des
+ * oreilles...) que de petites actions font évoluer. Les bonds suivent une vraie
+ * parabole, avec un temps d'appel au départ et un amorti à l'arrivée. Une
+ * « humeur » qui varie lentement règle la longueur et l'enchaînement des bonds.
  */
 export function initBunny() {
-    const meadow = document.querySelector('.meadow');
-    const bunny = meadow?.querySelector('.bunny');
-    const body = bunny?.querySelector('.bunny__body');
-    if (!body || !bunny.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const foot = document.querySelector('.foot');
+    const bunny = foot?.querySelector('.bunny');
+    const svg = bunny?.querySelector('.bunny__body');
+    const groundLine = foot?.querySelector('.foot__bottom');
+    if (!svg || !groundLine || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    const part = (name) => svg.querySelector(`[data-part="${name}"]`);
+    const ears = part('ears');
+    const backEar = part('back-ear');
+    const leg = part('leg');
+    const head = part('head');
+    const eye = part('eye');
+
+    const GRAVITY = 1250; // px/s²
+    const MAX_CLIMB = 170; // hauteur maximale qu'il ose franchir d'un bond
     const rand = (min, max) => min + Math.random() * (max - min);
+    const chance = (p) => Math.random() < p;
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    const place = (x) => { bunny.style.transform = `translateX(${x}px)`; };
+    const pick = (choices) => {
+        let roll = Math.random() * choices.reduce((sum, [weight]) => sum + weight, 0);
+        for (const [weight, action] of choices) {
+            if ((roll -= weight) <= 0) return action;
+        }
+        return choices[0][1];
+    };
 
-    // on ne l'anime que lorsque le pied de page est à l'écran
+    /* ---------- le niveau : le sol et les lignes de texte ---------- */
+
+    let platforms = [];
+    let ground = null;
+    const HALF = 18; // demi-largeur des pattes, pour ne pas tomber du bord
+
+    function measure() {
+        const box = foot.getBoundingClientRect();
+        const line = groundLine.getBoundingClientRect();
+        ground = { x1: line.left - box.left, x2: line.right - box.left, y: line.top - box.top, ground: true };
+
+        const found = [];
+        foot.querySelectorAll('.foot__title, .foot__address, .foot__note, .foot__time').forEach((el) => {
+            const size = parseFloat(getComputedStyle(el).fontSize);
+            const range = document.createRange();
+            range.selectNodeContents(el);
+            // on regroupe les morceaux de texte par ligne
+            const lines = [];
+            for (const r of range.getClientRects()) {
+                if (r.width < 4 || r.height < 4) continue;
+                const top = r.top - box.top;
+                const same = lines.find((l) => Math.abs(l.top - top) < size * .5);
+                if (same) { same.x1 = Math.min(same.x1, r.left - box.left); same.x2 = Math.max(same.x2, r.right - box.left); }
+                else lines.push({ top, x1: r.left - box.left, x2: r.right - box.left });
+            }
+            // il se pose sur le haut des minuscules, pas au-dessus de la boîte du texte
+            lines.forEach((l) => {
+                if (l.x2 - l.x1 > HALF * 3) found.push({ x1: l.x1, x2: l.x2, y: l.top + size * .43 });
+            });
+        });
+        platforms = [ground, ...found];
+    }
+
+    /* ---------- l'état et son rendu ---------- */
+
+    const s = { x: 0, y: 0, dir: 1, rot: 0, sx: 1, sy: 1, ear: 0, earLag: 0, leg: 0, head: 0, blink: 0, alpha: 0 };
+    let on = null; // plateforme sous ses pattes
+
+    function render() {
+        bunny.style.transform = `translate(${(s.x - bunny.offsetWidth / 2).toFixed(2)}px, ${(s.y - bunny.offsetHeight).toFixed(2)}px)`;
+        bunny.style.opacity = s.alpha.toFixed(3);
+        svg.style.transform = `scaleX(${s.dir}) rotate(${s.rot.toFixed(2)}deg) scale(${s.sx.toFixed(3)}, ${s.sy.toFixed(3)})`;
+        ears.setAttribute('transform', `rotate(${s.ear.toFixed(2)} 31 13)`);
+        backEar.setAttribute('transform', `rotate(${(s.earLag - 14).toFixed(2)} 28.5 6)`);
+        leg.setAttribute('transform', `rotate(${s.leg.toFixed(2)} 15 31)`);
+        head.setAttribute('transform', `rotate(${s.head.toFixed(2)} 29 25)`);
+        eye.setAttribute('transform', `translate(0 ${(19 * s.blink).toFixed(2)}) scale(1 ${(1 - s.blink * .9).toFixed(3)})`);
+    }
+
+    /** Fait varier l'état pendant `ms`, `step` reçoit t de 0 à 1. */
+    const tween = (ms, step) => new Promise((resolve) => {
+        const start = performance.now();
+        const frame = (now) => {
+            const t = Math.min(1, (now - start) / ms);
+            step(t);
+            render();
+            if (t < 1) requestAnimationFrame(frame);
+            else resolve();
+        };
+        requestAnimationFrame(frame);
+    });
+
+    // ressort amorti : part de `from`, oscille et revient à 0
+    const spring = (from, t, freq = 3, damping = 5) => from * Math.exp(-damping * t) * Math.cos(freq * Math.PI * 2 * t);
+
+    /* ---------- les mouvements ---------- */
+
+    /** Un bond de (x, y) vers (tx, ty), qui peut monter ou descendre. */
+    async function jump(tx, ty, lift) {
+        const x0 = s.x;
+        const y0 = s.y;
+        const climb = y0 - ty; // > 0 quand il monte
+        s.dir = tx >= x0 ? 1 : -1;
+        const big = Math.abs(climb) > 20;
+
+        // l'appel, plus marqué avant un grand saut
+        await tween(big ? rand(150, 220) : rand(70, 130), (t) => {
+            const e = Math.sin(t * Math.PI / 2);
+            s.sy = lerp(1, big ? .72 : .8, e); s.sx = lerp(1, big ? 1.16 : 1.1, e);
+            s.ear = lerp(s.ear, 12, e); s.head = lerp(0, 5, e);
+        });
+
+        // une parabole qui passe au-dessus du point le plus haut
+        const arc = lift + Math.max(0, climb) * .35;
+        const peak = Math.max(0, climb) + arc; // hauteur atteinte au-dessus du départ
+        const up = Math.sqrt(2 * peak / GRAVITY);
+        const down = Math.sqrt(2 * (peak - climb) / GRAVITY);
+        const flight = (up + down) * 1000;
+        const split = up / (up + down);
+        await tween(flight, (t) => {
+            const top = y0 - peak;
+            s.x = lerp(x0, tx, t);
+            s.y = t < split
+                ? y0 - peak * (1 - (1 - t / split) ** 2)
+                : top + (ty - top) * ((t - split) / (1 - split)) ** 2;
+            const vy = t < split ? 1 - t / split : -(t - split) / (1 - split); // +1 en montée, -1 en chute
+            s.rot = -vy * lerp(8, 20, Math.min(1, peak / 40));
+            s.sy = 1 + .14 * Math.abs(vy) - .04;
+            s.sx = 1 / s.sy;
+            s.ear = 22 * vy + 6;
+            s.earLag = 8 * Math.sin(t * Math.PI * 2);
+            s.leg = 38 * Math.sin(t * Math.PI);
+            s.head = -4 * vy;
+        });
+        s.x = tx; s.y = ty;
+
+        // l'arrivée : écrasement puis rebond amorti, les oreilles retombent en avant
+        const fall = Math.max(peak - climb, 4);
+        const impact = lerp(.14, .32, Math.min(1, fall / 60));
+        await tween(rand(220, 320), (t) => {
+            s.sy = 1 - spring(impact, t, 1.6, 4.5);
+            s.sx = 1 / Math.sqrt(s.sy);
+            s.rot = spring(5, t, 1.2, 6);
+            s.ear = spring(-16, t, 2.2, 4);
+            s.earLag = spring(-6, t, 2.6, 4);
+            s.leg = lerp(s.leg, 0, Math.min(1, t * 3));
+            s.head = spring(-3, t, 1.5, 5);
+        });
+        Object.assign(s, { sx: 1, sy: 1, rot: 0, leg: 0 });
+    }
+
+    async function sniff() {
+        for (let i = Math.round(rand(2, 5)); i > 0; i--) {
+            await tween(rand(140, 220), (t) => { s.head = 7 * Math.sin(t * Math.PI); s.ear = -3 * Math.sin(t * Math.PI); });
+            await wait(rand(60, 350));
+        }
+    }
+    const twitch = () => tween(rand(260, 380), (t) => { s.earLag = spring(-14, t, 3, 6); s.ear = spring(-5, t, 2, 7); });
+    async function sitUp(ms) {
+        await tween(220, (t) => { s.rot = lerp(0, -16, t); s.sy = lerp(1, 1.06, t); s.ear = lerp(0, -6, t); });
+        await wait(ms);
+        await tween(240, (t) => { s.rot = lerp(-16, 0, t); s.sy = lerp(1.06, 1, t); s.ear = lerp(-6, 0, t); });
+    }
+    async function lookAround() {
+        s.dir *= -1; render();
+        await wait(rand(500, 1300));
+        if (chance(.35)) await sniff();
+        if (chance(.6)) { s.dir *= -1; render(); }
+    }
+    const idle = () => pick([
+        [34, () => wait(rand(300, 1500))],
+        [22, sniff],
+        [16, twitch],
+        [12, lookAround],
+        [10, () => sitUp(rand(600, 1600))],
+        [6, () => wait(rand(1800, 3500))],
+    ])();
+
+    /* ---------- la décision : où aller ensuite ---------- */
+
+    /** Plateformes qu'il peut atteindre d'ici, avec le point où il atterrirait. */
+    function reachable() {
+        return platforms
+            .filter((p) => p !== on && Math.abs(p.y - s.y) <= MAX_CLIMB && Math.abs(p.y - s.y) > 12)
+            .map((p) => {
+                const lo = p.x1 + HALF;
+                const hi = p.x2 - HALF;
+                if (hi < lo) return null;
+                // il vise un point proche, un peu devant lui si possible
+                const aim = clamp(s.x + s.dir * rand(20, 70), lo, hi);
+                return Math.abs(aim - s.x) <= 150 ? { p, x: aim } : null;
+            })
+            .filter(Boolean);
+    }
+
+    async function wander(mood) {
+        // une série de bonds sur la plateforme actuelle
+        let count = 1;
+        while (count < 8 && chance(lerp(.4, .8, mood))) count++;
+        for (let i = 0; i < count; i++) {
+            await ready();
+            const leap = on.ground && chance(.06 + mood * .06);
+            const step = lerp(16, 50, mood) * rand(.7, 1.3) * (leap ? 1.8 : 1);
+            let tx = s.x + s.dir * step;
+            const lo = on.ground ? -Infinity : on.x1 + HALF;
+            const hi = on.ground ? Infinity : on.x2 - HALF;
+            if (tx < lo || tx > hi) {
+                // au bord d'une ligne de texte : demi-tour, ou il redescend plus tard
+                if (!on.ground) { s.dir *= -1; render(); await wait(rand(150, 500)); tx = clamp(s.x + s.dir * step, lo, hi); }
+            }
+            await jump(tx, on.y, Math.min(30, (5 + step * .34) * rand(.85, 1.2)));
+            await wait(leap ? rand(120, 260) : rand(10, 110));
+        }
+    }
+
+    /* ---------- la boucle ---------- */
+
     let visible = false;
     let wake = null;
     new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting;
         if (visible && wake) { wake(); wake = null; }
-    }).observe(meadow);
-    const whenVisible = () => (visible ? Promise.resolve() : new Promise((resolve) => { wake = resolve; }));
-
-    async function hop(from, to) {
-        const height = rand(9, 24);
-        const duration = rand(330, 520);
-        bunny.animate([{ transform: `translateX(${from}px)` }, { transform: `translateX(${to}px)` }],
-            { duration, easing: 'cubic-bezier(.3, .1, .5, 1)', fill: 'forwards' });
-        await body.animate([
-            { transform: 'translateY(0) scale(1.08, .84)' },
-            { transform: `translateY(${-height}px) rotate(-9deg) scale(.95, 1.07)`, offset: .42, easing: 'ease-in' },
-            { transform: 'translateY(0) rotate(3deg) scale(1.1, .82)', offset: .86 },
-            { transform: 'translateY(0) scale(1, 1)' },
-        ], { duration, easing: 'ease-out' }).finished;
-        place(to);
+    }).observe(foot);
+    async function ready() {
+        if (!visible) await new Promise((resolve) => { wake = resolve; });
+        while (bunny.matches(':hover')) await wait(120); // il s'arrête pour qu'on lui dise bonjour
     }
 
-    async function sniff() {
-        const times = Math.round(rand(2, 5));
-        for (let i = 0; i < times; i++) {
-            await body.animate([
-                { transform: 'rotate(0)' },
-                { transform: 'rotate(4deg) translateY(1px)' },
-                { transform: 'rotate(0)' },
-            ], { duration: rand(160, 260) }).finished;
-            await wait(rand(80, 400));
+    async function enter() {
+        measure();
+        on = ground;
+        Object.assign(s, { x: ground.x1 + HALF, y: ground.y, dir: 1 });
+        await tween(400, (t) => { s.alpha = t; });
+    }
+    async function leave() {
+        await tween(350, (t) => { s.alpha = 1 - t; });
+        await wait(rand(2500, 8000));
+    }
+
+    // si la page change de taille, il redescend sur le sol
+    let resized = false;
+    addEventListener('resize', () => { resized = true; });
+    document.fonts?.ready.then(measure);
+
+    // clignements, indépendants du reste
+    (async () => {
+        for (;;) {
+            await wait(rand(1800, 5200));
+            await tween(130, (t) => { s.blink = Math.sin(t * Math.PI); });
+            if (chance(.2)) { await wait(90); await tween(120, (t) => { s.blink = Math.sin(t * Math.PI); }); }
         }
-    }
+    })();
 
     (async () => {
-        let x = -60;
-        place(x);
-        await wait(rand(800, 2500));
+        let mood = rand(.3, .8);
+        await ready();
+        await wait(rand(600, 2000));
+        await enter();
         for (;;) {
-            await whenVisible();
-            if (x > meadow.clientWidth + 10) {
-                x = -60;
-                place(x);
-                await wait(rand(3000, 9000));
+            await ready();
+            if (resized) {
+                resized = false;
+                measure();
+                on = ground;
+                s.y = ground.y; s.x = clamp(s.x, ground.x1 + HALF, ground.x2 - HALF); render();
+            }
+            mood = clamp(mood + rand(-.25, .25), .1, 1);
+
+            // au bout du sol, il s'en va et revient par la gauche
+            if (on.ground && s.x >= ground.x2 - HALF) {
+                await leave();
+                await enter();
                 continue;
             }
-            // une série de 2 à 6 bonds, puis une pause, parfois pour renifler
-            const series = Math.round(rand(2, 6));
-            for (let i = 0; i < series; i++) {
-                // il s'arrête tant qu'on le survole, le temps de dire bonjour
-                while (bunny.matches(':hover')) await wait(120);
-                const to = x + rand(24, 62);
-                await hop(x, to);
-                x = to;
-                await wait(rand(30, 160));
+
+            // sauter sur du texte, ou en redescendre
+            const options = reachable();
+            const higher = options.filter((o) => o.p.y < s.y);
+            const lower = options.filter((o) => o.p.y > s.y);
+            if (on.ground && higher.length && chance(.3 + mood * .2)) {
+                const o = higher[Math.floor(Math.random() * higher.length)];
+                await jump(o.x, o.p.y, rand(14, 26));
+                on = o.p;
+            } else if (!on.ground && chance(.3)) {
+                // plus haut encore, ou retour vers le bas
+                const next = chance(.4) && higher.length ? higher : lower.length ? lower : [{ p: ground, x: clamp(s.x + s.dir * 40, ground.x1 + HALF, ground.x2 - HALF) }];
+                const o = next[Math.floor(Math.random() * next.length)];
+                await jump(o.x, o.p.y, rand(10, 22));
+                on = o.p;
+            } else {
+                // sur le sol, il avance surtout vers la droite
+                if (on.ground && s.dir < 0 && chance(.7)) { s.dir = 1; render(); }
+                await wander(mood);
             }
-            if (Math.random() < .35) await sniff();
-            else await wait(rand(250, 1400));
+            await idle();
         }
     })();
 }
