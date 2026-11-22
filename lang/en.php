@@ -56,14 +56,14 @@ return [
     "En 2019 j'ai monté mon premier PC. Depuis, l'informatique est devenue une passion. Elle m'a amené au <em>développement</em> et me pousse aujourd'hui vers l'<em>administration systèmes et réseaux</em>. Chez moi tourne un homelab avec NAS, OPNsense, Proxmox. À côté, un PC pensé pour l'<em>OPSEC</em>, dont j'ai retiré les puces à risque. Il démarre sous Kicksecure, chiffre ses données avec VeraCrypt, sort sur Internet par Mullvad."
         => "In 2019 I built my first PC. Since then, computing has become a passion. It led me to <em>development</em> and today pushes me towards <em>systems and network administration</em>. At home I run a homelab with a NAS, OPNsense, Proxmox. Next to it sits a PC built for <em>OPSEC</em>, stripped of its risky chips. It boots Kicksecure, encrypts its data with VeraCrypt, reaches the Internet through Mullvad.",
     "Aujourd'hui"                              => 'Today',
-    'BTS SIO, option SLAM. Deux applications livrées de bout en bout&nbsp;: base MySQL, API, client, et mise en production sur mon VPS.'
-        => 'BTS SIO, SLAM track. Two applications delivered end to end: MySQL database, API, client, and deployment to production on my own VPS.',
+    'BTS SIO, <em>option SLAM</em>. Deux applications livrées de bout en bout&nbsp;: base MySQL, API, client, et <em>mise en production</em> sur mon VPS.'
+        => 'BTS SIO, <em>SLAM track</em>. Two applications delivered end to end: MySQL database, API, client, and <em>deployment to production</em> on my own VPS.',
     'Le cap'                                   => "Where I'm headed",
-    "Administration systèmes, réseaux et bases de données. Linux, Windows Server, Cisco, PostgreSQL&nbsp;: la liste est longue, je la prends dans l'ordre."
-        => "Systems, network and database administration. Linux, Windows Server, Cisco, PostgreSQL: the list is long, and I'm working through it in order.",
+    "<em>Administration systèmes, réseaux et bases de données</em>. Linux, Windows Server, Cisco, PostgreSQL&nbsp;: la liste est longue, je la prends dans l'ordre."
+        => "<em>Systems, network and database administration</em>. Linux, Windows Server, Cisco, PostgreSQL: the list is long, and I'm working through it in order.",
     'À côté'                                   => 'On the side',
-    'Je prépare le TOEIC pour valider mon anglais, ainsi que la certification Cisco CCNA en réseau.'
-        => "I'm preparing for the TOEIC to certify my English, along with the Cisco CCNA networking certification.",
+    'Un <em>homelab</em> avec NAS, OPNsense, Proxmox. Je répare mon matériel moi-même, <em>soudure</em> comprise. En parallèle, je prépare le <em>TOEIC</em> ainsi que la certification <em>Cisco CCNA</em>.'
+        => "A <em>homelab</em> with a NAS, OPNsense, Proxmox. I repair my own hardware, <em>soldering</em> included. Alongside that, I'm preparing for the <em>TOEIC</em> as well as the <em>Cisco CCNA</em> certification.",
     'compétences acquises'                     => 'skills acquired',
     "WHERE statut = 'acquis'"                  => "WHERE status = 'acquired'",
     "en cours d'apprentissage"                 => 'currently learning',
@@ -73,9 +73,11 @@ return [
     'technologies dans mes projets'            => 'technologies across my projects',
     'Ces chiffres sortent de la base SQLite qui fait tourner ce site.' => 'These numbers come straight from the SQLite database that runs this site.',
     'Interroger mes compétences →'             => 'Query my skills →',
-    'Du schéma de base<br>à la mise en production.' => 'From database schema<br>to production.',
+    'Du <em>schéma de base</em><br>à la <em>mise en production</em>.' => 'From <em>database schema</em><br>to <em>production</em>.',
     'En ce moment'                             => 'Right now',
-    'Ce que je ne sais pas<br>encore faire.'   => "What I can't<br>do yet.",
+    'Ce que je ne sais <em>pas encore</em> faire.' => "What I <em>can't do yet</em>.",
+    '[pas encore installé]'                    => '[not installed yet]',
+    'paquets à installer.'                     => 'packages to install.',
     "Une liste honnête vaut mieux qu'une barre de progression gonflée. Voici les compétences recherchées en administration systèmes, réseaux et bases de données que je n'ai pas encore, et que je travaille."
         => "An honest list beats an inflated progress bar. These are the in-demand systems, network and database administration skills I don't have yet, and that I'm working on.",
     'Voir le parcours et la suite →'           => 'See my journey and what comes next →',

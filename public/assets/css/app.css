@@ -534,10 +534,12 @@ a.lang__flag:hover img, a.lang__flag:focus-visible img {
 
 .hero__scroll {
     position: absolute; left: 50%; bottom: 28px; width: 22px; height: 34px; margin-left: -11px;
-    border: 1.5px solid var(--line-strong); border-radius: 12px;
+    border: 1.5px solid var(--faint); border-radius: 12px;
+    transition: border-color .25s;
 }
+.hero__scroll:hover, .hero__scroll:focus-visible { border-color: var(--violet); }
 .hero__scroll span {
-    position: absolute; left: 50%; top: 7px; width: 4px; height: 4px; margin-left: -2px;
+    position: absolute; left: 50%; top: 7px; width: 5px; height: 5px; margin-left: -2.5px;
     background: var(--violet); animation: wheel 1.8s var(--ease) infinite;
 }
 @keyframes wheel { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(12px); opacity: 0; } 100% { opacity: 0; } }
@@ -580,6 +582,37 @@ a.lang__flag:hover img, a.lang__flag:focus-visible img {
     margin-bottom: clamp(56px, 7vw, 96px);
 }
 
+/* les mots clés passés au surligneur, le trait se dessine à l'apparition */
+.statement em, .trio__item em, .projects-head .h2 em, .cap__title em {
+    color: var(--violet-ink);
+    padding: 0 .08em; margin: 0 -.08em;
+    background: linear-gradient(100deg, rgba(217, 205, 251, .35) 0%, var(--violet-light) 12%, var(--violet-light) 88%, rgba(217, 205, 251, .5) 100%) no-repeat 0 88% / 100% .42em;
+    border-radius: .1em .3em .15em .25em;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.js .statement[data-reveal] em { background-size: 0% .42em; transition: background-size .9s var(--ease) .5s; }
+.js .statement[data-reveal] em:nth-of-type(2) { transition-delay: .85s; }
+.js .statement[data-reveal] em:nth-of-type(3) { transition-delay: 1.2s; }
+.js .statement[data-reveal].is-visible em { background-size: 100% .42em; }
+.trio__item em { background-size: 100% .62em; background-position: 0 82%; }
+.js .trio__item[data-reveal] em { background-size: 0% .62em; transition: background-size .7s var(--ease) .45s; }
+.js .trio__item[data-reveal] em:nth-of-type(2) { transition-delay: .7s; }
+.js .trio__item[data-reveal] em:nth-of-type(3) { transition-delay: .95s; }
+.js .trio__item[data-reveal] em:nth-of-type(4) { transition-delay: 1.2s; }
+.js .trio__item[data-reveal].is-visible em { background-size: 100% .62em; }
+.projects-head .h2 em, .cap__title em { color: inherit; background-size: 100% .34em; background-position: 0 86%; }
+.js .projects-head .h2[data-reveal] em, .js .cap__title[data-reveal] em { background-size: 0% .34em; transition: background-size 1s var(--ease) .45s; }
+.js .projects-head .h2[data-reveal] em:nth-of-type(2) { transition-delay: .9s; }
+.js .projects-head .h2[data-reveal].is-visible em, .js .cap__title[data-reveal].is-visible em { background-size: 100% .34em; }
+
+.projects-head .h2 { text-align: center; }
+
+@media (prefers-reduced-motion: reduce) {
+    .js .projects-head .h2[data-reveal] em, .js .cap__title[data-reveal] em { background-size: 100% .34em; transition: none; }
+    .js .statement[data-reveal] em { background-size: 100% .42em; transition: none; }
+    .js .trio__item[data-reveal] em { background-size: 100% .62em; transition: none; }
+}
+
 .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 64px); }
 .trio__item { border-top: 1px solid var(--ink); padding-top: 20px; color: var(--ink-2); }
 .trio__key { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); margin-bottom: 16px; }
@@ -620,8 +653,12 @@ a.lang__flag:hover img, a.lang__flag:focus-visible img {
 .project__title {
     font-size: clamp(40px, 5.4vw, 84px); line-height: .92; letter-spacing: -.055em;
     margin-bottom: 20px;
-    transition: transform .5s var(--ease);
+    text-decoration: underline; text-decoration-color: var(--violet);
+    text-decoration-thickness: .055em; text-underline-offset: .09em; text-decoration-skip-ink: auto;
+    transition: transform .5s var(--ease), text-decoration-color .8s ease .3s;
 }
+.js .project[data-reveal] .project__title { text-decoration-color: transparent; }
+.js .project[data-reveal].is-visible .project__title { text-decoration-color: var(--violet); }
 .project__link:hover .project__title { transform: translateX(8px); }
 .project__tagline { font-size: 18px; color: var(--ink-2); max-width: 40ch; margin-bottom: 24px; }
 .project__more {
@@ -1038,19 +1075,52 @@ a.lang__flag:hover img, a.lang__flag:focus-visible img {
 
 /* Accueil : le cap */
 
-.cap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
-.cap__text .h2 { margin-bottom: 28px; }
-.cap__text .lead { margin-bottom: 28px; }
-.goals { border-top: 1px solid var(--ink); counter-reset: goal; }
-.goal {
-    display: grid; grid-template-columns: 44px 1fr auto; gap: 12px; align-items: baseline;
-    padding: 16px 0; border-bottom: 1px solid var(--line);
-    transition: padding .35s var(--ease), background .3s;
+/* le texte à gauche, la liste sous forme de terminal à droite */
+.cap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 96px); align-items: center; }
+.cap__title { margin-bottom: 28px; text-wrap: balance; }
+.cap__text .lead { margin-bottom: 24px; }
+
+.apt { box-shadow: 10px 10px 0 var(--violet-tint); }
+.apt__body { padding: 22px clamp(16px, 2vw, 26px) 24px; font-family: var(--mono); font-size: 13.5px; line-height: 1.7; font-variant-ligatures: none; }
+.apt__line { margin: 0; overflow-wrap: anywhere; }
+.section:has(> .hero__scroll) { padding-bottom: clamp(108px, 10vw, 150px); }
+@media (max-width: 640px) {
+    .apt { box-shadow: 6px 6px 0 var(--violet-tint); }
+    .apt__body { font-size: 12px; }
+    .apt .apt__row { grid-template-columns: minmax(0, 1fr); }
+    .apt .apt__state { grid-row: 3; }
 }
-.goal:hover { padding-left: 10px; background: linear-gradient(90deg, var(--violet-tint), transparent); }
-.goal__num { font-family: var(--mono); font-size: 12px; color: var(--violet); }
-.goal__name { font-size: clamp(18px, 1.7vw, 22px); font-weight: 500; letter-spacing: -.02em; }
-.goal__domain { font-family: var(--mono); font-size: 12px; color: var(--faint); }
+.apt__user { color: var(--violet-light); }
+.apt__path { color: #8fb3ff; }
+.apt__dim { color: var(--dark-muted); }
+.apt__list { margin: 6px 0 10px; }
+.apt__row {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px;
+    padding: 7px 10px; margin: 0 -10px; border-left: 2px solid transparent;
+    transition: background .2s, border-color .2s;
+}
+.apt__row:hover { background: rgba(217, 205, 251, .07); border-left-color: var(--violet-light); }
+.apt__pkg { color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.apt__suite { color: var(--violet-light); }
+.apt__state { color: #e8b86b; font-size: 12px; white-space: nowrap; }
+.apt__name { grid-column: 1 / -1; color: var(--dark-muted); font-family: var(--sans); font-size: 14px; letter-spacing: -.01em; }
+.apt__caret { display: inline-block; width: .55em; height: 1.05em; vertical-align: -.18em; background: var(--violet-light); animation: caret 1.06s step-end infinite; }
+
+/* les lignes sortent l'une après l'autre, comme une vraie commande */
+.js .apt[data-reveal] .apt__line, .js .apt[data-reveal] .apt__row { opacity: 0; transition: opacity .25s ease; }
+.js .apt[data-reveal].is-visible .apt__line, .js .apt[data-reveal].is-visible .apt__row { opacity: 1; }
+.js .apt[data-reveal] .apt__row:nth-child(1) { transition-delay: .75s; }
+.js .apt[data-reveal] .apt__row:nth-child(2) { transition-delay: .85s; }
+.js .apt[data-reveal] .apt__row:nth-child(3) { transition-delay: .95s; }
+.js .apt[data-reveal] .apt__row:nth-child(4) { transition-delay: 1.05s; }
+.js .apt[data-reveal] .apt__row:nth-child(5) { transition-delay: 1.15s; }
+.js .apt[data-reveal] .apt__row:nth-child(n+6) { transition-delay: 1.25s; }
+.js .apt[data-reveal] .apt__line:nth-last-child(2) { transition-delay: 1.45s; }
+.js .apt[data-reveal] .apt__line:last-child { transition-delay: 1.65s; }
+@media (prefers-reduced-motion: reduce) {
+    .js .apt[data-reveal] .apt__line, .js .apt[data-reveal] .apt__row { opacity: 1; transition: none; }
+    .apt__caret { animation: none; }
+}
 
 /* Parcours */
 

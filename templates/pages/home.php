@@ -74,15 +74,15 @@ $letters = function (string $word, int $offset = 0): string {
         <div class="trio">
             <article class="trio__item" data-reveal>
                 <p class="trio__key"><?= $this->t("Aujourd'hui") ?></p>
-                <p><?= $this->t('BTS SIO, option SLAM. Deux applications livrées de bout en bout&nbsp;: base MySQL, API, client, et mise en production sur mon VPS.') ?></p>
+                <p><?= $this->t('BTS SIO, <em>option SLAM</em>. Deux applications livrées de bout en bout&nbsp;: base MySQL, API, client, et <em>mise en production</em> sur mon VPS.') ?></p>
             </article>
             <article class="trio__item" data-reveal>
                 <p class="trio__key"><?= $this->t('Le cap') ?></p>
-                <p><?= $this->t("Administration systèmes, réseaux et bases de données. Linux, Windows Server, Cisco, PostgreSQL&nbsp;: la liste est longue, je la prends dans l'ordre.") ?></p>
+                <p><?= $this->t("<em>Administration systèmes, réseaux et bases de données</em>. Linux, Windows Server, Cisco, PostgreSQL&nbsp;: la liste est longue, je la prends dans l'ordre.") ?></p>
             </article>
             <article class="trio__item" data-reveal>
                 <p class="trio__key"><?= $this->t('À côté') ?></p>
-                <p><?= $this->t('Je prépare le TOEIC pour valider mon anglais, ainsi que la certification Cisco CCNA en réseau.') ?></p>
+                <p><?= $this->t('Un <em>homelab</em> avec NAS, OPNsense, Proxmox. Je répare mon matériel moi-même, <em>soudure</em> comprise. En parallèle, je prépare le <em>TOEIC</em> ainsi que la certification <em>Cisco CCNA</em>.') ?></p>
             </article>
         </div>
 
@@ -106,40 +106,54 @@ $letters = function (string $word, int $offset = 0): string {
         </dl>
         <p class="figures__note" data-reveal><?= $this->t('Ces chiffres sortent de la base SQLite qui fait tourner ce site.') ?> <a class="link" href="<?= $this->url('skills') ?>"><?= $this->t('Interroger mes compétences →') ?></a></p>
     </div>
+    <a class="hero__scroll" href="#projets" aria-label="<?= $this->t('Descendre') ?>"><span></span></a>
 </section>
 
 <!-- (02) Projets -->
-<section class="section section--projects">
+<section class="section section--projects" id="projets">
     <div class="wrap">
-        <div class="section__head">
+        <div class="section__head projects-head">
             <?= $this->rule($this->t('Projets'), $this->plural(count($projects), 'dossier')) ?>
-            <h2 class="h2" data-reveal><?= $this->t('Du schéma de base<br>à la mise en production.') ?></h2>
+            <h2 class="h2" data-reveal><?= $this->t('Du <em>schéma de base</em><br>à la <em>mise en production</em>.') ?></h2>
         </div>
 
         <?= $this->partial('partials/project-list', ['projects' => $projects]) ?>
     </div>
+    <a class="hero__scroll" href="#cap" aria-label="<?= $this->t('Descendre') ?>"><span></span></a>
 </section>
 
 <!-- (03) Le cap -->
-<section class="section section--cap">
-    <div class="wrap cap">
-        <div class="cap__text">
-            <?= $this->rule($this->t('En ce moment'), $this->plural(count($goals), 'objectif')) ?>
-            <h2 class="h2" data-reveal><?= $this->t('Ce que je ne sais pas<br>encore faire.') ?></h2>
-            <p class="lead" data-reveal><?= $this->t("Une liste honnête vaut mieux qu'une barre de progression gonflée. Voici les compétences recherchées en administration systèmes, réseaux et bases de données que je n'ai pas encore, et que je travaille.") ?></p>
-            <?php if ($next !== null): ?>
-                <a class="link" href="<?= $this->url('journey') ?>" data-reveal><?= $this->t('Voir le parcours et la suite →') ?></a>
-            <?php endif; ?>
-        </div>
+<section class="section section--cap" id="cap">
+    <div class="wrap">
+        <?= $this->rule($this->t('En ce moment'), $this->plural(count($goals), 'objectif')) ?>
+        <div class="cap">
+            <div class="cap__text">
+                <h2 class="h2 cap__title" data-reveal><?= $this->t('Ce que je ne sais <em>pas encore</em> faire.') ?></h2>
+                <p class="lead" data-reveal><?= $this->t("Une liste honnête vaut mieux qu'une barre de progression gonflée. Voici les compétences recherchées en administration systèmes, réseaux et bases de données que je n'ai pas encore, et que je travaille.") ?></p>
+                <?php if ($next !== null): ?>
+                    <a class="link" href="<?= $this->url('journey') ?>" data-reveal><?= $this->t('Voir le parcours et la suite →') ?></a>
+                <?php endif; ?>
+            </div>
 
-        <ol class="goals" data-reveal>
-            <?php foreach ($goals as $i => $goal): ?>
-                <li class="goal">
-                    <span class="goal__num"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
-                    <span class="goal__name"><?= $this->e($goal['name']) ?></span>
-                    <span class="goal__domain"><?= $this->e($goal['domain_label']) ?></span>
-                </li>
-            <?php endforeach; ?>
-        </ol>
+            <div class="term apt" data-reveal>
+                <div class="term__bar"><span></span><span></span><span></span><em>bash · raphael@besancon</em></div>
+                <div class="apt__body">
+                    <p class="apt__line"><span class="apt__user">raphael@besancon</span>:<span class="apt__path">~</span>$ apt list --upgradable</p>
+                    <ol class="apt__list">
+                        <?php foreach ($goals as $goal): ?>
+                            <?php $pkg = trim((string) preg_replace('/[^a-z0-9]+/', '-', strtolower((string) iconv('UTF-8', 'ASCII//TRANSLIT', $goal['name']))), '-'); ?>
+                            <li class="apt__row">
+                                <span class="apt__pkg"><?= $this->e($pkg) ?><span class="apt__suite">/<?= $this->e($goal['domain_label']) ?></span></span>
+                                <span class="apt__state"><?= $this->t('[pas encore installé]') ?></span>
+                                <span class="apt__name"><?= $this->e($goal['name']) ?></span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                    <p class="apt__line apt__dim"><?= count($goals) ?> <?= $this->t('paquets à installer.') ?></p>
+                    <p class="apt__line"><span class="apt__user">raphael@besancon</span>:<span class="apt__path">~</span>$ <span class="apt__caret" aria-hidden="true"></span></p>
+                </div>
+            </div>
+        </div>
     </div>
+    <a class="hero__scroll" href="#contact" aria-label="<?= $this->t('Descendre') ?>"><span></span></a>
 </section>
