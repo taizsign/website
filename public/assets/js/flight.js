@@ -1,10 +1,11 @@
 /*
- * À l'arrivée sur le site, une nuée de papillons (le même dessin que celui du titre,
- * en plusieurs couleurs) décolle du bas de la page, à gauche, et s'échappe par le haut
- * ou par la droite, à vitesse constante. Le tout dure 3 secondes, puis tout est retiré de la page.
+ * Quand on ouvre une rubrique du menu (Projets, Compétences, Parcours, Veille, Labo),
+ * une nuée de papillons (le même dessin que celui du titre, en plusieurs couleurs)
+ * décolle du bas de la page, à gauche, et s'échappe par le haut ou par la droite,
+ * à vitesse constante. Le tout dure 3 secondes, puis tout est retiré de la page.
  *
- * « Arriver sur le site » : entrer depuis l'extérieur (lien, favori, adresse tapée)
- * ou recharger la page. Naviguer d'une page à l'autre du site ne relance pas la nuée.
+ * Pas sur la page d'accueil, pas sur le détail d'un projet, pas en revenant en arrière,
+ * et une seule fois par rubrique et par visite pour ne pas lasser.
  */
 
 const DURATION = 3000;
@@ -36,16 +37,22 @@ const MARKUP = `
 
 const rand = (min, max) => min + Math.random() * (max - min);
 
-function isArrival() {
+function isSectionOpening() {
     const nav = performance.getEntriesByType?.('navigation')[0];
-    if (nav?.type === 'reload') return true;
     if (nav?.type === 'back_forward') return false;
 
+    // la page doit être une rubrique du menu principal
+    const here = location.pathname.replace(/\/+$/, '');
+    const isSection = [...document.querySelectorAll('.nav a')]
+        .some((a) => new URL(a.href, location.href).pathname.replace(/\/+$/, '') === here);
+    if (!isSection) return false;
+
     try {
-        return !document.referrer || new URL(document.referrer).origin !== location.origin;
-    } catch {
-        return true;
-    }
+        const seen = JSON.parse(sessionStorage.getItem('flock') || '[]');
+        if (seen.includes(here)) return false;
+        sessionStorage.setItem('flock', JSON.stringify([...seen, here]));
+    } catch { /* stockage indisponible : on les montre quand même */ }
+    return true;
 }
 
 /** Point d'une courbe de Bézier cubique, et sa tangente. */
@@ -136,7 +143,7 @@ function makeButterfly(index, W, H) {
 }
 
 export function initFlight() {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !isArrival()) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !isSectionOpening()) return;
 
     const W = innerWidth, H = innerHeight;
     const count = W < 640 ? 6 : 10;

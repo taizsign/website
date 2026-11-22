@@ -52,8 +52,8 @@ return [
 
     // Accueil
     'Étudiant BTS SIO SLAM'                    => 'IT student, BTS SIO SLAM',
-    "J'ai appris à construire des applications et m'oriente maintenant vers ce qui les fait tourner. <em>Je recherche une alternance</em> pour continuer dans cette voie."
-        => "I learned how to build applications and I'm now moving toward what keeps them running. <em>I'm looking for a work-study position</em> to keep going in that direction.",
+    "J'ai appris à construire des applications et m'oriente maintenant vers ce qui les fait tourner. <em>Je recherche une alternance</em> à Bordeaux pour la rentrée 2027."
+        => "I learned how to build applications and I'm now moving toward what keeps them running. <em>I'm looking for a work-study position</em> in Bordeaux, starting in September 2027.",
     'Voir mes projets'                         => 'See my projects',
     'Descendre'                                => 'Scroll down',
     'Qui je suis ?'                            => 'Who am I?',
@@ -63,8 +63,8 @@ return [
     "<em>Deux applications livrées</em> de bout en bout, de la base MySQL à la mise en production sur mon VPS. Prochaine étape, <em>une alternance</em> pour passer de l'autre côté du serveur."
         => '<em>Two applications delivered</em> end to end, from the MySQL database to production on my own VPS. Next step, <em>a work-study position</em> to move to the other side of the server.',
     'Le cap'                                   => "Where I'm headed",
-    "Valider l'<em>AZ-900</em>, automatiser mon homelab avec <em>Ansible</em> et le superviser avec <em>Grafana</em>, pour qu'il tourne comme un vrai parc."
-        => 'Pass the <em>AZ-900</em>, automate my homelab with <em>Ansible</em> and monitor it with <em>Grafana</em>, so it runs like a real fleet.',
+    "Intégrer <em>une équipe qui gère un vrai parc</em>, entre Windows Server, Linux et réseau Cisco, et y apprendre le métier d'administrateur au quotidien."
+        => "Join <em>a team that runs a real fleet</em> of Windows Server, Linux and Cisco networking, and learn the sysadmin job day to day.",
     'À côté'                                   => 'On the side',
     'Je répare mon matériel moi-même, <em>soudure</em> comprise. En parallèle, je prépare le <em>TOEIC</em> ainsi que la certification <em>Cisco CCNA</em>.'
         => "I repair my own hardware, <em>soldering</em> included. Alongside that, I'm preparing for the <em>TOEIC</em> as well as the <em>Cisco CCNA</em> certification.",

@@ -49,7 +49,7 @@ $letters = function (string $word, int $offset = 0): string {
             <span aria-hidden="true"><?= $letters('Jacquis', 7) ?><span class="hero__semi">;</span></span>
         </h1>
         <div class="hero__intro">
-            <p><?= $this->t("J'ai appris à construire des applications et m'oriente maintenant vers ce qui les fait tourner. <em>Je recherche une alternance</em> pour continuer dans cette voie.") ?></p>
+            <p><?= $this->t("J'ai appris à construire des applications et m'oriente maintenant vers ce qui les fait tourner. <em>Je recherche une alternance</em> à Bordeaux pour la rentrée 2027.") ?></p>
             <div class="actions">
                 <a class="btn" href="<?= $this->url('projects') ?>"><?= $this->t('Voir mes projets') ?>
                     <span class="arrow" aria-hidden="true"><?= $this->partial('partials/arrow') ?><?= $this->partial('partials/arrow') ?></span>
@@ -83,7 +83,7 @@ $letters = function (string $word, int $offset = 0): string {
             </article>
             <article class="trio__item" data-reveal>
                 <p class="trio__key"><?= $this->t('Le cap') ?></p>
-                <p><?= $this->t("Valider l'<em>AZ-900</em>, automatiser mon homelab avec <em>Ansible</em> et le superviser avec <em>Grafana</em>, pour qu'il tourne comme un vrai parc.") ?></p>
+                <p><?= $this->t("Intégrer <em>une équipe qui gère un vrai parc</em>, entre Windows Server, Linux et réseau Cisco, et y apprendre le métier d'administrateur au quotidien.") ?></p>
             </article>
             <article class="trio__item" data-reveal>
                 <p class="trio__key"><?= $this->t('À côté') ?></p>
