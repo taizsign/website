@@ -5,19 +5,107 @@
 /** Copier l'adresse e-mail. */
 export function initCopy() {
     document.querySelectorAll('[data-copy]').forEach((button) => {
+        // le bouton du mail n'a qu'une icône : pas de texte à changer, seulement sa couleur
         const label = button.querySelector('[data-copy-label]');
-        const initial = label.textContent;
+        const initial = label?.textContent;
         button.addEventListener('click', async () => {
             try {
                 await navigator.clipboard.writeText(button.dataset.copy);
-                label.textContent = button.dataset.copied || 'Copié ✓';
+                if (label) label.textContent = button.dataset.copied || 'Copié ✓';
                 button.classList.add('is-done');
             } catch {
-                label.textContent = button.dataset.copy;
+                if (label) label.textContent = button.dataset.copy;
             }
-            setTimeout(() => { label.textContent = initial; button.classList.remove('is-done'); }, 2200);
+            setTimeout(() => { if (label) label.textContent = initial; button.classList.remove('is-done'); }, 2200);
         });
     });
+}
+
+/** Heure de Besançon dans le pied de page, mise à jour chaque minute. */
+export function initClock() {
+    const clock = document.querySelector('[data-clock]');
+    if (!clock) return;
+    const format = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' });
+    const tick = () => { clock.textContent = format.format(new Date()); };
+    tick();
+    setInterval(tick, 30000);
+}
+
+/**
+ * Le lapin du pied de page. Chaque bond a sa propre longueur, sa hauteur et sa durée,
+ * avec des pauses de temps en temps : rien ne se répète exactement.
+ */
+export function initBunny() {
+    const meadow = document.querySelector('.meadow');
+    const bunny = meadow?.querySelector('.bunny');
+    const body = bunny?.querySelector('.bunny__body');
+    if (!body || !bunny.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const rand = (min, max) => min + Math.random() * (max - min);
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const place = (x) => { bunny.style.transform = `translateX(${x}px)`; };
+
+    // on ne l'anime que lorsque le pied de page est à l'écran
+    let visible = false;
+    let wake = null;
+    new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting;
+        if (visible && wake) { wake(); wake = null; }
+    }).observe(meadow);
+    const whenVisible = () => (visible ? Promise.resolve() : new Promise((resolve) => { wake = resolve; }));
+
+    async function hop(from, to) {
+        const height = rand(9, 24);
+        const duration = rand(330, 520);
+        bunny.animate([{ transform: `translateX(${from}px)` }, { transform: `translateX(${to}px)` }],
+            { duration, easing: 'cubic-bezier(.3, .1, .5, 1)', fill: 'forwards' });
+        await body.animate([
+            { transform: 'translateY(0) scale(1.08, .84)' },
+            { transform: `translateY(${-height}px) rotate(-9deg) scale(.95, 1.07)`, offset: .42, easing: 'ease-in' },
+            { transform: 'translateY(0) rotate(3deg) scale(1.1, .82)', offset: .86 },
+            { transform: 'translateY(0) scale(1, 1)' },
+        ], { duration, easing: 'ease-out' }).finished;
+        place(to);
+    }
+
+    async function sniff() {
+        const times = Math.round(rand(2, 5));
+        for (let i = 0; i < times; i++) {
+            await body.animate([
+                { transform: 'rotate(0)' },
+                { transform: 'rotate(4deg) translateY(1px)' },
+                { transform: 'rotate(0)' },
+            ], { duration: rand(160, 260) }).finished;
+            await wait(rand(80, 400));
+        }
+    }
+
+    (async () => {
+        let x = -60;
+        place(x);
+        await wait(rand(800, 2500));
+        for (;;) {
+            await whenVisible();
+            if (x > meadow.clientWidth + 10) {
+                x = -60;
+                place(x);
+                await wait(rand(3000, 9000));
+                continue;
+            }
+            // une série de 2 à 6 bonds, puis une pause, parfois pour renifler
+            const series = Math.round(rand(2, 6));
+            for (let i = 0; i < series; i++) {
+                // il s'arrête tant qu'on le survole, le temps de dire bonjour
+                while (bunny.matches(':hover')) await wait(120);
+                const to = x + rand(24, 62);
+                await hop(x, to);
+                x = to;
+                await wait(rand(30, 160));
+            }
+            if (Math.random() < .35) await sniff();
+            else await wait(rand(250, 1400));
+        }
+    })();
 }
 
 /** Vidéo YouTube chargée seulement au clic (pas de cookie avant). */

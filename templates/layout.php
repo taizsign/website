@@ -39,7 +39,7 @@ $alternates = $this->alternates();
     <script src="<?= $this->asset('js/boot.js') ?>"></script>
     <script type="module" src="<?= $this->asset('js/app.js') ?>"></script>
 </head>
-<body>
+<body id="top">
     <a class="skip" href="#main"><?= $this->t('Aller au contenu') ?></a>
     <canvas class="field" id="field" aria-hidden="true"></canvas>
 

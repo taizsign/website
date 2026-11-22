@@ -31,13 +31,17 @@ return [
     'Filtre activé · cliquer pour couper'      => 'Filter on · click to turn off',
 
     'Contact'                                  => 'Contact',
-    'Un projet, une question,<br>un serveur qui ne répond plus&nbsp;?' => 'A project, a question,<br>a server that stopped answering?',
+    "Au plaisir d'<em>échanger</em>."        => 'Happy to <em>talk</em>.',
+    'Mon code est sur GitHub, sous le nom'     => 'My code lives on GitHub, under the name',
+    'On peut aussi me joindre sur Discord,'    => 'You can also reach me on Discord,',
+    'Heure locale'                             => 'Local time',
+    'Plan du site'                             => 'Site map',
+    'Code source'                              => 'Source code',
+    'Haut de page'                             => 'Back to top',
     'Adresse copiée ✓'                         => 'Address copied ✓',
     "Copier l'adresse"                         => 'Copy address',
-    'Ailleurs'                                 => 'Elsewhere',
     'Pseudo copié ✓'                           => 'Username copied ✓',
     'Copier le pseudo Discord'                 => 'Copy Discord username',
-    'Basé à'                                   => 'Based in',
 
     // config/app.php
     'Raphaël Jacquis · systèmes, réseaux et bases de données' => 'Raphaël Jacquis · systems, networks and databases',

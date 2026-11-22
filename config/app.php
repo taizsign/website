@@ -13,7 +13,6 @@ return [
     'github'       => 'https://github.com/taizsign',
     'github_user'  => 'taizsign',
     'location'     => 'Besançon, France',
-    'x'            => ['handle' => 'padisem', 'url' => 'https://x.com/padisem'],
     'discord'      => 'taizxyz',
     'heading'      => 'Futur administrateur systèmes, réseaux & BDD',  // en haut à droite de l'accueil
 
