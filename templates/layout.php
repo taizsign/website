@@ -26,6 +26,11 @@ $alternates = $this->alternates();
     <meta property="og:title" content="<?= $this->e($pageTitle) ?>">
     <meta property="og:description" content="<?= $this->e($pageDescription) ?>">
     <meta property="og:locale" content="<?= $this->e($alternates[$locale]['tag']) ?>">
+    <meta property="og:image" content="<?= $this->e(rtrim($site['url'], '/') . '/assets/img/og.png') ?>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="<?= $this->e($site['name']) ?>">
+    <meta name="twitter:card" content="summary_large_image">
     <?php if ($route !== 'error'): ?>
         <?php foreach ($alternates as $code => $alternate): ?>
             <link rel="alternate" hreflang="<?= $this->e($code) ?>" href="<?= $this->e($site['url'] . $alternate['url']) ?>">

@@ -62,7 +62,7 @@ return [
         'Épreuve E7'            => 'E7 exam',
         'Projet OPSEC'          => 'OPSEC project',
         'Atelier perso'         => 'My own workbench',
-        'Ce portfolio'          => 'This portfolio',
+        'Portfolio'             => 'Portfolio',
         'Scripts perso'         => 'Personal scripts',
         'Veille technologique'  => 'Tech watch',
     ],

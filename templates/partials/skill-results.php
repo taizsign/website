@@ -29,8 +29,10 @@ $levels = [
     2 => $this->t('En pratique'),
     3 => $this->t('Autonome'),
     4 => $this->t('Confirmé'),
-    5 => $this->t('Expert'),
 ];
+
+// preuves qui renvoient vers une page du site plutôt que vers un projet
+$pages = [$this->t('Veille technologique') => $this->url('watch')];
 
 // domaine => niveau => compétences (dans l'ordre renvoyé par la requête)
 $matrix = [];
@@ -64,7 +66,14 @@ $uid = 0;
     <p class="skills-empty"><?= $this->t('Aucune ligne. La requête est valide, elle ne renvoie simplement rien&nbsp;: réactivez une valeur.') ?></p>
 <?php else: ?>
     <div class="skills-bar">
-        <p class="skills-guide"><span class="skills-guide__wide"><?= $this->t('Lecture de gauche à droite, du niveau le plus faible au plus élevé.') ?></span><span class="skills-guide__narrow"><?= $this->t('Classé du niveau le plus élevé au plus faible.') ?></span> <span class="skills-guide__hint"><?= $this->t('Survolez ou touchez une compétence pour en savoir plus.') ?></span></p>
+        <div class="skills-search">
+            <svg class="skills-search__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+            <input class="skills-search__input" type="search" data-skill-search autocomplete="off" spellcheck="false"
+                   placeholder="<?= $this->t('Rechercher une compétence, par exemple Linux, SQL ou Docker') ?>"
+                   aria-label="<?= $this->t('Rechercher une compétence') ?>">
+            <span class="skills-search__count" data-skill-count aria-live="polite"
+                  data-none="<?= $this->t('Aucune compétence trouvée') ?>" data-one="<?= $this->t('1 compétence trouvée') ?>" data-many="<?= $this->t('{n} compétences trouvées') ?>"></span>
+        </div>
     </div>
 
     <div class="matrix" role="table" aria-label="<?= $this->t('Matrice des compétences : domaines en lignes, niveaux en colonnes') ?>">
@@ -72,7 +81,7 @@ $uid = 0;
             <div class="matrix__corner" role="columnheader"><span class="sr-only"><?= $this->t('Domaine') ?></span></div>
             <?php foreach ($levels as $level => $label): ?>
                 <div class="matrix__level" role="columnheader" data-level="<?= $level ?>" style="--col: <?= $level ?>">
-                    <?= $this->stars($level) ?>
+                    <?= $this->stars($level, 4) ?>
                     <strong><?= $label ?></strong>
                 </div>
             <?php endforeach; ?>
@@ -88,7 +97,7 @@ $uid = 0;
                 <?php foreach ($cells as $level => $skills): ?>
                     <div class="matrix__cell" role="cell" data-level="<?= $level ?>"<?= $skills === [] ? ' data-empty' : '' ?>>
                         <?php if ($skills !== []): ?>
-                            <div class="matrix__tag" aria-hidden="true"><?= $this->stars($level) ?><span><?= $levels[$level] ?></span></div>
+                            <div class="matrix__tag" aria-hidden="true"><?= $this->stars($level, 4) ?><span><?= $levels[$level] ?></span></div>
                             <ul class="sk-list">
                                 <?php foreach ($skills as $row):
                                     $id = 'sk-' . ++$uid;
@@ -106,12 +115,12 @@ $uid = 0;
                                                 <img src="<?= $this->asset('img/logos/' . $row['logo'] . '.svg') ?>" alt="" width="32" height="32" loading="lazy">
                                                 <div>
                                                     <strong><?= $this->e($row['name']) ?></strong>
-                                                    <span class="sk__rating"><?= $this->stars($level) ?><?= $levels[$level] ?>, <?= $this->e($row['status_label']) ?></span>
+                                                    <span class="sk__rating"><?= $this->stars($level, 4) ?><?= $levels[$level] ?>, <?= $this->e($row['status_label']) ?></span>
                                                 </div>
                                             </div>
                                             <p class="sk__detail"><?= $this->e($row['detail']) ?></p>
                                             <?php if ($proofs !== []): ?>
-                                                <p class="sk__proof"><?php foreach ($proofs as $k => $proof): $slug = array_search($proof, $linked, true); ?><?= $k > 0 ? '<span class="sk__sep">,</span> ' : '' ?><?php if ($slug !== false): ?><a href="<?= $this->url('project', ['slug' => (string) $slug]) ?>"><?= $this->e($proof) ?></a><?php else: ?><span><?= $this->e($proof) ?></span><?php endif; ?><?php endforeach; ?></p>
+                                                <p class="sk__proof"><?php foreach ($proofs as $k => $proof): $slug = array_search($proof, $linked, true); ?><?= $k > 0 ? '<span class="sk__sep">,</span> ' : '' ?><?php if ($slug !== false): ?><a href="<?= $this->url('project', ['slug' => (string) $slug]) ?>"><?= $this->e($proof) ?></a><?php elseif (isset($pages[$proof])): ?><a href="<?= $pages[$proof] ?>"><?= $this->e($proof) ?></a><?php else: ?><span><?= $this->e($proof) ?></span><?php endif; ?><?php endforeach; ?></p>
                                             <?php endif; ?>
                                         </div>
                                     </li>

@@ -341,6 +341,66 @@ export function initBunny() {
     })();
 }
 
+/* ---------- recherche « de près ou de loin », commune aux listes du site ---------- */
+
+const plain = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+
+// distance d'édition entre deux mots courts (fautes de frappe)
+function distance(a, b) {
+    const row = Array.from({ length: b.length + 1 }, (_, i) => i);
+    for (let i = 1; i <= a.length; i++) {
+        let prev = row[0];
+        row[0] = i;
+        for (let j = 1; j <= b.length; j++) {
+            const tmp = row[j];
+            row[j] = Math.min(row[j] + 1, row[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+            prev = tmp;
+        }
+    }
+    return row[b.length];
+}
+
+// morceau du nom, lettres dans l'ordre, ou une faute de frappe ; query doit déjà passer par plain()
+function matches(name, query) {
+    const text = plain(name);
+    if (text.includes(query)) return true;
+    const words = text.split(/[^a-z0-9#+.]+/).filter(Boolean);
+    const tolerance = query.length >= 6 ? 2 : query.length >= 3 ? 1 : 0;
+    if (tolerance && words.some((w) => distance(w.slice(0, query.length), query) <= tolerance)) return true;
+    if (query.length >= 3) {
+        let i = 0;
+        for (const ch of text.replace(/\s+/g, '')) if (ch === query[i]) i++;
+        if (i === query.length && text.length <= query.length * 3) return true;
+    }
+    return false;
+}
+
+/**
+ * Page Compétences : la barre de recherche met en avant les compétences qui correspondent
+ * et estompe les autres. Écoute au niveau du document, car la console remplace la grille
+ * (et la barre) à chaque nouvelle requête.
+ */
+export function initSkillSearch() {
+    document.addEventListener('input', (event) => {
+        const input = event.target.closest?.('[data-skill-search]');
+        if (!input) return;
+        const result = input.closest('.result') || document;
+        const count = result.querySelector('[data-skill-count]');
+        const query = plain(input.value);
+        let found = 0;
+        result.querySelectorAll('.matrix .sk').forEach((sk) => {
+            const hit = query !== '' && matches(sk.querySelector('.sk__name')?.textContent ?? '', query);
+            sk.classList.toggle('is-match', hit);
+            sk.classList.toggle('is-dim', query !== '' && !hit);
+            if (hit) found++;
+        });
+        result.querySelector('.matrix')?.classList.toggle('is-searching', query !== '');
+        if (count) {
+            count.textContent = query === '' ? '' : found === 0 ? count.dataset.none : found === 1 ? count.dataset.one : count.dataset.many.replace('{n}', found);
+        }
+    });
+}
+
 /**
  * Les listes derrière les chiffres de l'accueil.
  * La fenêtre s'ouvre au survol du « ? » et reste ouverte tant que la souris
@@ -350,38 +410,6 @@ export function initBunny() {
 export function initFigures() {
     const figures = document.querySelectorAll('.figure');
     if (!figures.length) return;
-
-    const plain = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
-
-    // distance d'édition entre deux mots courts (fautes de frappe)
-    function distance(a, b) {
-        const row = Array.from({ length: b.length + 1 }, (_, i) => i);
-        for (let i = 1; i <= a.length; i++) {
-            let prev = row[0];
-            row[0] = i;
-            for (let j = 1; j <= b.length; j++) {
-                const tmp = row[j];
-                row[j] = Math.min(row[j] + 1, row[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
-                prev = tmp;
-            }
-        }
-        return row[b.length];
-    }
-
-    // « de près ou de loin » : morceau du nom, lettres dans l'ordre, ou une faute de frappe
-    function matches(name, query) {
-        const text = plain(name);
-        if (text.includes(query)) return true;
-        const words = text.split(/[^a-z0-9#+.]+/).filter(Boolean);
-        const tolerance = query.length >= 6 ? 2 : query.length >= 3 ? 1 : 0;
-        if (tolerance && words.some((w) => distance(w.slice(0, query.length), query) <= tolerance)) return true;
-        if (query.length >= 3) {
-            let i = 0;
-            for (const ch of text.replace(/\s+/g, '')) if (ch === query[i]) i++;
-            if (i === query.length && text.length <= query.length * 3) return true;
-        }
-        return false;
-    }
 
     figures.forEach((figure) => {
         const help = figure.querySelector('.figure__help');

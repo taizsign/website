@@ -13,7 +13,7 @@ $statusParam = $this->e($query->param('status'));
     <div class="wrap">
         <p class="crumb" data-reveal><a href="<?= $this->url('home') ?>">~</a> / <?= $this->t('compétences') ?></p>
         <h1 class="h1" data-reveal><?= $this->t('Compétences') ?><span class="title-semi" aria-hidden="true">;</span></h1>
-        <p class="lead lead--wide" data-reveal><?= $this->t("Pas de jauges au hasard&nbsp;: mes compétences sont rangées dans une vraie base de données, chacune avec un niveau, un statut et une preuve. Cliquez sur les valeurs de la requête pour filtrer&nbsp;; c'est exactement cette requête que le serveur exécute.") ?></p>
+        <p class="lead lead--wide" data-reveal><?= $this->t("Mes compétences sont enregistrées dans une <em>base de données</em>, chacune avec un niveau, un statut et, pour la plupart, une preuve. En cliquant sur les valeurs de la <em>requête SQL</em>, vous filtrez la liste, et c'est exactement cette requête que le serveur exécute.") ?></p>
     </div>
 </section>
 
@@ -51,7 +51,7 @@ $statusParam = $this->e($query->param('status'));
                         </select>
                     </label>;
                 </span></div>
-                <div class="ql ql--comment"><span class="ln">6</span><span class="tok-comment"><?= $this->t("/* 'objectif' : compétences très demandées en systèmes, réseaux et BDD que je travaille en ce moment */") ?></span></div>
+                <div class="ql ql--comment"><span class="ln">6</span><span class="tok-comment"><?= $this->t("/* 'objectif' : compétences très demandées en administration que je travaille en ce moment */") ?></span></div>
             </div>
 
             <div class="console__status" aria-live="polite" data-status>

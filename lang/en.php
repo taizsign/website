@@ -45,8 +45,8 @@ return [
 
     // config/app.php
     'Raphaël Jacquis | systèmes, réseaux et bases de données' => 'Raphaël Jacquis | systems, networks and databases',
-    "Portfolio de Raphaël, étudiant en BTS SIO à Besançon : projets, compétences et homelab, avec un cap sur l'administration systèmes, réseaux et bases de données."
-        => 'Portfolio of Raphaël Jacquis, an IT student in Besançon, France: projects, skills and homelab, heading toward systems, network and database administration.',
+    "Raphaël Jacquis, étudiant en BTS SIO SLAM. Je recherche une alternance en administration systèmes et réseaux à Bordeaux pour la rentrée 2027."
+        => "Raphaël Jacquis, BTS SIO student (software track). I'm looking for a work-study position in systems and network administration in Bordeaux, starting September 2027.",
     'Futur administrateur systèmes, réseaux & BDD' => 'Future systems, network & database administrator',
     'Script de déploiement / GitHub Pages'     => 'Setup script / GitHub Pages',
 
@@ -86,7 +86,7 @@ return [
     '{n} projets utilisent {tech}'             => '{n} projects use {tech}',
     'Ces chiffres sortent de la base SQLite qui fait tourner ce site.' => 'These numbers come straight from the SQLite database that runs this site.',
     'Interroger mes compétences →'             => 'Query my skills →',
-    'Du <em>schéma de base</em><br>à la <em>mise en production</em>.' => 'From <em>database schema</em><br>to <em>production</em>.',
+    "De la <em>base de données</em><br>jusqu'au <em>serveur</em>." => 'From the <em>database</em><br>all the way to the <em>server</em>.',
     'En ce moment'                             => 'Right now',
     'Ce que je ne sais <em>pas encore</em> faire.' => "What I <em>can't do yet</em>.",
     '[pas encore installé]'                    => '[not installed yet]',
@@ -139,13 +139,13 @@ return [
     'compétences'                              => 'skills',
     'Mes compétences, stockées dans une base SQLite et interrogeables directement depuis la page.'
         => 'My skills, stored in an SQLite database and queryable right from the page.',
-    "Pas de jauges au hasard&nbsp;: mes compétences sont rangées dans une vraie base de données, chacune avec un niveau, un statut et une preuve. Cliquez sur les valeurs de la requête pour filtrer&nbsp;; c'est exactement cette requête que le serveur exécute."
-        => 'No random gauges here. My skills are stored in a real database, each with a level, a status and some evidence. Click the values in the query to filter it. This is exactly the query the server runs.',
+    "Mes compétences sont enregistrées dans une <em>base de données</em>, chacune avec un niveau, un statut et, pour la plupart, une preuve. En cliquant sur les valeurs de la <em>requête SQL</em>, vous filtrez la liste, et c'est exactement cette requête que le serveur exécute."
+        => "My skills are stored in a <em>database</em>, each with a level, a status and, for most of them, evidence. Clicking the values in the <em>SQL query</em> filters the list, and that exact query is what the server runs.",
     'Exécuter'                                 => 'Run',
     'Requête SQL modifiable'                   => 'Editable SQL query',
     'Ordre de tri'                             => 'Sort order',
-    "/* 'objectif' : compétences très demandées en systèmes, réseaux et BDD que je travaille en ce moment */"
-        => "/* 'goal': in-demand systems, network and database skills I'm working on right now */",
+    "/* 'objectif' : compétences très demandées en administration que je travaille en ce moment */"
+        => "/* 'goal': in-demand administration skills I'm working on right now */",
     'en'                                       => 'in',
     'requête exécutée'                         => 'executed query',
     'Systèmes'                                 => 'Systems',
@@ -163,6 +163,11 @@ return [
     'Aucune ligne. La requête est valide, elle ne renvoie simplement rien&nbsp;: réactivez une valeur.'
         => 'No rows. The query is valid, it just returns nothing. Turn a value back on.',
     'Lecture de gauche à droite, du niveau le plus faible au plus élevé.' => 'Read from left to right, from the lowest level to the highest.',
+    'Rechercher une compétence, par exemple Linux, SQL ou Docker' => 'Search a skill, for example Linux, SQL or Docker',
+    'Rechercher une compétence'                => 'Search a skill',
+    'Aucune compétence trouvée'                => 'No skill found',
+    '1 compétence trouvée'                     => '1 skill found',
+    '{n} compétences trouvées'                 => '{n} skills found',
     'Classé du niveau le plus élevé au plus faible.' => 'Sorted from the highest level to the lowest.',
     'Survolez ou touchez une compétence pour en savoir plus.' => 'Hover over or tap a skill to learn more.',
     'Matrice des compétences : domaines en lignes, niveaux en colonnes' => 'Skills matrix: domains in rows, levels in columns',
@@ -178,6 +183,7 @@ return [
     "Le profil de l'étape"                     => 'The stage profile',
     'terminé'                                  => 'done',
     'en cours'                                 => 'in progress',
+    'acquis'                                   => 'acquired',
     'en projet'                                => 'planned',
     'LE CAP'                                   => 'THE GOAL',
     'Profil du parcours : '                    => 'Journey profile: ',

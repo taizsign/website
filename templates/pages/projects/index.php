@@ -61,14 +61,14 @@
                 <a class="row__link" href="https://github.com/taizsign/setup-computer" target="_blank" rel="noopener">
                     <span class="row__name">setup-computer</span>
                     <span class="row__desc"><?= $this->t('Script PowerShell qui prépare un poste Windows en une commande. Détaillé dans le <span class="u">Labo</span>.') ?></span>
-                    <span class="row__meta">PowerShell ↗</span>
+                    <span class="row__meta"><img src="<?= $this->techLogo('PowerShell') ?>" alt="" width="16" height="16" loading="lazy">PowerShell <span class="row__arrow" aria-hidden="true">↗</span></span>
                 </a>
             </li>
             <li class="row">
                 <a class="row__link" href="https://github.com/taizsign/mesvoyages" target="_blank" rel="noopener">
                     <span class="row__name">mesvoyages</span>
                     <span class="row__desc"><?= $this->t('Application Symfony&nbsp;: catalogue de visites, formulaire de contact, authentification et jeux de données de test.') ?></span>
-                    <span class="row__meta">PHP ↗</span>
+                    <span class="row__meta"><img src="<?= $this->techLogo('PHP') ?>" alt="" width="16" height="16" loading="lazy">PHP <span class="row__arrow" aria-hidden="true">↗</span></span>
                 </a>
             </li>
         </ul>

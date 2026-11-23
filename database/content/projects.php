@@ -373,7 +373,7 @@ PHP,
 
         'stack' => [
             'Backend'  => ['PHP 8.5', 'PDO', 'Composer'],
-            'Frontend' => ['HTML / CSS', 'JavaScript'],
+            'Frontend' => ['JavaScript', 'HTML / CSS'],
             'Données'  => ['SQLite'],
             'Outils'   => ['Git', 'Claude Code'],
         ],

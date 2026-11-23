@@ -143,19 +143,22 @@ $docsMeta = implode(', ', array_filter([
 
     <!-- Stack -->
     <section class="section">
-        <div class="wrap split">
-            <div class="split__side">
+        <div class="wrap">
+            <div class="section__head">
                 <?= $this->rule($this->t('Stack'), $this->plural(array_sum(array_map('count', $project->stack)), 'technologie')) ?>
             </div>
-            <div class="split__main">
-                <dl class="stack" data-reveal>
-                    <?php foreach ($project->stack as $layer => $technologies): ?>
-                        <div class="stack__row">
-                            <dt><?= $this->e($layer) ?></dt>
-                            <dd><ul class="chips"><?php foreach ($technologies as $tech): ?><li><img class="chips__logo" src="<?= $this->techLogo($tech) ?>" alt="" width="16" height="16" loading="lazy"><?= $this->e($tech) ?></li><?php endforeach; ?></ul></dd>
-                        </div>
-                    <?php endforeach; ?>
-                </dl>
+            <?php // une colonne par couche, les technologies empilées dessous comme une fiche technique ?>
+            <div class="stack" data-reveal>
+                <?php foreach ($project->stack as $layer => $technologies): ?>
+                    <section class="stack__col">
+                        <h3 class="stack__layer"><span><?= $this->e($layer) ?></span></h3>
+                        <ul class="stack__list">
+                            <?php foreach ($technologies as $tech): ?>
+                                <li><img src="<?= $this->techLogo($tech) ?>" alt="" width="18" height="18" loading="lazy"><?= $this->e($tech) ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </section>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -213,15 +216,15 @@ $docsMeta = implode(', ', array_filter([
     <!-- Compétences BTS -->
     <?php if ($project->competencies !== []): ?>
         <section class="section">
-            <div class="wrap split">
-                <div class="split__side">
+            <div class="wrap">
+                <div class="section__head">
                     <?= $this->rule($this->t('Référentiel BTS SIO'), $this->plural(array_sum(array_map(static fn (array $b): int => count($b['items']), $project->competencies)), 'compétence')) ?>
-                    <p class="split__summary" data-reveal><?= $this->t('Les compétences du référentiel mobilisées par ce projet.') ?></p>
+                    <p class="lead" data-reveal><?= $this->t('Les compétences du référentiel mobilisées par ce projet.') ?></p>
                 </div>
-                <div class="split__main bts">
+                <div class="bts">
                     <?php foreach ($project->competencies as $code => $block): ?>
                         <div class="bts__block" data-reveal>
-                            <h3 class="bts__title"><span><?= $this->e($code) ?></span><?= $this->e($block['label']) ?></h3>
+                            <h3 class="bts__title"><span><?= $this->e($code) ?></span><span class="bts__label"><?= $this->e($block['label']) ?></span></h3>
                             <ul class="bts__list">
                                 <?php foreach ($block['items'] as $itemCode => $itemLabel): ?>
                                     <li><code><?= $this->e($itemCode) ?></code><?= $this->e($itemLabel) ?></li>

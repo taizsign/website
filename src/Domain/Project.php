@@ -93,8 +93,28 @@ final class Project
      */
     public function headlineStack(int $max = 4): array
     {
-        $first = array_map(static fn (array $techs): string => $techs[0], array_filter($this->stack));
+        // les outils de travail (éditeur, Git...) ne résument pas un projet : on les laisse de côté
+        $layers = array_values(array_filter(
+            $this->stack,
+            static fn (array $techs, string $layer): bool => $techs !== [] && !in_array($layer, ['Outils', 'Tools'], true),
+            ARRAY_FILTER_USE_BOTH,
+        ));
 
-        return array_slice(array_values($first), 0, $max);
+        // la première technologie de chaque couche, puis la deuxième, etc. jusqu'à en avoir assez
+        $picked = [];
+        for ($rank = 0; count($picked) < $max && $layers !== []; $rank++) {
+            $added = false;
+            foreach ($layers as $techs) {
+                if (isset($techs[$rank]) && count($picked) < $max) {
+                    $picked[] = $techs[$rank];
+                    $added = true;
+                }
+            }
+            if (!$added) {
+                break;
+            }
+        }
+
+        return $picked;
     }
 }

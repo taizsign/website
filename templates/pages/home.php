@@ -128,7 +128,7 @@ $letters = function (string $word, int $offset = 0): string {
     <div class="wrap">
         <div class="section__head projects-head">
             <?= $this->rule($this->t('Projets'), $this->plural(count($projects), 'dossier')) ?>
-            <h2 class="h2" data-reveal><?= $this->t('Du <em>schéma de base</em><br>à la <em>mise en production</em>.') ?></h2>
+            <h2 class="h2" data-reveal><?= $this->t("De la <em>base de données</em><br>jusqu'au <em>serveur</em>.") ?></h2>
         </div>
 
         <?= $this->partial('partials/project-list', ['projects' => $projects]) ?>
@@ -150,9 +150,9 @@ $letters = function (string $word, int $offset = 0): string {
             </div>
 
             <div class="term apt" data-reveal>
-                <div class="term__bar"><span></span><span></span><span></span><em>raphael@besancon: ~</em></div>
+                <div class="term__bar"><span></span><span></span><span></span><em>raphael@homelab: ~</em></div>
                 <div class="apt__body">
-                    <p class="apt__line"><span class="apt__user">raphael@besancon</span>:<span class="apt__path">~</span>$ apt list --upgradable</p>
+                    <p class="apt__line"><span class="apt__user">raphael@homelab</span>:<span class="apt__path">~</span>$ apt list --upgradable</p>
                     <ol class="apt__list">
                         <?php foreach ($goals as $goal): ?>
                             <?php $pkg = trim((string) preg_replace('/[^a-z0-9]+/', '-', strtolower((string) iconv('UTF-8', 'ASCII//TRANSLIT', $goal['name']))), '-'); ?>
@@ -164,7 +164,7 @@ $letters = function (string $word, int $offset = 0): string {
                         <?php endforeach; ?>
                     </ol>
                     <p class="apt__line apt__dim"><?= count($goals) ?> <?= $this->t('paquets à installer.') ?></p>
-                    <p class="apt__line"><span class="apt__user">raphael@besancon</span>:<span class="apt__path">~</span>$ <span class="apt__caret" aria-hidden="true"></span></p>
+                    <p class="apt__line"><span class="apt__user">raphael@homelab</span>:<span class="apt__path">~</span>$ <span class="apt__caret" aria-hidden="true"></span></p>
                 </div>
             </div>
         </div>
