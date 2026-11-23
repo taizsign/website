@@ -15,6 +15,7 @@ return [
     // Commun : en-tête, pied de page, métadonnées
     'Aller au contenu'                         => 'Skip to content',
     'Accueil'                                  => 'Home',
+    'mobile à'                                 => 'moving to',
     'Contenu daté'                             => 'Dated content',
     'Cette page date des <em>épreuves 2026</em>.' => 'This page dates from the <em>2026 exams</em>.',
     "Ce support a été présenté aux épreuves du BTS SIO de 2026 et n'a pas été mis à jour depuis." => "These slides were presented at the 2026 BTS SIO exams and have not been updated since.",

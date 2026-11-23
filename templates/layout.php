@@ -32,6 +32,7 @@ $alternates = $this->alternates();
     <meta property="og:image:alt" content="<?= $this->e($site['name']) ?>">
     <meta name="twitter:card" content="summary_large_image">
     <?php if ($route !== 'error'): ?>
+        <link rel="canonical" href="<?= $this->e($site['url'] . $alternates[$locale]['url']) ?>">
         <?php foreach ($alternates as $code => $alternate): ?>
             <link rel="alternate" hreflang="<?= $this->e($code) ?>" href="<?= $this->e($site['url'] . $alternate['url']) ?>">
         <?php endforeach; ?>

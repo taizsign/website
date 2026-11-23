@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /documents/
 
-# **
+Sitemap: https://taizsys.xyz/sitemap.xml

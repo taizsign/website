@@ -13,7 +13,8 @@ final class WatchController extends AbstractController
     {
         $feeds = [];
         foreach ($this->container->config['feeds'] as $feed) {
-            $feeds[] = $feed + ['items' => $this->container->feeds()->latest($feed['url'], 4)];
+            $items = $this->container->feeds()->latest($feed['url'], 4, $feed['match'] ?? null, $this->container->config['feeds_skip'] ?? null);
+            $feeds[] = $feed + ['items' => $items];
         }
 
         return $this->render('pages/watch', [

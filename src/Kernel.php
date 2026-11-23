@@ -10,6 +10,7 @@ use App\Controller\HomeController;
 use App\Controller\JourneyController;
 use App\Controller\LabController;
 use App\Controller\ProjectController;
+use App\Controller\SitemapController;
 use App\Controller\SkillController;
 use App\Controller\WatchController;
 use App\Http\Request;
@@ -58,7 +59,8 @@ final class Kernel
             ->get('/parcours/e5', [JourneyController::class, 'e5'], 'journey-e5', ['en' => '/journey/e5'])
             ->get('/veille', [WatchController::class, 'index'], 'watch', ['en' => '/tech-watch'])
             ->get('/labo', [LabController::class, 'index'], 'lab', ['en' => '/lab'])
-            ->get('/documents/{slug}', [DocumentController::class, 'show'], 'document', localized: false);
+            ->get('/documents/{slug}', [DocumentController::class, 'show'], 'document', localized: false)
+            ->get('/sitemap.xml', [SitemapController::class, 'index'], 'sitemap', localized: false);
     }
 
     public function handle(Request $request): Response

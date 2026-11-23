@@ -19,10 +19,26 @@ final class FeedReader
     }
 
     /**
+     * Les derniers articles d'un flux, filtrés sur leur titre.
+     *
+     * @param ?string $match on ne garde que les titres qui correspondent (expression régulière)
+     * @param ?string $skip  on écarte les titres qui correspondent
      * @return list<array{title: string, url: string, date: ?int}>
      */
-    public function latest(string $url, int $max = 4): array
+    public function latest(string $url, int $max = 4, ?string $match = null, ?string $skip = null): array
     {
+        $keep = static fn (array $i): bool => ($match === null || preg_match($match, $i['title']) === 1)
+            && ($skip === null || preg_match($skip, $i['title']) !== 1);
+
+        return array_slice(array_values(array_filter($this->all($url), $keep)), 0, $max);
+    }
+
+    /**
+     * @return list<array{title: string, url: string, date: ?int}>
+     */
+    private function all(string $url): array
+    {
+        $max = PHP_INT_MAX;
         $cacheFile = $this->cacheDir . '/feed-' . md5($url) . '.json';
 
         if (is_file($cacheFile) && time() - filemtime($cacheFile) < self::TTL) {

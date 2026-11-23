@@ -32,7 +32,7 @@ $letters = function (string $word, int $offset = 0): string {
             <li>
                 <!-- la citadelle de Besançon -->
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21h20M3.5 21V8h1.5v1.5h1.5V8H8v13M16 21V8h1.5v1.5H19V8h1.5v13M8 12.5h8M8 12.5V11h1.6v1.5M11.2 12.5V11h1.6v1.5M14.4 12.5V11H16M10.5 21v-3a1.5 1.5 0 0 1 3 0v3M18.25 8V3.5l2.5 1.1-2.5 1.1"/></svg>
-                <?= $this->e($site['location']) ?>
+                <?= $this->e(strtok($site['location'], ',')) ?>, <?= $this->t('mobile à') ?> <?= $this->e($site['mobility']) ?>
             </li>
         </ul>
         <p class="hero__status">

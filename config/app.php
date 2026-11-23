@@ -13,6 +13,7 @@ return [
     'github'       => 'https://github.com/taizsign',
     'github_user'  => 'taizsign',
     'location'     => 'Besançon, France',
+    'mobility'     => 'Bordeaux',  // ville où je cherche l'alternance, affichée sur l'accueil
     'discord'      => 'taizxyz',
     'heading'      => 'Futur administrateur systèmes, réseaux & BDD',  // en haut à droite de l'accueil
 
@@ -33,9 +34,13 @@ return [
     ],
 
     // Flux lus par la page Veille (lang : langue des articles, ils ne sont pas traduits).
+    // match : on ne garde que les titres qui correspondent (facultatif).
+    // Les bons plans et les tests produits sont toujours écartés (voir feeds_skip).
     'feeds' => [
         ['name' => 'IT-Connect',  'url' => 'https://www.it-connect.fr/feed/',              'lang' => 'fr'],
         ['name' => 'GitHub Blog', 'url' => 'https://github.blog/feed/',                    'lang' => 'en'],
-        ['name' => 'ZDNet',       'url' => 'https://www.zdnet.fr/feeds/rss/actualites/', 'lang' => 'fr'],
+        ['name' => 'ZDNet',       'url' => 'https://www.zdnet.fr/feeds/rss/actualites/', 'lang' => 'fr',
+         'match' => '/\\b((?-i:IA|AI|LLM)|Copilot|ChatGPT|Claude|Gemini|Mistral|OpenAI|Anthropic|agents?|code|développeurs?|open source)\\b/iu'],
     ],
+    'feeds_skip' => '/black friday|bon plan|remise|promo|soldes|\\d\\s?€|j\'ai testé|\\btest (du|de|des)\\b|mon top|meilleur|lequel choisir|acheter/iu',
 ];
