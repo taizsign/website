@@ -78,6 +78,12 @@ return [
     'Voir la liste'                            => 'Show the list',
     'Rechercher'                               => 'Search',
     'Rechercher dans la liste'                 => 'Search the list',
+    'Filtrer par langage ou technologie'       => 'Filter by language or technology',
+    'Filtrer les projets par technologie'      => 'Filter projects by technology',
+    'Effacer le filtre'                        => 'Clear the filter',
+    'Aucune technologie ne correspond.'        => 'No technology matches.',
+    '{n} projet utilise {tech}'                => '{n} project uses {tech}',
+    '{n} projets utilisent {tech}'             => '{n} projects use {tech}',
     'Ces chiffres sortent de la base SQLite qui fait tourner ce site.' => 'These numbers come straight from the SQLite database that runs this site.',
     'Interroger mes compétences →'             => 'Query my skills →',
     'Du <em>schéma de base</em><br>à la <em>mise en production</em>.' => 'From <em>database schema</em><br>to <em>production</em>.',
@@ -91,8 +97,8 @@ return [
 
     // Projets
     'projets'                                  => 'projects',
-    "Deux applications complètes, construites pendant le BTS. Pour chacune&nbsp;: le contexte, l'architecture, du vrai code tiré des dépôts, et ce que je referais autrement aujourd'hui."
-        => 'Two complete applications, built during my BTS. For each one: the context, the architecture, real code taken from the repositories, and what I would do differently today.',
+    "<em>Deux applications complètes</em>, construites pendant le BTS. Pour chacune, le <em>contexte</em>, l'<em>architecture</em>, des extraits du <em>code source</em> et ce que je <em>referais autrement</em> aujourd'hui."
+        => '<em>Two complete applications</em>, built during my BTS. For each one, the <em>context</em>, the <em>architecture</em>, excerpts from the <em>source code</em> and what I would <em>do differently</em> today.',
     'Aussi sur GitHub'                         => 'Also on GitHub',
     'Script PowerShell qui prépare un poste Windows en une commande. Détaillé dans le <span class="u">Labo</span>.'
         => 'PowerShell script that sets up a Windows machine with a single command. Covered in the <span class="u">Lab</span>.',

@@ -13,7 +13,7 @@ $years = $eventYears === [] ? null : reset($eventYears) . ' → ' . end($eventYe
     <div class="wrap">
         <p class="crumb" data-reveal><a href="<?= $this->url('home') ?>">~</a> / <?= $this->t('veille') ?></p>
         <?= $this->rule($this->t('Veille technologique'), $this->t('édition 2026')) ?>
-        <h1 class="h1 h1--long" data-reveal><?= $this->t("L'IA générative dans le développement logiciel") ?></h1>
+        <h1 class="h1 h1--long" data-reveal><?= $this->t("L'IA générative dans le développement logiciel") ?><span class="title-semi" aria-hidden="true">;</span></h1>
         <p class="lead lead--wide" data-reveal><?= $this->t("De l'assistant de code à l'agent autonome.") ?></p>
     </div>
 </section>

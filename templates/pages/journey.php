@@ -18,7 +18,7 @@ usort($chrono, static fn (Milestone $a, Milestone $b): int => $a->at <=> $b->at)
     <div class="wrap journey-head">
         <div class="journey-head__title">
             <p class="crumb" data-reveal><a href="<?= $this->url('home') ?>">~</a> / <?= $this->t('parcours') ?></p>
-            <h1 class="h1" data-reveal><?= $this->t('Parcours') ?></h1>
+            <h1 class="h1" data-reveal><?= $this->t('Parcours') ?><span class="title-semi" aria-hidden="true">;</span></h1>
         </div>
 
         <dl class="resume" data-reveal>

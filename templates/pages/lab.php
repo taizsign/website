@@ -15,7 +15,7 @@ $rackU = max(12, $totalU + 2);
         <div class="lab-head">
             <div>
                 <p class="crumb" data-reveal><a href="<?= $this->url('home') ?>">~</a> / <?= $this->t('labo') ?></p>
-                <h1 class="h1" data-reveal><?= $this->t('Labo') ?></h1>
+                <h1 class="h1" data-reveal><?= $this->t('Labo') ?><span class="title-semi" aria-hidden="true">;</span></h1>
             </div>
 
             <?php if (!$showHomelab || !$showProbes): ?>

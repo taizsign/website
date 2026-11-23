@@ -186,6 +186,39 @@ final class View
      * Nom propre long (« MediaTekDocuments ») : autorise une coupure aux majuscules
      * internes plutôt qu'au milieu d'un mot sur petit écran.
      */
+    public function techLogo(string $tech): string
+    {
+        static $map = [
+            'c#' => 'csharp', '.net' => 'csharp', 'winforms' => 'windows', 'visual studio' => 'windows',
+            'newtonsoft' => 'api', 'postman' => 'api', 'api' => 'api',
+            'mstest' => 'tests', 'phpunit' => 'tests', 'sonarlint' => 'tests',
+            'phpdocumentor' => 'php', 'php' => 'php', 'composer' => 'php', 'pdo' => 'dba',
+            'mysql' => 'mysql', 'sqlite' => 'sqlite', 'postgresql' => 'postgresql',
+            'vps' => 'server', 'winscp' => 'server', 'ubuntu' => 'linux', 'linux' => 'linux', 'nginx' => 'nginx',
+            'github actions' => 'githubactions', 'git' => 'git', 'docker' => 'docker',
+            'symfony' => 'symfony', 'doctrine' => 'doctrine', 'twig' => 'twig',
+            'javascript' => 'javascript', 'python' => 'python', 'powershell' => 'powershell',
+        ];
+        $name = mb_strtolower($tech);
+        foreach ($map as $prefix => $file) {
+            if (str_starts_with($name, $prefix)) {
+                return $this->asset('img/logos/' . $file . '.svg');
+            }
+        }
+
+        return $this->asset('img/logos/code.svg');
+    }
+
+    /**
+     * Toutes les technologies d'un projet, à plat et sans doublon.
+     *
+     * @return list<string>
+     */
+    public function techList(\App\Domain\Project $project): array
+    {
+        return array_values(array_unique(array_merge(...array_values($project->stack ?: [[]]))));
+    }
+
     public function breakable(string $name): string
     {
         return (string) preg_replace('/(?<=\p{Ll})(?=\p{Lu})/u', '<wbr>', $this->e($name));

@@ -477,6 +477,99 @@ export function initProgress() {
     update();
 }
 
+/**
+ * Page projets : une barre qui propose les technologies des projets, avec leur icône.
+ * On tape pour réduire la liste (accents et majuscules ignorés), on choisit avec la
+ * souris ou les flèches, et seuls les projets qui utilisent la technologie restent.
+ */
+export function initTechSearch() {
+    const box = document.querySelector('[data-techsearch]');
+    if (!box) return;
+    const input = box.querySelector('.techsearch__input');
+    const list = box.querySelector('.techsearch__list');
+    const clear = box.querySelector('.techsearch__clear');
+    const status = box.querySelector('.techsearch__status');
+    const empty = box.querySelector('.techsearch__empty');
+    const options = [...list.querySelectorAll('.techsearch__option')];
+    const projects = [...document.querySelectorAll('.project[data-techs]')];
+    const plain = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    // ce qu'on tape vraiment pour certains noms (« csharp » pour C#, « js » pour JavaScript...)
+    const ALIASES = { 'c#': 'csharp c sharp', '.net': 'dotnet', javascript: 'js', 'html / css': 'html css',
+        postgresql: 'postgres', 'github actions': 'ci cd', 'vps ovh': 'serveur server', ubuntu: 'linux' };
+    const searchable = (tech) => plain(`${tech} ${Object.entries(ALIASES).find(([k]) => tech.toLowerCase().startsWith(k))?.[1] ?? ''}`);
+    let active = -1;
+
+    const visible = () => options.filter((o) => !o.hidden);
+    const open = () => { list.hidden = false; input.setAttribute('aria-expanded', 'true'); };
+    const close = () => { list.hidden = true; input.setAttribute('aria-expanded', 'false'); setActive(-1); };
+
+    function setActive(index) {
+        const shown = visible();
+        options.forEach((o) => { o.classList.remove('is-active'); o.setAttribute('aria-selected', 'false'); });
+        active = index;
+        const option = shown[index];
+        if (option) {
+            option.classList.add('is-active');
+            option.setAttribute('aria-selected', 'true');
+            option.scrollIntoView({ block: 'nearest' });
+            input.setAttribute('aria-activedescendant', option.id);
+        } else {
+            input.removeAttribute('aria-activedescendant');
+        }
+    }
+
+    function narrow() {
+        const query = plain(input.value);
+        options.forEach((o) => { o.hidden = query !== '' && !searchable(o.dataset.tech).includes(query); });
+        empty.hidden = visible().length > 0;
+        setActive(-1);
+    }
+
+    function apply(tech) {
+        const key = tech.toLowerCase();
+        let count = 0;
+        projects.forEach((p) => {
+            const match = p.dataset.techs.split('|').includes(key);
+            p.classList.toggle('is-filtered', !match);
+            if (match) count++;
+        });
+        input.value = tech;
+        clear.hidden = false;
+        status.textContent = (count > 1 ? box.dataset.many : box.dataset.one).replace('{n}', count).replace('{tech}', tech);
+        close();
+    }
+
+    function reset() {
+        projects.forEach((p) => p.classList.remove('is-filtered'));
+        input.value = '';
+        clear.hidden = true;
+        status.textContent = '';
+        narrow();
+    }
+
+    options.forEach((o, i) => {
+        o.id = `techsearch-${i}`;
+        o.addEventListener('mousedown', (event) => event.preventDefault()); // garder le focus dans le champ
+        o.addEventListener('click', () => apply(o.dataset.tech));
+    });
+    input.addEventListener('focus', () => { narrow(); open(); });
+    input.addEventListener('click', open);
+    input.addEventListener('input', () => {
+        if (!input.value) reset();
+        narrow();
+        open();
+    });
+    input.addEventListener('keydown', (event) => {
+        const shown = visible();
+        if (event.key === 'ArrowDown') { event.preventDefault(); open(); setActive(Math.min(active + 1, shown.length - 1)); }
+        else if (event.key === 'ArrowUp') { event.preventDefault(); setActive(Math.max(active - 1, 0)); }
+        else if (event.key === 'Enter' && shown[Math.max(active, 0)] && !list.hidden) { event.preventDefault(); apply(shown[Math.max(active, 0)].dataset.tech); }
+        else if (event.key === 'Escape') { close(); }
+    });
+    input.addEventListener('blur', () => setTimeout(close, 120));
+    clear.addEventListener('click', () => { reset(); input.focus(); });
+}
+
 /** Vidéo YouTube chargée seulement au clic (pas de cookie avant). */
 export function initVideo() {
     document.querySelectorAll('[data-video]').forEach((box) => {

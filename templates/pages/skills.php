@@ -12,7 +12,7 @@ $statusParam = $this->e($query->param('status'));
 <section class="page-head">
     <div class="wrap">
         <p class="crumb" data-reveal><a href="<?= $this->url('home') ?>">~</a> / <?= $this->t('compétences') ?></p>
-        <h1 class="h1" data-reveal><?= $this->t('Compétences') ?></h1>
+        <h1 class="h1" data-reveal><?= $this->t('Compétences') ?><span class="title-semi" aria-hidden="true">;</span></h1>
         <p class="lead lead--wide" data-reveal><?= $this->t("Pas de jauges au hasard&nbsp;: mes compétences sont rangées dans une vraie base de données, chacune avec un niveau, un statut et une preuve. Cliquez sur les valeurs de la requête pour filtrer&nbsp;; c'est exactement cette requête que le serveur exécute.") ?></p>
     </div>
 </section>
