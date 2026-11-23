@@ -14,7 +14,7 @@ return [
     ],
     [
         'period' => 'July 2025',
-        'kind'   => 'Internship · 2 months',
+        'kind'   => 'Internship / 2 months',
         'title'  => 'Network & systems technician internship',
         'body'   => 'Diagnosing and repairing PCs, servers and peripherals. Installing a firewall and a NAS, seeing a company network from the inside, analysing security logs.',
         'tags'   => ['Firewall', 'NAS', 'Hardware', 'Logs'],

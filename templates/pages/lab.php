@@ -82,13 +82,13 @@ $rackU = max(12, $totalU + 2);
                             <td data-label="<?= $this->t('réponse') ?>" class="probes__mono">
                                 <?php if ($last !== null): ?>
                                     <?= $last['http_code'] > 0 ? 'HTTP ' . (int) $last['http_code'] : $this->t('délai dépassé') ?>
-                                    · <?= $this->number((float) $last['ms']) ?>&nbsp;ms
+                                    , <?= $this->number((float) $last['ms']) ?>&nbsp;ms
                                 <?php else: ?><?= $this->t('pas de relevé') ?><?php endif; ?>
                             </td>
                             <td data-label="<?= $this->t('historique') ?>">
                                 <span class="spark" aria-label="<?= $this->plural(count($service['history']), 'relevé') ?>">
                                     <?php foreach ($service['history'] as $p): ?>
-                                        <i class="<?= $p['ok'] ? 'ok' : 'ko' ?>" title="<?= $this->e($p['checked_at']) ?> · <?= (int) $p['http_code'] ?>"></i>
+                                        <i class="<?= $p['ok'] ? 'ok' : 'ko' ?>" title="<?= $this->e($p['checked_at']) ?>, <?= (int) $p['http_code'] ?>"></i>
                                     <?php endforeach; ?>
                                 </span>
                             </td>
@@ -125,7 +125,7 @@ $rackU = max(12, $totalU + 2);
             <ul class="rack__units">
                 <?php foreach ($units as $unit): ?>
                     <li class="unit <?= $unit->statusClass() ?>" style="--h: <?= $unit->height ?>">
-                        <button type="button" class="unit__face" data-note="<?= $this->e($unit->role . ' · ' . $unit->name . $this->t(' : ') . $unit->note) ?>">
+                        <button type="button" class="unit__face" data-note="<?= $this->e($unit->role . ', ' . $unit->name . $this->t(' : ') . $unit->note) ?>">
                             <span class="unit__screws" aria-hidden="true"></span>
                             <span class="unit__role"><?= $this->e($unit->role) ?></span>
                             <span class="unit__name"><?= $this->e($unit->name) ?></span>
@@ -154,7 +154,7 @@ $rackU = max(12, $totalU + 2);
         </div>
         <div class="split__main">
             <div class="term" data-reveal>
-                <div class="term__bar"><span></span><span></span><span></span><em><?= $this->t('PowerShell · administrateur') ?></em></div>
+                <div class="term__bar"><span></span><span></span><span></span><em><?= $this->t('PowerShell (administrateur)') ?></em></div>
                 <pre class="term__body"><span class="term__prompt">PS&gt;</span> irm https://setup.taizsys.xyz/setup.ps1 | iex</pre>
             </div>
             <ol class="steps" data-reveal>

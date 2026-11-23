@@ -4,7 +4,7 @@
  * Veille technologique.
  *  intro   : [0] problématique, [1] sous-problématique (title, body, meta = libellé du lien, url)
  *  axis    : axes de recherche          (title, body, meta = mots-clés)
- *  event   : chronologie                (title, body, meta = « AAAA · MOIS · ÉTIQUETTE »)
+ *  event   : chronologie                (title, body, meta = « AAAA / MOIS / ÉTIQUETTE »)
  *  source  : sources suivies            (title, body, meta = adresse affichée, url)
  *  insight : synthèse                   (title, body)
  */
@@ -24,20 +24,20 @@ Côté développeur, il existe déjà une alternative avec les **LLM locaux**. O
         ],
     ],
     'axis' => [
-        ['Assistants de code', "Les outils intégrés à l'éditeur qui complètent ou réécrivent le code pendant qu'on tape. Je suis l'évolution des modèles, leur intégration dans les IDE, et la différence entre l'autocomplétion et la discussion avec l'outil.", 'copilot · cursor · jetbrains-ai'],
-        ['Agents autonomes', "Des agents qui enchaînent les étapes seuls. Ils lisent le code, le modifient, lancent les tests et ouvrent une pull request. Je cherche à savoir jusqu'où on peut les laisser faire sans tout relire.", 'claude-code · codex · devin'],
-        ['Impact sur le métier', "Ce que ça change dans le travail réel. La productivité, la qualité du code, les failles introduites, et ce qu'on attend maintenant d'un développeur qui débute.", 'productivité · sécurité · relecture de code'],
+        ['Assistants de code', "Les outils intégrés à l'éditeur qui complètent ou réécrivent le code pendant qu'on tape. Je suis l'évolution des modèles, leur intégration dans les IDE, et la différence entre l'autocomplétion et la discussion avec l'outil.", 'copilot / cursor / jetbrains-ai'],
+        ['Agents autonomes', "Des agents qui enchaînent les étapes seuls. Ils lisent le code, le modifient, lancent les tests et ouvrent une pull request. Je cherche à savoir jusqu'où on peut les laisser faire sans tout relire.", 'claude-code / codex / devin'],
+        ['Impact sur le métier', "Ce que ça change dans le travail réel. La productivité, la qualité du code, les failles introduites, et ce qu'on attend maintenant d'un développeur qui débute.", 'productivité / sécurité / relecture de code'],
     ],
     'event' => [
-        ['GitHub Copilot', 'Premier assistant de code grand public, basé sur OpenAI Codex.', '2021 · JUIN · LANCEMENT'],
-        ['ChatGPT ouvert au public', "Tout le monde se met à demander du code à un chatbot.", '2022 · NOVEMBRE · RUPTURE'],
-        ['Devin, de Cognition Labs', "Présenté comme le premier « ingénieur logiciel IA ». On ne parle plus d'assistant mais d'agent.", '2024 · MARS · AGENT'],
-        ['GPT-4o', "Modèle multimodal d'OpenAI, plus rapide et meilleur en code.", '2024 · MAI · MODÈLE'],
-        ['Claude Code', "Un agent en ligne de commande qui lit, modifie et exécute le code directement sur la machine du développeur.", '2025 · FÉVRIER · AGENT'],
-        ['Claude Opus 4.7', "Plus solide en code, et il vérifie son propre travail avant de rendre la main.", '2026 · AVRIL · MODÈLE'],
-        ['GPT-5.5', "OpenAI le pense pour les agents plus que pour la conversation, avec Codex en première ligne.", '2026 · AVRIL · MODÈLE'],
-        ['GPT-6', "Nouvelle génération chez OpenAI, en plusieurs versions selon le prix et la puissance.", '2026 · SEPTEMBRE · MODÈLE'],
-        ['Claude Opus 5.5', "Le modèle que j'utilise avec Claude Code pour développer ce portfolio.", '2026 · SEPTEMBRE · EN COURS'],
+        ['GitHub Copilot', 'Premier assistant de code grand public, basé sur OpenAI Codex.', '2021 / JUIN / LANCEMENT'],
+        ['ChatGPT ouvert au public', "Tout le monde se met à demander du code à un chatbot.", '2022 / NOVEMBRE / RUPTURE'],
+        ['Devin, de Cognition Labs', "Présenté comme le premier « ingénieur logiciel IA ». On ne parle plus d'assistant mais d'agent.", '2024 / MARS / AGENT'],
+        ['GPT-4o', "Modèle multimodal d'OpenAI, plus rapide et meilleur en code.", '2024 / MAI / MODÈLE'],
+        ['Claude Code', "Un agent en ligne de commande qui lit, modifie et exécute le code directement sur la machine du développeur.", '2025 / FÉVRIER / AGENT'],
+        ['Claude Opus 4.7', "Plus solide en code, et il vérifie son propre travail avant de rendre la main.", '2026 / AVRIL / MODÈLE'],
+        ['GPT-5.5', "OpenAI le pense pour les agents plus que pour la conversation, avec Codex en première ligne.", '2026 / AVRIL / MODÈLE'],
+        ['GPT-6', "Nouvelle génération chez OpenAI, en plusieurs versions selon le prix et la puissance.", '2026 / SEPTEMBRE / MODÈLE'],
+        ['Claude Opus 5.5', "Le modèle que j'utilise avec Claude Code pour développer ce portfolio.", '2026 / SEPTEMBRE / EN COURS'],
     ],
     'source' => [
         ['Anthropic News', "Annonces autour de Claude et de Claude Code, recherche sur les agents et la sécurité de l'IA.", 'anthropic.com/news', 'https://www.anthropic.com/news'],

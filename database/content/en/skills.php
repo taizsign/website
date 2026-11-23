@@ -17,7 +17,7 @@ return [
         'Proxmox VE'                        => ['Proxmox VE', 'Virtual machines and LXC containers.'],
         'Docker'                            => ['Docker', 'Containerising my homelab services.'],
         'Cybersécurité'                     => ['Cybersecurity', 'Log and port analysis during my internship. OPSEC project, a workstation as secure as possible: risky chips removed, Qubes OS, VeraCrypt encryption, Mullvad VPN with a kill switch over two bridges, LibreWolf browser.'],
-        'Windows Server · Active Directory' => ['Windows Server · Active Directory', 'Directory, GPOs, DNS and DHCP in a Windows environment.'],
+        'Windows Server / Active Directory' => ['Windows Server / Active Directory', 'Directory, GPOs, DNS and DHCP in a Windows environment.'],
         'Ansible'                           => ['Ansible', 'Describing my servers\' configuration instead of redoing it by hand.'],
         'Supervision (Zabbix, Grafana)'     => ['Monitoring (Zabbix, Grafana)', 'Knowing a service is down before a user tells me.'],
         'Sauvegarde et PRA'                 => ['Backup and disaster recovery', '3-2-1 rule, Proxmox Backup Server, restore tests.'],
@@ -41,17 +41,17 @@ return [
         // Development
         'PHP'                               => ['PHP', 'PHP 8, OOP, PDO. This site is written in object-oriented PHP without a framework.'],
         'Symfony'                           => ['Symfony', 'Controllers, forms, Security, Twig.'],
-        'C# · .NET'                         => ['C# · .NET', 'OOP, WinForms, MVC architecture, API calls.'],
+        'C# / .NET'                         => ['C# / .NET', 'OOP, WinForms, MVC architecture, API calls.'],
         'API REST'                          => ['REST APIs', 'Route design, JSON, HTTP authentication.'],
         'Tests unitaires'                   => ['Unit testing', 'PHPUnit and MSTest.'],
         'Python'                            => ['Python', 'Automation scripts and file handling.'],
         'JavaScript'                        => ['JavaScript', 'Interactions and animations without a library.'],
 
         // Tools
-        'Git · GitHub'                      => ['Git · GitHub', 'Branches, pull requests, code review.'],
+        'Git / GitHub'                      => ['Git / GitHub', 'Branches, pull requests, code review.'],
         'CI/CD GitHub Actions'              => ['CI/CD with GitHub Actions', 'Automatic SSH deployment on every push.'],
         'Microsoft 365'                     => ['Microsoft 365', 'Word, Excel, Outlook and Teams every day, at school and during my internship.'],
-        'Prompt engineering · Claude'       => ['Prompt engineering · Claude', 'Writing precise prompts, steering a coding agent, reviewing and testing what it produces.'],
+        'Prompt engineering (Claude)'       => ['Prompt engineering (Claude)', 'Writing precise prompts, steering a coding agent, reviewing and testing what it produces.'],
         'Cloud Azure (AZ-900)'              => ['Azure cloud (AZ-900)', 'Public cloud basics first, then Azure administration.'],
     ],
 

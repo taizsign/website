@@ -28,7 +28,7 @@ return [
     'Activer le filtre de lumière bleue'       => 'Turn on the blue light filter',
     'Désactiver le filtre de lumière bleue'    => 'Turn off the blue light filter',
     'Filtre lumière bleue'                     => 'Blue light filter',
-    'Filtre activé · cliquer pour couper'      => 'Filter on · click to turn off',
+    'Filtre activé, cliquer pour couper'      => 'Filter on, click to turn off',
 
     'Contact'                                  => 'Contact',
     "Au plaisir d'<em>échanger</em>."        => 'Happy to <em>talk</em>.',
@@ -44,11 +44,11 @@ return [
     'Copier le pseudo Discord'                 => 'Copy Discord username',
 
     // config/app.php
-    'Raphaël Jacquis · systèmes, réseaux et bases de données' => 'Raphaël Jacquis · systems, networks and databases',
+    'Raphaël Jacquis | systèmes, réseaux et bases de données' => 'Raphaël Jacquis | systems, networks and databases',
     "Portfolio de Raphaël, étudiant en BTS SIO à Besançon : projets, compétences et homelab, avec un cap sur l'administration systèmes, réseaux et bases de données."
         => 'Portfolio of Raphaël Jacquis, an IT student in Besançon, France: projects, skills and homelab, heading toward systems, network and database administration.',
     'Futur administrateur systèmes, réseaux & BDD' => 'Future systems, network & database administrator',
-    'Script de déploiement · GitHub Pages'     => 'Setup script · GitHub Pages',
+    'Script de déploiement / GitHub Pages'     => 'Setup script / GitHub Pages',
 
     // Accueil
     'Étudiant BTS SIO SLAM'                    => 'IT student, BTS SIO SLAM',
@@ -74,7 +74,7 @@ return [
     "WHERE statut = 'en cours'"                => "WHERE status = 'learning'",
     'objectifs pour la suite'                  => 'goals for what comes next',
     "WHERE statut = 'objectif'"                => "WHERE status = 'goal'",
-    'outils et technologies dans mes 2 projets' => 'tools and technologies across my 2 projects',
+    'outils et technologies dans mes {n} projets' => 'tools and technologies across my {n} projects',
     'Voir la liste'                            => 'Show the list',
     'Rechercher'                               => 'Search',
     'Rechercher dans la liste'                 => 'Search the list',
@@ -97,8 +97,8 @@ return [
 
     // Projets
     'projets'                                  => 'projects',
-    "<em>Deux applications complètes</em>, construites pendant le BTS. Pour chacune, le <em>contexte</em>, l'<em>architecture</em>, des extraits du <em>code source</em> et ce que je <em>referais autrement</em> aujourd'hui."
-        => '<em>Two complete applications</em>, built during my BTS. For each one, the <em>context</em>, the <em>architecture</em>, excerpts from the <em>source code</em> and what I would <em>do differently</em> today.',
+    "<em>Deux applications complètes</em> construites pendant le BTS, et <em>ce site</em>. Pour chacun, le <em>contexte</em>, l'<em>architecture</em>, des extraits du <em>code source</em> et ce que je <em>referais autrement</em> aujourd'hui."
+        => '<em>Two complete applications</em> built during my BTS, and <em>this site</em>. For each one, the <em>context</em>, the <em>architecture</em>, excerpts from the <em>source code</em> and what I would <em>do differently</em> today.',
     'Aussi sur GitHub'                         => 'Also on GitHub',
     'Script PowerShell qui prépare un poste Windows en une commande. Détaillé dans le <span class="u">Labo</span>.'
         => 'PowerShell script that sets up a Windows machine with a single command. Covered in the <span class="u">Lab</span>.',
@@ -112,10 +112,10 @@ return [
     'Liens'                                    => 'Links',
     'Architecture'                             => 'Architecture',
     'Survolez un élément pour voir ses liaisons.' => 'Hover over a component to see its connections.',
-    'Le brief'                                 => 'The brief',
+    'Le contexte'                              => 'Context',
     "Ce que j'ai construit"                    => 'What I built',
-    'Sous le capot'                            => 'Under the hood',
-    'Du code copié tel quel depuis les dépôts, sans retouche.' => 'Code copied as is from the repositories, untouched.',
+    'Extraits de code'                         => 'Code excerpts',
+    'Du code copié tel quel depuis les dépôts&nbsp;:' => 'Code copied as is from the repositories:',
     'Avec du recul'                            => 'In hindsight',
     'Ce que je<br>referais autrement.'         => 'What I would<br>do differently.',
     "Relu aujourd'hui avec un œil plus systèmes et bases de données. Rien de tout ça n'empêchait le projet de fonctionner&nbsp;; tout ça compterait en production."
@@ -182,7 +182,7 @@ return [
     'LE CAP'                                   => 'THE GOAL',
     'Profil du parcours : '                    => 'Journey profile: ',
     ', puis '                                  => ', then ',
-    'BTS SIO · épreuve E5'                     => 'BTS SIO · E5 exam',
+    'BTS SIO, épreuve E5'                     => 'BTS SIO, E5 exam',
     'Support de présentation'                  => 'Presentation slides',
     "Les diapositives présentées à l'épreuve, consultables en plein écran." => 'The slides I presented at the exam, viewable full screen.',
 
@@ -238,13 +238,13 @@ return [
     "Un VPS OVH sous Ubuntu sert plusieurs sous-domaines de taizsys.xyz grâce aux hôtes virtuels nginx. Le code arrive par GitHub&nbsp;: déploiement SSH pour le VPS, GitHub Pages pour le script d'installation."
         => 'An OVH VPS running Ubuntu serves several taizsys.xyz subdomains through nginx virtual hosts. The code comes from GitHub: SSH deployment for the VPS, GitHub Pages for the setup script.',
     'zone DNS'                                 => 'DNS zone',
-    'dépôts · Actions · Pages'                 => 'repos · Actions · Pages',
+    'dépôts / Actions / Pages'                 => 'repos / Actions / Pages',
     'hôtes virtuels'                           => 'virtual hosts',
     '2 bases'                                  => '2 databases',
-    'A · sous-domaines'                        => 'A · subdomains',
+    'A / sous-domaines'                        => 'A / subdomains',
     'déploiement SSH'                          => 'SSH deployment',
     'publie'                                   => 'publishes',
-    'VPS OVH · Ubuntu'                         => 'OVH VPS · Ubuntu',
+    'VPS OVH / Ubuntu'                         => 'OVH VPS / Ubuntu',
     'API REST'                                 => 'REST API',
     'État des services'                        => 'Service status',
     'relevé toutes les 5 min'                  => 'checked every 5 min',
@@ -270,7 +270,7 @@ return [
     'Outil maison'                             => 'Homemade tool',
     "Préparer un poste Windows neuf en une seule commande, au lieu d'une heure de clics." => 'Set up a fresh Windows machine with a single command instead of an hour of clicking.',
     'Voir le script sur GitHub ↗'              => 'See the script on GitHub ↗',
-    'PowerShell · administrateur'              => 'PowerShell · administrator',
+    'PowerShell (administrateur)'              => 'PowerShell (administrator)',
     "<strong>Se relance en administrateur</strong> si besoin, et vérifie qu'on est au moins sous Windows 10."
         => '<strong>Relaunches itself as administrator</strong> if needed, and checks that the machine runs at least Windows 10.',
     "<strong>Choisit son gestionnaire de paquets</strong>&nbsp;: winget s'il est présent, sinon installe Chocolatey."

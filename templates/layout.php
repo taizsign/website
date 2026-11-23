@@ -7,7 +7,7 @@
  * @var string $content
  * @var ?string $title
  */
-$pageTitle = isset($title) && $title !== null ? $title . ' · ' . $site['name'] : $this->t($site['title']);
+$pageTitle = isset($title) && $title !== null ? $title . ' | ' . $site['name'] : $this->t($site['title']);
 $pageDescription = $description ?? $this->t($site['description']);
 $route = $this->get('route', '');
 $locale = $this->locale();

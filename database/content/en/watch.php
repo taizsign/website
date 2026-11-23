@@ -3,7 +3,7 @@
 /*
  * Tech watch in English, same structure and order as ../watch.php.
  * Each entry: [title, body, meta]. Links stay in the French file.
- * Events: meta = "YEAR · MONTH · TAG"; the tag NOW marks the current event.
+ * Events: meta = "YEAR / MONTH / TAG"; the tag NOW marks the current event.
  */
 
 return [
@@ -20,20 +20,20 @@ Developers already have an alternative with **local LLMs**. Ollama runs open mod
         ],
     ],
     'axis' => [
-        ['Coding assistants', 'Tools built into the editor that complete or rewrite code as you type. I follow how the models evolve, how they fit into IDEs, and the difference between autocompletion and talking to the tool.', 'copilot · cursor · jetbrains-ai'],
-        ['Autonomous agents', 'Agents that chain the steps on their own. They read the code, change it, run the tests and open a pull request. I want to know how far you can let them go without reviewing everything.', 'claude-code · codex · devin'],
-        ['Impact on the job', 'What it changes in real work. Productivity, code quality, the vulnerabilities it introduces, and what is now expected from a developer starting out.', 'productivity · security · code review'],
+        ['Coding assistants', 'Tools built into the editor that complete or rewrite code as you type. I follow how the models evolve, how they fit into IDEs, and the difference between autocompletion and talking to the tool.', 'copilot / cursor / jetbrains-ai'],
+        ['Autonomous agents', 'Agents that chain the steps on their own. They read the code, change it, run the tests and open a pull request. I want to know how far you can let them go without reviewing everything.', 'claude-code / codex / devin'],
+        ['Impact on the job', 'What it changes in real work. Productivity, code quality, the vulnerabilities it introduces, and what is now expected from a developer starting out.', 'productivity / security / code review'],
     ],
     'event' => [
-        ['GitHub Copilot', 'The first mainstream coding assistant, built on OpenAI Codex.', '2021 · JUNE · LAUNCH'],
-        ['ChatGPT opens to the public', 'Everyone starts asking a chatbot for code.', '2022 · NOVEMBER · TURNING POINT'],
-        ['Devin, by Cognition Labs', 'Presented as the first "AI software engineer". People stop saying assistant and start saying agent.', '2024 · MARCH · AGENT'],
-        ['GPT-4o', 'OpenAI\'s multimodal model, faster and better with code.', '2024 · MAY · MODEL'],
-        ['Claude Code', 'A command-line agent that reads, edits and runs code directly on the developer\'s machine.', '2025 · FEBRUARY · AGENT'],
-        ['Claude Opus 4.7', 'Stronger at coding, and it checks its own work before handing back.', '2026 · APRIL · MODEL'],
-        ['GPT-5.5', 'OpenAI built it for agents more than for chat, with Codex in the front line.', '2026 · APRIL · MODEL'],
-        ['GPT-6', 'A new generation at OpenAI, in several versions depending on price and power.', '2026 · SEPTEMBER · MODEL'],
-        ['Claude Opus 5.5', 'The model I use with Claude Code to build this portfolio.', '2026 · SEPTEMBER · NOW'],
+        ['GitHub Copilot', 'The first mainstream coding assistant, built on OpenAI Codex.', '2021 / JUNE / LAUNCH'],
+        ['ChatGPT opens to the public', 'Everyone starts asking a chatbot for code.', '2022 / NOVEMBER / TURNING POINT'],
+        ['Devin, by Cognition Labs', 'Presented as the first "AI software engineer". People stop saying assistant and start saying agent.', '2024 / MARCH / AGENT'],
+        ['GPT-4o', 'OpenAI\'s multimodal model, faster and better with code.', '2024 / MAY / MODEL'],
+        ['Claude Code', 'A command-line agent that reads, edits and runs code directly on the developer\'s machine.', '2025 / FEBRUARY / AGENT'],
+        ['Claude Opus 4.7', 'Stronger at coding, and it checks its own work before handing back.', '2026 / APRIL / MODEL'],
+        ['GPT-5.5', 'OpenAI built it for agents more than for chat, with Codex in the front line.', '2026 / APRIL / MODEL'],
+        ['GPT-6', 'A new generation at OpenAI, in several versions depending on price and power.', '2026 / SEPTEMBER / MODEL'],
+        ['Claude Opus 5.5', 'The model I use with Claude Code to build this portfolio.', '2026 / SEPTEMBER / NOW'],
     ],
     'source' => [
         ['Anthropic News', 'Announcements about Claude and Claude Code, research on agents and AI safety.', 'anthropic.com/news'],

@@ -15,7 +15,7 @@ $isHome = $this->isCurrent('home');
             <!-- L'icône est un interrupteur : filtre de lumière bleue (teinte chaude sur tout le site) -->
             <button class="nightlight" type="button" aria-pressed="false" aria-label="<?= $this->t('Activer le filtre de lumière bleue') ?>" data-nightlight
                     data-label-on="<?= $this->t('Désactiver le filtre de lumière bleue') ?>" data-label-off="<?= $this->t('Activer le filtre de lumière bleue') ?>"
-                    data-tip-on="<?= $this->t('Filtre activé · cliquer pour couper') ?>" data-tip-off="<?= $this->t('Filtre lumière bleue') ?>">
+                    data-tip-on="<?= $this->t('Filtre activé, cliquer pour couper') ?>" data-tip-off="<?= $this->t('Filtre lumière bleue') ?>">
                 <svg viewBox="0 0 28 28" fill="none" stroke-width="2.2" aria-hidden="true">
                     <rect class="nightlight__frame" x="2" y="2" width="24" height="24" rx="7" pathLength="1"/>
                     <path class="nightlight__chevron" d="M8.5 10l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/>

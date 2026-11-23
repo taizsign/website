@@ -8,7 +8,8 @@
  * kind : client | server | data | service | external  (change l'apparence du nœud)
  */
 
-$btsCommon = ['B1.1', 'B1.2', 'B1.3', 'B1.4', 'B1.5', 'B1.6', 'B2.1.1', 'B2.1.3', 'B2.1.4', 'B2.2.1', 'B2.2.4', 'B2.2.5', 'B2.3.1', 'B2.3.2'];
+// le socle SLAM commun aux deux ateliers, complété projet par projet
+$btsCommon = ['B1.2', 'B1.4', 'B1.5', 'B2.1.1', 'B2.1.3', 'B2.1.4', 'B2.2.1', 'B2.2.4', 'B2.2.5', 'B2.3.1', 'B2.3.2'];
 
 return [
 
@@ -18,7 +19,7 @@ return [
         'tagline' => 'Un logiciel de gestion de médiathèque qui parle à sa base à travers une API que j\'ai mise en ligne.',
         'summary' => 'Application de bureau C# pour le personnel d\'une médiathèque : livres, DVD, revues, commandes, abonnements. Elle ne touche ==jamais la base directement== : tout passe par une __API REST en PHP__, hébergée sur mon VPS.',
         'year'    => 2026,
-        'context' => 'Atelier professionnel 2 · BTS SIO',
+        'context' => 'Atelier professionnel 2 / BTS SIO',
         'role'    => 'Client C#, API PHP, base MySQL, déploiement',
         'video'   => null,
 
@@ -30,20 +31,20 @@ return [
         'architecture' => [
             'nodes' => [
                 ['id' => 'msi',    'x' => 30,  'y' => 300, 'w' => 190, 'label' => 'Installateur .msi',  'sub' => 'déployé sur les postes',     'kind' => 'external'],
-                ['id' => 'client', 'x' => 30,  'y' => 150, 'w' => 190, 'label' => 'MediaTekDocuments',  'sub' => 'C# · WinForms · .NET 4.7.2', 'kind' => 'client'],
+                ['id' => 'client', 'x' => 30,  'y' => 150, 'w' => 190, 'label' => 'MediaTekDocuments',  'sub' => 'C# / WinForms / .NET 4.7.2', 'kind' => 'client'],
                 ['id' => 'nginx',  'x' => 330, 'y' => 150, 'w' => 130, 'label' => 'nginx',              'sub' => 'serveur web',                'kind' => 'server'],
-                ['id' => 'api',    'x' => 560, 'y' => 150, 'w' => 170, 'label' => 'API REST',           'sub' => 'PHP 8.4 · PHP-FPM',          'kind' => 'service'],
+                ['id' => 'api',    'x' => 560, 'y' => 150, 'w' => 170, 'label' => 'API REST',           'sub' => 'PHP 8.4 / PHP-FPM',          'kind' => 'service'],
                 ['id' => 'db',     'x' => 820, 'y' => 150, 'w' => 120, 'label' => 'MySQL',              'sub' => 'mediatek86',                 'kind' => 'data'],
             ],
             'links' => [
                 ['from' => 'msi',    'to' => 'client', 'label' => 'installe'],
-                ['from' => 'client', 'to' => 'nginx',  'label' => 'HTTP · JSON', 'flow' => true],
+                ['from' => 'client', 'to' => 'nginx',  'label' => 'HTTP / JSON', 'flow' => true],
                 ['from' => 'nginx',  'to' => 'api',    'label' => 'FastCGI', 'flow' => true],
                 ['from' => 'api',    'to' => 'db',     'label' => 'PDO', 'flow' => true],
             ],
             'groups' => [
-                ['label' => 'VPS OVH · Ubuntu', 'x' => 305, 'y' => 100, 'w' => 645, 'h' => 160],
-                ['label' => 'Poste · Windows', 'x' => 10, 'y' => 100, 'w' => 230, 'h' => 290],
+                ['label' => 'VPS OVH / Ubuntu', 'x' => 305, 'y' => 100, 'w' => 645, 'h' => 160],
+                ['label' => 'Poste / Windows', 'x' => 10, 'y' => 100, 'w' => 230, 'h' => 290],
             ],
         ],
         'architecture_caption' => 'Le client n\'a ==aucun accès à MySQL== : il envoie des requêtes HTTP (GET, POST, PUT, DELETE) avec un corps JSON à l\'API, qui seule parle à la base. Changer de poste ou de base ne demande donc __aucune modification côté client__.',
@@ -73,7 +74,7 @@ return [
             [
                 'title'    => 'Abonnements qui expirent dans les 30 jours',
                 'language' => 'sql',
-                'source'   => 'rest_mediatekdocuments · src/MyAccessBDD.php',
+                'source'   => 'rest_mediatekdocuments / src/MyAccessBDD.php',
                 'caption'  => 'Un abonnement est une commande : les deux tables partagent la même clé `id`, d\'où la jointure. Toute la logique de date reste dans la base.',
                 'code'     => <<<'SQL'
 SELECT c.id, c.dateCommande, c.montant, a.dateFinAbonnement, a.idRevue, d.titre
@@ -87,7 +88,7 @@ SQL,
             [
                 'title'    => 'Les règles du suivi de commande',
                 'language' => 'csharp',
-                'source'   => 'mediatekdocuments · view/FrmMediatek.cs',
+                'source'   => 'mediatekdocuments / view/FrmMediatek.cs',
                 'caption'  => 'Étape 1 : en cours, 2 : livrée, 3 : réglée. Les contrôles sont faits avant d\'appeler l\'API ; avec le recul, l\'API devrait aussi les vérifier, puisqu\'un autre client pourrait l\'appeler.',
                 'code'     => <<<'CS'
 if (commande.IdSuivi == 3)
@@ -118,10 +119,10 @@ CS,
         ],
 
         'documents' => [
-            ['ap2-fiche-realisation', 'Fiche descriptive de réalisation', 'AP2 · PDF', null],
-            ['ap2-compte-rendu', 'Compte rendu d\'activité', 'Synthèse · PDF', null],
-            ['ap2-tests', 'Résultats des tests MSTest', '14 tests · PDF', null],
-            ['ap2-cahier-des-charges', 'Cahier des charges', 'Spécifications · PDF', null],
+            ['ap2-fiche-realisation', 'Fiche descriptive de réalisation', 'AP2 / PDF', null],
+            ['ap2-compte-rendu', 'Compte rendu d\'activité', 'Synthèse / PDF', null],
+            ['ap2-tests', 'Résultats des tests MSTest', '14 tests / PDF', null],
+            ['ap2-cahier-des-charges', 'Cahier des charges', 'Spécifications / PDF', null],
         ],
 
         'competencies' => $btsCommon,
@@ -133,7 +134,7 @@ CS,
         'tagline' => 'Le catalogue de formations vidéo d\'un réseau de médiathèques, en ligne et redéployé à chaque push.',
         'summary' => 'Site Symfony en deux parties : un __front public__ pour parcourir les formations et les playlists, un __back-office protégé__ pour tout administrer. Il tourne sur mon VPS, et ==GitHub Actions le met à jour tout seul==.',
         'year'    => 2025,
-        'context' => 'Atelier professionnel 1 · BTS SIO',
+        'context' => 'Atelier professionnel 1 / BTS SIO',
         'role'    => 'Développement Symfony, tests, déploiement',
         'video'   => 'WEkONaJWiqM',
 
@@ -150,19 +151,19 @@ CS,
                 ['id' => 'actions', 'x' => 545, 'y' => 40,  'w' => 190, 'label' => 'GitHub Actions', 'sub' => 'workflow deploy.yml',   'kind' => 'external'],
                 ['id' => 'visitor', 'x' => 30,  'y' => 270, 'w' => 170, 'label' => 'Visiteur',       'sub' => 'navigateur',            'kind' => 'client'],
                 ['id' => 'nginx',   'x' => 330, 'y' => 270, 'w' => 140, 'label' => 'nginx',          'sub' => 'hôte virtuel',          'kind' => 'server'],
-                ['id' => 'symfony', 'x' => 560, 'y' => 270, 'w' => 170, 'label' => 'Symfony 6.4',    'sub' => 'PHP-FPM · Doctrine',    'kind' => 'service'],
+                ['id' => 'symfony', 'x' => 560, 'y' => 270, 'w' => 170, 'label' => 'Symfony 6.4',    'sub' => 'PHP-FPM / Doctrine',    'kind' => 'service'],
                 ['id' => 'db',      'x' => 820, 'y' => 270, 'w' => 120, 'label' => 'MySQL',          'sub' => 'formations',            'kind' => 'data'],
             ],
             'links' => [
                 ['from' => 'dev',     'to' => 'github',  'label' => 'push', 'flow' => true],
                 ['from' => 'github',  'to' => 'actions', 'label' => 'déclenche', 'flow' => true],
-                ['from' => 'actions', 'to' => 'symfony', 'label' => 'SSH · git pull · composer', 'flow' => true],
+                ['from' => 'actions', 'to' => 'symfony', 'label' => 'SSH / git pull / composer', 'flow' => true],
                 ['from' => 'visitor', 'to' => 'nginx',   'label' => 'HTTPS', 'flow' => true],
                 ['from' => 'nginx',   'to' => 'symfony', 'label' => 'FastCGI', 'flow' => true],
                 ['from' => 'symfony', 'to' => 'db',      'label' => 'Doctrine', 'flow' => true],
             ],
             'groups' => [
-                ['label' => 'VPS OVH · Ubuntu', 'x' => 305, 'y' => 222, 'w' => 645, 'h' => 158],
+                ['label' => 'VPS OVH / Ubuntu', 'x' => 305, 'y' => 222, 'w' => 645, 'h' => 158],
             ],
         ],
         'architecture_caption' => 'Deux chemins arrivent sur le même serveur : celui des visiteurs, et celui du code. Un push sur main ==déclenche un workflow== qui se connecte en SSH au VPS et met le site à jour, __sans que je touche au serveur__.',
@@ -192,7 +193,7 @@ CS,
             [
                 'title'    => 'Le pipeline de déploiement',
                 'language' => 'yaml',
-                'source'   => 'mediatek86 · .github/workflows/deploy.yml',
+                'source'   => 'mediatek86 / .github/workflows/deploy.yml',
                 'caption'  => 'Les accès au serveur (hôte, utilisateur, clé SSH) sont des secrets GitHub, jamais écrits dans le dépôt.',
                 'code'     => <<<'YAML'
 name: Deploy
@@ -223,7 +224,7 @@ YAML,
             [
                 'title'    => 'Trier les playlists par nombre de formations',
                 'language' => 'php',
-                'source'   => 'mediatek86 · src/Repository/PlaylistRepository.php',
+                'source'   => 'mediatek86 / src/Repository/PlaylistRepository.php',
                 'caption'  => 'Ça marche, mais le tri se fait en PHP après avoir tout chargé. Voir « Avec du recul » : c\'est un `ORDER BY COUNT(f.id)` qui manque.',
                 'code'     => <<<'PHP'
 public function findAllOrderByFormationsCount($ordre): array{
@@ -252,14 +253,133 @@ PHP,
         ],
 
         'documents' => [
-            ['ap1-synthese', 'Synthèse de l\'atelier', 'Compte rendu · PDF', 'ap1-synthese.pdf'],
-            ['ap1-pv-recette', 'PV de recette', 'Validation finale · PDF', 'ap1-pv-recette.pdf'],
-            ['ap1-plan-de-tests', 'Plan de tests', 'Recette et intégration · PDF', 'ap1-plan-de-tests.pdf'],
-            ['ap1-cahier-des-charges', 'Cahier des charges', 'Spécifications · PDF', 'ap1-cahier-des-charges.pdf'],
-            ['ap1-contrat-developpement', 'Contrat de développement', 'Engagement · PDF', 'ap1-contrat-developpement.pdf'],
-            ['ap1-fiche-missions', 'Fiche de missions', 'AP1 · PDF', 'ap1-fiche-missions.pdf'],
+            ['ap1-synthese', 'Synthèse de l\'atelier', 'Compte rendu / PDF', 'ap1-synthese.pdf'],
+            ['ap1-pv-recette', 'PV de recette', 'Validation finale / PDF', 'ap1-pv-recette.pdf'],
+            ['ap1-plan-de-tests', 'Plan de tests', 'Recette et intégration / PDF', 'ap1-plan-de-tests.pdf'],
+            ['ap1-cahier-des-charges', 'Cahier des charges', 'Spécifications / PDF', 'ap1-cahier-des-charges.pdf'],
+            ['ap1-contrat-developpement', 'Contrat de développement', 'Engagement / PDF', 'ap1-contrat-developpement.pdf'],
+            ['ap1-fiche-missions', 'Fiche de missions', 'AP1 / PDF', 'ap1-fiche-missions.pdf'],
         ],
 
-        'competencies' => $btsCommon,
+        'competencies' => [...$btsCommon, 'B1.3'],
+    ],
+
+    [
+        'slug'    => 'portfolio',
+        'title'   => 'Portfolio',
+        'tagline' => 'Le site que vous lisez, écrit en PHP objet sans framework, avec ses contenus dans SQLite.',
+        'summary' => 'Un portfolio bilingue construit de zéro. ==Routeur, contrôleurs et vues écrits à la main==, contenus rangés dans __deux bases SQLite__, une par langue. Aucune bibliothèque, ni côté serveur ni côté navigateur.',
+        'year'    => 2026,
+        'context' => 'Projet personnel',
+        'role'    => 'Conception, développement, contenus',
+        'video'   => null,
+
+        'links' => [
+            ['Dépôt GitHub', 'https://github.com/taizsign/website'],
+        ],
+
+        'architecture' => [
+            'nodes' => [
+                ['id' => 'visitor', 'x' => 20,  'y' => 120, 'w' => 160, 'label' => 'Visiteur',    'sub' => 'navigateur',              'kind' => 'client'],
+                ['id' => 'kernel',  'x' => 280, 'y' => 120, 'w' => 170, 'label' => 'Kernel',      'sub' => 'routeur / en-têtes',      'kind' => 'server'],
+                ['id' => 'ctrl',    'x' => 530, 'y' => 120, 'w' => 180, 'label' => 'Contrôleurs', 'sub' => 'PHP objet',               'kind' => 'service'],
+                ['id' => 'view',    'x' => 790, 'y' => 120, 'w' => 150, 'label' => 'Vues',        'sub' => 'gabarits PHP',            'kind' => 'service'],
+                ['id' => 'content', 'x' => 20,  'y' => 300, 'w' => 200, 'label' => 'Contenus',    'sub' => 'database/content/*.php',  'kind' => 'external'],
+                ['id' => 'build',   'x' => 280, 'y' => 300, 'w' => 170, 'label' => 'db:build',    'sub' => 'bin/console',             'kind' => 'external'],
+                ['id' => 'db',      'x' => 530, 'y' => 300, 'w' => 180, 'label' => 'SQLite',      'sub' => 'une base par langue',     'kind' => 'data'],
+            ],
+            'links' => [
+                ['from' => 'visitor', 'to' => 'kernel',  'label' => 'HTTP', 'flow' => true],
+                ['from' => 'kernel',  'to' => 'ctrl',    'label' => 'route', 'flow' => true],
+                ['from' => 'ctrl',    'to' => 'view',    'label' => 'données', 'flow' => true],
+                ['from' => 'ctrl',    'to' => 'db',      'label' => 'PDO', 'flow' => true],
+                ['from' => 'content', 'to' => 'build',   'label' => 'lit'],
+                ['from' => 'build',   'to' => 'db',      'label' => 'génère'],
+            ],
+            'groups' => [
+                ['label' => 'Serveur PHP', 'x' => 255, 'y' => 70, 'w' => 700, 'h' => 340],
+            ],
+        ],
+        'architecture_caption' => 'Le contenu ne vit pas dans les gabarits. Il est écrit dans des fichiers PHP, puis `php bin/console db:build` ==reconstruit les deux bases SQLite==. Au moment de la visite, le site ne fait __que lire__.',
+
+        'brief' => [
+            ['L\'idée', 'Un portfolio qui ==prouve ce qu\'il raconte==. Les chiffres de l\'accueil sortent de la base, la page Compétences affiche __la vraie requête SQL__, et le code est public.'],
+            ['Les contraintes', 'Pas de framework, pas de CMS. Tout doit tourner sur ==un simple serveur PHP==, s\'afficher vite et rester lisible sur un téléphone, en français comme en anglais.'],
+        ],
+
+        'build' => [
+            ['Un routeur bilingue', 'Chaque route existe dans les deux langues, avec ==ses propres chemins== : `/projets` devient `/en/projects`. Le changement de langue garde la page en cours.'],
+            ['Les contenus en base', 'Les textes sont écrits en PHP, puis `db:build` remplit ==une base SQLite par langue==. Les chiffres et les listes du site sont de __vraies requêtes__.'],
+            ['La console SQL', 'Sur la page Compétences, le visiteur coche des filtres et voit la requête. Chaque valeur passe par ==une liste blanche== et des __paramètres liés__ : ce qui s\'affiche est ce qui s\'exécute.'],
+            ['Une traduction vérifiée', '`php bin/console i18n:check` relève chaque texte du site et signale ceux qui n\'ont ==pas de traduction anglaise==.'],
+            ['Les en-têtes de sécurité', '==Politique de sécurité du contenu== stricte, `X-Frame-Options`, `nosniff`. Aucun script externe, et la vidéo YouTube ne se charge __qu\'au clic__.'],
+            ['Léger et accessible', 'Aucune bibliothèque JavaScript, polices hébergées sur le site, animations coupées pour qui les désactive. Mise en page ==vérifiée de 320 à 1500 pixels== de large.'],
+        ],
+
+
+        'retro' => [],
+
+        'excerpts' => [
+            [
+                'title'    => 'Les en-têtes envoyés avec chaque page',
+                'language' => 'php',
+                'source'   => 'website / src/Http/Response.php',
+                'caption'  => 'Posés par le code et non par la configuration du serveur, ils protègent le site ==quel que soit l\'hébergement==.',
+                'code'     => <<<'PHP'
+public function withSecurityHeaders(): self
+{
+    $clone = clone $this;
+    $clone->headers += [
+        'X-Content-Type-Options'  => 'nosniff',
+        'X-Frame-Options'         => 'DENY',
+        'Referrer-Policy'         => 'strict-origin-when-cross-origin',
+        'Permissions-Policy'      => 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+        'Cross-Origin-Opener-Policy' => 'same-origin',
+        'Content-Security-Policy' => implode('; ', [
+            "default-src 'self'",
+            "script-src 'self'",
+            "style-src 'self' 'unsafe-inline'",
+            "img-src 'self' data:",
+            "font-src 'self'",
+            "connect-src 'self'",
+            'frame-src https://www.youtube-nocookie.com',
+            "object-src 'none'",
+            "base-uri 'self'",
+            "form-action 'self'",
+            "frame-ancestors 'none'",
+        ]),
+    ];
+
+    return $clone;
+PHP,
+            ],
+            [
+                'title'    => 'La liste blanche de la console SQL',
+                'language' => 'php',
+                'source'   => 'website / src/Service/SkillQuery.php',
+                'caption'  => '`array_intersect` ne garde que les valeurs connues : ==rien de ce que tape le visiteur== n\'arrive tel quel dans la requête.',
+                'code'     => <<<'PHP'
+public function __construct(array $domains, array $statuses, string $order, string $locale = 'fr')
+{
+    // array_intersect garde l'ordre de la liste blanche et écarte toute valeur inconnue.
+    $this->domains = array_values(array_intersect(self::DOMAINS, $domains));
+    $this->statuses = array_values(array_intersect(self::STATUSES, $statuses));
+    $this->order = in_array($order, self::ORDERS, true) ? $order : 'niveau';
+    $this->dialect = self::DIALECTS[$locale] ?? self::DIALECTS['fr'];
+}
+PHP,
+            ],
+        ],
+
+        'stack' => [
+            'Backend'  => ['PHP 8.5', 'PDO', 'Composer'],
+            'Frontend' => ['HTML / CSS', 'JavaScript'],
+            'Données'  => ['SQLite'],
+            'Outils'   => ['Git', 'Claude Code'],
+        ],
+
+        'documents' => [],
+
+        'competencies' => ['B1.3', 'B1.4', 'B1.5', 'B1.6', 'B2.1.1', 'B2.1.3', 'B2.1.4', 'B2.2.4', 'B2.3.1', 'B2.3.2'],
     ],
 ];

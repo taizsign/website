@@ -10,7 +10,7 @@
         <li class="project" data-reveal data-techs="<?= $this->e(mb_strtolower(implode('|', $this->techList($project)))) ?>">
             <a class="project__link" href="<?= $this->url('project', ['slug' => $project->slug]) ?>">
                 <div class="project__text">
-                    <p class="project__num"><?= $project->number() ?> <span>/ <?= $project->year ?> · <?= $this->e($project->context) ?></span></p>
+                    <p class="project__num"><?= $project->number() ?> <span>/ <?= $project->year ?> / <?= $this->e($project->context) ?></span></p>
                     <h3 class="project__title"><?= $this->breakable($project->title) ?></h3>
                     <p class="project__tagline"><?= $this->e($project->tagline) ?></p>
                     <ul class="chips" aria-label="<?= $this->t('Technologies principales') ?>">

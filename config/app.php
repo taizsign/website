@@ -6,7 +6,7 @@
 
 return [
     'name'         => 'Raphaël Jacquis',
-    'title'        => 'Raphaël Jacquis · systèmes, réseaux et bases de données',
+    'title'        => 'Raphaël Jacquis | systèmes, réseaux et bases de données',
     'description'  => 'Portfolio de Raphaël, étudiant en BTS SIO à Besançon : projets, compétences et homelab, avec un cap sur l\'administration systèmes, réseaux et bases de données.',
     'url'          => 'https://taizsys.xyz',
     'email'        => 'raphaelpv@protonmail.com',
@@ -27,9 +27,9 @@ return [
 
     // Services surveillés sur la page Labo (sonde HTTP côté serveur).
     'uptime' => [
-        ['name' => 'mediatek.taizsys.xyz',      'url' => 'https://mediatek.taizsys.xyz/',      'role' => 'Mediatek86 · Symfony'],
-        ['name' => 'docs.mediatek.taizsys.xyz', 'url' => 'https://docs.mediatek.taizsys.xyz/', 'role' => 'Documentation · phpDocumentor'],
-        ['name' => 'setup.taizsys.xyz',         'url' => 'https://setup.taizsys.xyz/setup.ps1', 'role' => 'Script de déploiement · GitHub Pages'],
+        ['name' => 'mediatek.taizsys.xyz',      'url' => 'https://mediatek.taizsys.xyz/',      'role' => 'Mediatek86 / Symfony'],
+        ['name' => 'docs.mediatek.taizsys.xyz', 'url' => 'https://docs.mediatek.taizsys.xyz/', 'role' => 'Documentation / phpDocumentor'],
+        ['name' => 'setup.taizsys.xyz',         'url' => 'https://setup.taizsys.xyz/setup.ps1', 'role' => 'Script de déploiement / GitHub Pages'],
     ],
 
     // Flux lus par la page Veille (lang : langue des articles, ils ne sont pas traduits).

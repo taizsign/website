@@ -55,7 +55,7 @@ $summary = function (array $cells): string {
         $parts[] = $this->plural($count['objectif'], 'objectif');
     }
 
-    return implode(' · ', $parts);
+    return implode(', ', $parts);
 };
 
 $uid = 0;
@@ -93,7 +93,7 @@ $uid = 0;
                                 <?php foreach ($skills as $row):
                                     $id = 'sk-' . ++$uid;
                                     $status = str_replace(' ', '-', $row['status']);
-                                    $proofs = $row['proof'] === null ? [] : explode(' · ', $row['proof']);
+                                    $proofs = $row['proof'] === null ? [] : explode(' | ', $row['proof']);
                                     $linked = array_intersect_key($projects, array_flip($row['projects']));
                                 ?>
                                     <li class="sk sk--<?= $this->e($status) ?><?= $level >= 4 ? ' sk--end' : '' ?>" style="--i: <?= $uid ?>">
@@ -106,12 +106,12 @@ $uid = 0;
                                                 <img src="<?= $this->asset('img/logos/' . $row['logo'] . '.svg') ?>" alt="" width="32" height="32" loading="lazy">
                                                 <div>
                                                     <strong><?= $this->e($row['name']) ?></strong>
-                                                    <span class="sk__rating"><?= $this->stars($level) ?><?= $levels[$level] ?> · <?= $this->e($row['status_label']) ?></span>
+                                                    <span class="sk__rating"><?= $this->stars($level) ?><?= $levels[$level] ?>, <?= $this->e($row['status_label']) ?></span>
                                                 </div>
                                             </div>
                                             <p class="sk__detail"><?= $this->e($row['detail']) ?></p>
                                             <?php if ($proofs !== []): ?>
-                                                <p class="sk__proof"><?php foreach ($proofs as $k => $proof): $slug = array_search($proof, $linked, true); ?><?= $k > 0 ? '<span class="sk__sep">·</span>' : '' ?><?php if ($slug !== false): ?><a href="<?= $this->url('project', ['slug' => (string) $slug]) ?>"><?= $this->e($proof) ?></a><?php else: ?><span><?= $this->e($proof) ?></span><?php endif; ?><?php endforeach; ?></p>
+                                                <p class="sk__proof"><?php foreach ($proofs as $k => $proof): $slug = array_search($proof, $linked, true); ?><?= $k > 0 ? '<span class="sk__sep">,</span> ' : '' ?><?php if ($slug !== false): ?><a href="<?= $this->url('project', ['slug' => (string) $slug]) ?>"><?= $this->e($proof) ?></a><?php else: ?><span><?= $this->e($proof) ?></span><?php endif; ?><?php endforeach; ?></p>
                                             <?php endif; ?>
                                         </div>
                                     </li>

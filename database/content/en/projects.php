@@ -19,7 +19,7 @@ return [
     'mediatekdocuments' => [
         'tagline' => 'Library management software that talks to its database through an API I put online myself.',
         'summary' => 'A C# desktop application for library staff: books, DVDs, magazines, orders, subscriptions. It ==never touches the database directly==. Everything goes through a __PHP REST API__ hosted on my VPS.',
-        'context' => 'Professional workshop 2 · BTS SIO',
+        'context' => 'Professional workshop 2 / BTS SIO',
         'role'    => 'C# client, PHP API, MySQL database, deployment',
 
         'links' => ['Application repository', 'REST API repository'],
@@ -33,8 +33,8 @@ return [
             'msi>client' => 'installs',
         ],
         'groups' => [
-            'VPS OVH · Ubuntu' => 'OVH VPS · Ubuntu',
-            'Poste · Windows'  => 'Workstation · Windows',
+            'VPS OVH / Ubuntu' => 'OVH VPS / Ubuntu',
+            'Poste / Windows'  => 'Workstation / Windows',
         ],
         'architecture_caption' => 'The client has ==no access to MySQL==. It sends HTTP requests (GET, POST, PUT, DELETE) with a JSON body to the API, and only the API talks to the database. Moving the client to another machine or changing the database requires __no change on the client side__.',
 
@@ -74,17 +74,17 @@ return [
         'technologies' => ['VPS OVH' => 'OVH VPS'],
 
         'documents' => [
-            'ap2-fiche-realisation'  => ['Project description sheet', 'AP2 · PDF'],
-            'ap2-compte-rendu'       => ['Activity report', 'Summary · PDF'],
-            'ap2-tests'              => ['MSTest results', '14 tests · PDF'],
-            'ap2-cahier-des-charges' => ['Specifications', 'Requirements · PDF'],
+            'ap2-fiche-realisation'  => ['Project description sheet', 'AP2 / PDF'],
+            'ap2-compte-rendu'       => ['Activity report', 'Summary / PDF'],
+            'ap2-tests'              => ['MSTest results', '14 tests / PDF'],
+            'ap2-cahier-des-charges' => ['Specifications', 'Requirements / PDF'],
         ],
     ],
 
     'mediatek86' => [
         'tagline' => 'The video training catalogue of a library network, online and redeployed on every push.',
         'summary' => 'A Symfony site in two parts: a __public front end__ to browse trainings and playlists, and a __protected back office__ to manage everything. It runs on my VPS, and ==GitHub Actions keeps it up to date on its own==.',
-        'context' => 'Professional workshop 1 · BTS SIO',
+        'context' => 'Professional workshop 1 / BTS SIO',
         'role'    => 'Symfony development, tests, deployment',
 
         'links' => ['Live site', 'Technical documentation', 'GitHub repository'],
@@ -100,7 +100,7 @@ return [
             'github>actions' => 'triggers',
         ],
         'groups' => [
-            'VPS OVH · Ubuntu' => 'OVH VPS · Ubuntu',
+            'VPS OVH / Ubuntu' => 'OVH VPS / Ubuntu',
         ],
         'architecture_caption' => 'Two paths lead to the same server: the visitors\' path and the code\'s path. A push to main ==triggers a workflow== that connects to the VPS over SSH and updates the site, __without me touching the server__.',
 
@@ -140,12 +140,67 @@ return [
         'technologies' => ['VPS OVH' => 'OVH VPS'],
 
         'documents' => [
-            'ap1-synthese'              => ['Workshop summary', 'Report · PDF'],
-            'ap1-pv-recette'            => ['Acceptance report', 'Final sign-off · PDF'],
-            'ap1-plan-de-tests'         => ['Test plan', 'Acceptance and integration · PDF'],
-            'ap1-cahier-des-charges'    => ['Specifications', 'Requirements · PDF'],
-            'ap1-contrat-developpement' => ['Development contract', 'Commitment · PDF'],
-            'ap1-fiche-missions'        => ['Assignment sheet', 'AP1 · PDF'],
+            'ap1-synthese'              => ['Workshop summary', 'Report / PDF'],
+            'ap1-pv-recette'            => ['Acceptance report', 'Final sign-off / PDF'],
+            'ap1-plan-de-tests'         => ['Test plan', 'Acceptance and integration / PDF'],
+            'ap1-cahier-des-charges'    => ['Specifications', 'Requirements / PDF'],
+            'ap1-contrat-developpement' => ['Development contract', 'Commitment / PDF'],
+            'ap1-fiche-missions'        => ['Assignment sheet', 'AP1 / PDF'],
         ],
+    ],
+
+    'portfolio' => [
+        'tagline' => 'The site you are reading, written in object-oriented PHP with no framework, its content stored in SQLite.',
+        'summary' => 'A bilingual portfolio built from scratch. ==Router, controllers and views written by hand==, content stored in __two SQLite databases__, one per language. No library, on the server or in the browser.',
+        'context' => 'Personal project',
+        'role'    => 'Design, development, content',
+
+        'links' => ['GitHub repository'],
+
+        'nodes' => [
+            'visitor' => ['label' => 'Visitor', 'sub' => 'browser'],
+            'kernel'  => ['sub' => 'router / headers'],
+            'ctrl'    => ['label' => 'Controllers', 'sub' => 'object-oriented PHP'],
+            'view'    => ['label' => 'Views', 'sub' => 'PHP templates'],
+            'content' => ['label' => 'Content'],
+            'db'      => ['sub' => 'one database per language'],
+        ],
+        'arrows' => [
+            'ctrl>view'     => 'data',
+            'content>build' => 'reads',
+            'build>db'      => 'generates',
+        ],
+        'groups' => [
+            'Serveur PHP' => 'PHP server',
+        ],
+        'architecture_caption' => 'The content does not live in the templates. It is written in PHP files, then `php bin/console db:build` ==rebuilds both SQLite databases==. During a visit, the site __only reads__.',
+
+        'brief' => [
+            ['The idea', 'A portfolio that ==proves what it claims==. The numbers on the home page come from the database, the Skills page shows __the actual SQL query__, and the code is public.'],
+            ['The constraints', 'No framework, no CMS. Everything has to run on ==a plain PHP server==, load fast and stay readable on a phone, in French and in English.'],
+        ],
+
+        'build' => [
+            ['A bilingual router', 'Every route exists in both languages, with ==its own paths==: `/projets` becomes `/en/projects`. Switching language keeps the current page.'],
+            ['Content in a database', 'The texts are written in PHP, then `db:build` fills ==one SQLite database per language==. The numbers and lists on the site are __real queries__.'],
+            ['The SQL console', 'On the Skills page, visitors tick filters and see the query. Every value goes through ==an allow list== and __bound parameters__: what is shown is what runs.'],
+            ['A checked translation', '`php bin/console i18n:check` collects every text on the site and flags the ones with ==no English translation==.'],
+            ['Security headers', 'A strict ==Content Security Policy==, `X-Frame-Options`, `nosniff`. No external script, and the YouTube video only loads __on click__.'],
+            ['Light and accessible', 'No JavaScript library, self-hosted fonts, animations turned off for people who disable them. Layout ==checked from 320 to 1500 pixels== wide.'],
+        ],
+
+
+        'excerpts' => [
+            [
+                'title'   => 'The headers sent with every page',
+                'caption' => 'Set by the code rather than the server configuration, they protect the site ==whatever the hosting==.',
+            ],
+            [
+                'title'   => 'The allow list behind the SQL console',
+                'caption' => '`array_intersect` only keeps known values: ==nothing the visitor types== reaches the query as is.',
+            ],
+        ],
+
+        'layers' => ['Données' => 'Data', 'Outils' => 'Tools'],
     ],
 ];

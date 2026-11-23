@@ -197,7 +197,7 @@ final class View
             'vps' => 'server', 'winscp' => 'server', 'ubuntu' => 'linux', 'linux' => 'linux', 'nginx' => 'nginx',
             'github actions' => 'githubactions', 'git' => 'git', 'docker' => 'docker',
             'symfony' => 'symfony', 'doctrine' => 'doctrine', 'twig' => 'twig',
-            'javascript' => 'javascript', 'python' => 'python', 'powershell' => 'powershell',
+            'javascript' => 'javascript', 'python' => 'python', 'powershell' => 'powershell', 'claude' => 'ai',
         ];
         $name = mb_strtolower($tech);
         foreach ($map as $prefix => $file) {

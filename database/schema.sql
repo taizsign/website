@@ -128,7 +128,7 @@ SELECT s.name   AS nom,
        s.status AS statut,
        s.detail AS detail,
        s.logo   AS logo,
-       (SELECT group_concat(p.label, ' · ')
+       (SELECT group_concat(p.label, ' | ')
           FROM (SELECT label FROM skill_proof WHERE skill_id = s.id ORDER BY position) AS p) AS preuve,
        (SELECT group_concat(pr.slug, ',')
           FROM skill_proof sp JOIN project pr ON pr.id = sp.project_id

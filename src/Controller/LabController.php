@@ -36,16 +36,16 @@ final class LabController extends AbstractController
         return new Topology(
             nodes: [
                 'dns'     => ['id' => 'dns',     'x' => 30,  'y' => 40,  'w' => 190, 'label' => 'taizsys.xyz',     'sub' => $t('zone DNS'),                 'kind' => 'external'],
-                'gh'      => ['id' => 'gh',      'x' => 30,  'y' => 300, 'w' => 190, 'label' => 'GitHub',          'sub' => $t('dépôts · Actions · Pages'), 'kind' => 'external'],
-                'pages'   => ['id' => 'pages',   'x' => 300, 'y' => 300, 'w' => 200, 'label' => 'setup.taizsys.xyz', 'sub' => 'GitHub Pages · .ps1',     'kind' => 'service'],
+                'gh'      => ['id' => 'gh',      'x' => 30,  'y' => 300, 'w' => 190, 'label' => 'GitHub',          'sub' => $t('dépôts / Actions / Pages'), 'kind' => 'external'],
+                'pages'   => ['id' => 'pages',   'x' => 300, 'y' => 300, 'w' => 200, 'label' => 'setup.taizsys.xyz', 'sub' => 'GitHub Pages / .ps1',     'kind' => 'service'],
                 'nginx'   => ['id' => 'nginx',   'x' => 300, 'y' => 140, 'w' => 170, 'label' => 'nginx',           'sub' => $t('hôtes virtuels'),           'kind' => 'server'],
-                'symfony' => ['id' => 'symfony', 'x' => 550, 'y' => 60,  'w' => 180, 'label' => 'Mediatek86',      'sub' => 'Symfony · PHP-FPM',        'kind' => 'service'],
+                'symfony' => ['id' => 'symfony', 'x' => 550, 'y' => 60,  'w' => 180, 'label' => 'Mediatek86',      'sub' => 'Symfony / PHP-FPM',        'kind' => 'service'],
                 'docs'    => ['id' => 'docs',    'x' => 550, 'y' => 140, 'w' => 180, 'label' => 'Documentation',   'sub' => 'phpDocumentor',            'kind' => 'service'],
                 'api'     => ['id' => 'api',     'x' => 550, 'y' => 220, 'w' => 180, 'label' => $t('API REST'),    'sub' => 'MediaTekDocuments',        'kind' => 'service'],
                 'mysql'   => ['id' => 'mysql',   'x' => 790, 'y' => 140, 'w' => 145, 'label' => 'MySQL',           'sub' => $t('2 bases'),                  'kind' => 'data'],
             ],
             links: [
-                ['from' => 'dns',     'to' => 'nginx',   'label' => $t('A · sous-domaines')],
+                ['from' => 'dns',     'to' => 'nginx',   'label' => $t('A / sous-domaines')],
                 ['from' => 'nginx',   'to' => 'symfony', 'label' => '', 'flow' => true],
                 ['from' => 'nginx',   'to' => 'docs',    'label' => '', 'flow' => true],
                 ['from' => 'nginx',   'to' => 'api',     'label' => '', 'flow' => true],
@@ -55,7 +55,7 @@ final class LabController extends AbstractController
                 ['from' => 'gh',      'to' => 'pages',   'label' => $t('publie')],
             ],
             groups: [
-                ['label' => $t('VPS OVH · Ubuntu'), 'x' => 280, 'y' => 20, 'w' => 670, 'h' => 290],
+                ['label' => $t('VPS OVH / Ubuntu'), 'x' => 280, 'y' => 20, 'w' => 670, 'h' => 290],
             ],
         );
     }

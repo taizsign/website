@@ -96,7 +96,7 @@ $letters = function (string $word, int $offset = 0): string {
             ['acquired', $this->t('compétences acquises'), $this->t("WHERE statut = 'acquis'")],
             ['learning', $this->t("en cours d'apprentissage"), $this->t("WHERE statut = 'en cours'")],
             ['goals', $this->t('objectifs pour la suite'), $this->t("WHERE statut = 'objectif'")],
-            ['technologies', $this->t('outils et technologies dans mes 2 projets'), 'SELECT COUNT(*) FROM technology'],
+            ['technologies', $this->t('outils et technologies dans mes {n} projets', ['n' => count($projects)]), 'SELECT COUNT(*) FROM technology'],
         ];
         ?>
         <dl class="figures" data-reveal>
@@ -150,7 +150,7 @@ $letters = function (string $word, int $offset = 0): string {
             </div>
 
             <div class="term apt" data-reveal>
-                <div class="term__bar"><span></span><span></span><span></span><em>bash · raphael@besancon</em></div>
+                <div class="term__bar"><span></span><span></span><span></span><em>raphael@besancon: ~</em></div>
                 <div class="apt__body">
                     <p class="apt__line"><span class="apt__user">raphael@besancon</span>:<span class="apt__path">~</span>$ apt list --upgradable</p>
                     <ol class="apt__list">

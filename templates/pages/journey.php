@@ -33,7 +33,7 @@ usort($chrono, static fn (Milestone $a, Milestone $b): int => $a->at <=> $b->at)
                 <div class="resume__row is-next">
                     <dt><?= $this->t('En projet') ?></dt>
                     <span class="resume__dots" aria-hidden="true"></span>
-                    <dd><?= $this->e(implode(' · ', array_map(static fn (Milestone $m): string => $m->title, $planned))) ?></dd>
+                    <dd><?= $this->e(implode(', ', array_map(static fn (Milestone $m): string => $m->title, $planned))) ?></dd>
                 </div>
             <?php endif; ?>
         </dl>
@@ -55,7 +55,7 @@ usort($chrono, static fn (Milestone $a, Milestone $b): int => $a->at <=> $b->at)
                         <span class="leg__num"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
                         <span class="leg__state"><?= $this->t($m->stateLabel()) ?></span>
                     </p>
-                    <p class="leg__period"><?= $this->e($m->period) ?> · <?= $this->e($m->kind) ?></p>
+                    <p class="leg__period"><?= $this->e($m->period) ?> / <?= $this->e($m->kind) ?></p>
                     <h2 class="leg__title"><?= $this->e($m->title) ?></h2>
                     <?= $this->text($m->body) ?>
                     <?php if ($m->tags !== []): ?>
@@ -70,7 +70,7 @@ usort($chrono, static fn (Milestone $a, Milestone $b): int => $a->at <=> $b->at)
 <section class="section">
     <div class="wrap">
         <a class="card-link" href="<?= $this->url('journey-e5') ?>" data-reveal>
-            <span class="card-link__kicker"><?= $this->t('BTS SIO · épreuve E5') ?></span>
+            <span class="card-link__kicker"><?= $this->t('BTS SIO, épreuve E5') ?></span>
             <span class="card-link__title"><?= $this->t('Support de présentation') ?> <span aria-hidden="true">→</span></span>
             <span class="card-link__text"><?= $this->t("Les diapositives présentées à l'épreuve, consultables en plein écran.") ?></span>
         </a>

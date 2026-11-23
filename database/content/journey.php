@@ -19,7 +19,7 @@ return [
     ],
     [
         'period' => 'Juillet 2025',
-        'kind'   => 'Stage · 2 mois',
+        'kind'   => 'Stage / 2 mois',
         'title'  => 'Stage technicien réseaux & systèmes',
         'body'   => 'Diagnostic et réparation de PC, serveurs et périphériques. Installation d\'un pare-feu et d\'un NAS, découverte d\'un réseau d\'entreprise de l\'intérieur, analyse de journaux de sécurité.',
         'tags'   => ['Pare-feu', 'NAS', 'Matériel', 'Journaux'],

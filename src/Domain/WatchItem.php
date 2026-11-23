@@ -24,13 +24,13 @@ final class WatchItem
     }
 
     /**
-     * Pour les événements, meta = « 2024 · MARS · AGENT ».
+     * Pour les événements, meta = « 2024 / MARS / AGENT ».
      *
      * @return array{year: string, month: string, tag: string}
      */
     public function eventParts(): array
     {
-        $parts = array_map('trim', explode('·', $this->meta)) + ['', '', ''];
+        $parts = array_map('trim', explode('/', $this->meta)) + ['', '', ''];
 
         return ['year' => $parts[0], 'month' => $parts[1], 'tag' => $parts[2]];
     }

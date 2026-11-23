@@ -9,7 +9,7 @@
     <div class="wrap">
         <p class="crumb" data-reveal><a href="<?= $this->url('home') ?>">~</a> / <?= $this->t('projets') ?></p>
         <h1 class="h1" data-reveal><?= $this->t('Projets') ?><span class="title-semi" aria-hidden="true">;</span></h1>
-        <p class="lead lead--wide" data-reveal><?= $this->t("<em>Deux applications complètes</em>, construites pendant le BTS. Pour chacune, le <em>contexte</em>, l'<em>architecture</em>, des extraits du <em>code source</em> et ce que je <em>referais autrement</em> aujourd'hui.") ?></p>
+        <p class="lead lead--wide" data-reveal><?= $this->t("<em>Deux applications complètes</em> construites pendant le BTS, et <em>ce site</em>. Pour chacun, le <em>contexte</em>, l'<em>architecture</em>, des extraits du <em>code source</em> et ce que je <em>referais autrement</em> aujourd'hui.") ?></p>
 
         <?php
         // chaque technologie, avec le nombre de projets qui l'utilisent
