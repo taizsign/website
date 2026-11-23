@@ -18,11 +18,12 @@
                             <li><img class="chips__logo" src="<?= $this->techLogo($tech) ?>" alt="" width="16" height="16" loading="lazy"><?= $this->e($tech) ?></li>
                         <?php endforeach; ?>
                     </ul>
-                    <span class="project__more"><?= $this->t('Lire le dossier') ?><span class="project__line" aria-hidden="true"></span><svg class="project__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5"/></svg></span>
+                    </span>
                 </div>
                 <figure class="project__figure">
                     <?= $this->topology($project->architecture, 'topo-' . $project->slug) ?>
                 </figure>
+                <span class="project__tag" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7.5V18a1.5 1.5 0 0 0 1.5 1.5h15A1.5 1.5 0 0 0 21 18V9.5A1.5 1.5 0 0 0 19.5 8h-7.4l-2-2.5H4.5A1.5 1.5 0 0 0 3 7z"/><path d="M3 11h18"/></svg><?= $this->t('Lire le dossier') ?></span>
             </a>
         </li>
     <?php endforeach; ?>

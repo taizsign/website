@@ -52,7 +52,7 @@ $docsMeta = implode(' · ', array_filter([
         <div class="wrap split">
             <div class="split__side">
                 <?= $this->rule($this->t('Le brief'), $project->context) ?>
-                <p class="split__summary" data-reveal><?= $this->e($project->summary) ?></p>
+                <p class="split__summary" data-reveal><?= $this->inline($project->summary) ?></p>
             </div>
             <div class="split__main brief">
                 <?php foreach ($project->sections('brief') as $section): ?>
@@ -71,12 +71,11 @@ $docsMeta = implode(' · ', array_filter([
             <div class="section__head">
                 <?= $this->rule($this->t("Ce que j'ai construit"), $this->plural(count($project->sections('build')), 'réalisation')) ?>
             </div>
-            <ol class="builds">
-                <?php foreach ($project->sections('build') as $i => $section): ?>
-                    <li class="build" data-reveal>
-                        <span class="build__num"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
-                        <h3 class="build__title"><?= $this->e($section->title) ?></h3>
-                        <div class="build__body"><?= $this->text($section->body) ?></div>
+            <ol class="thread">
+                <?php foreach ($project->sections('build') as $section): ?>
+                    <li class="thread__item" data-reveal>
+                        <h3 class="thread__title"><?= $this->e($section->title) ?></h3>
+                        <div class="thread__body"><?= $this->text($section->body) ?></div>
                     </li>
                 <?php endforeach; ?>
             </ol>
@@ -143,7 +142,7 @@ $docsMeta = implode(' · ', array_filter([
                     <?php foreach ($project->stack as $layer => $technologies): ?>
                         <div class="stack__row">
                             <dt><?= $this->e($layer) ?></dt>
-                            <dd><ul class="chips"><?php foreach ($technologies as $tech): ?><li><?= $this->e($tech) ?></li><?php endforeach; ?></ul></dd>
+                            <dd><ul class="chips"><?php foreach ($technologies as $tech): ?><li><img class="chips__logo" src="<?= $this->techLogo($tech) ?>" alt="" width="16" height="16" loading="lazy"><?= $this->e($tech) ?></li><?php endforeach; ?></ul></dd>
                         </div>
                     <?php endforeach; ?>
                 </dl>
