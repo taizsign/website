@@ -21,23 +21,8 @@ usort($chrono, static fn (Milestone $a, Milestone $b): int => $a->at <=> $b->at)
             <h1 class="h1" data-reveal><?= $this->t('Parcours') ?><span class="title-semi" aria-hidden="true">;</span></h1>
         </div>
 
-        <dl class="resume" data-reveal>
-            <?php foreach ($reached as $m): ?>
-                <div class="resume__row<?= $m->state === 'current' ? ' is-current' : '' ?>">
-                    <dt><?= $this->e($m->title) ?></dt>
-                    <span class="resume__dots" aria-hidden="true"></span>
-                    <dd><?= $this->e($m->period) ?></dd>
-                </div>
-            <?php endforeach; ?>
-            <?php if ($planned !== []): ?>
-                <div class="resume__row is-next">
-                    <dt><?= $this->t('En projet') ?></dt>
-                    <span class="resume__dots" aria-hidden="true"></span>
-                    <dd><?= $this->e(implode(', ', array_map(static fn (Milestone $m): string => $m->title, $planned))) ?></dd>
-                </div>
-            <?php endif; ?>
-        </dl>
     </div>
+
 </section>
 
 <section class="section section--tight">
@@ -48,19 +33,20 @@ usort($chrono, static fn (Milestone $a, Milestone $b): int => $a->at <=> $b->at)
             <?= $this->journeyProfile($milestones, $cap) ?>
         </div>
 
+        <?php // le carnet de route : la date à gauche, un repère sur le fil, puis l'étape ; l'état se lit au repère ?>
         <ol class="legs" data-legs>
             <?php foreach ($chrono as $i => $m): ?>
                 <li class="leg is-<?= $this->e($m->state) ?>" data-step="<?= $i ?>" data-reveal>
-                    <p class="leg__top">
-                        <span class="leg__num"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
-                        <span class="leg__state"><?= $this->t($m->stateLabel()) ?></span>
+                    <p class="leg__when">
+                        <span class="leg__period"><?= $this->e($m->period) ?></span>
+                        <span class="leg__kind"><?= $this->e($m->kind) ?></span>
+                        <?php if ($m->state === 'current'): ?><span class="leg__state"><?= $this->t($m->stateLabel()) ?></span><?php endif; ?>
                     </p>
-                    <p class="leg__period"><?= $this->e($m->period) ?> / <?= $this->e($m->kind) ?></p>
-                    <h2 class="leg__title"><?= $this->e($m->title) ?></h2>
-                    <?= $this->text($m->body) ?>
-                    <?php if ($m->tags !== []): ?>
-                        <ul class="chips"><?php foreach ($m->tags as $tag): ?><li><?= $this->e($tag) ?></li><?php endforeach; ?></ul>
-                    <?php endif; ?>
+                    <span class="leg__mark" aria-hidden="true"></span>
+                    <div class="leg__body">
+                        <h2 class="leg__title"><?= $this->e($m->title) ?></h2>
+                        <?= $this->text($m->body) ?>
+                    </div>
                 </li>
             <?php endforeach; ?>
         </ol>

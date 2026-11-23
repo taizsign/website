@@ -1403,8 +1403,15 @@ a.row__link:hover .row__arrow { transform: translate(3px, -3px); }
 
 /* En-tête : le titre à gauche, le parcours résumé en sommaire à droite,
    assez compact pour que le profil apparaisse dès l'arrivée sur la page */
-.page-head--journey { padding-bottom: clamp(16px, 2vw, 28px); }
-.journey-head { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: clamp(48px, 7vw, 140px); align-items: end; }
+/* Parcours : en-tête resserré pour que la montagne tienne entière à l'écran dès l'arrivée */
+.page-head--journey { padding-top: calc(var(--bar-h) + clamp(16px, 2.5vw, 36px)); padding-bottom: clamp(8px, 1.5vw, 16px); }
+.page-head--journey .h1 { font-size: clamp(52px, 7.5vw, 116px); }
+.page-head--journey + .section { padding-top: clamp(8px, 1.5vw, 20px); }
+@media (min-width: 901px) {
+    .profile { max-height: calc(100svh - var(--bar-h) - 275px); min-height: 340px; }
+}
+.journey-head { display: block; }
+
 .journey-head .h1 { margin-bottom: 0; }
 .resume { margin: 0; border-top: 1px solid var(--ink); }
 .resume__row {
@@ -1473,18 +1480,20 @@ a.row__link:hover .row__arrow { transform: translate(3px, -3px); }
 .js .profile-scroll.is-visible .profile__summit { opacity: 1; transition: opacity .5s var(--ease-out); transition-delay: calc(.2s + var(--d, 0) * 1.6s); }
 
 /* Les étapes détaillées, sous le profil */
-.legs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); margin-top: clamp(32px, 4vw, 56px); border-top: 1px solid var(--ink); }
-.leg { padding: 22px 24px 28px 0; color: var(--ink-2); font-size: 15px; transition: background .3s; }
-.leg + .leg { padding-left: 24px; border-left: 1px solid var(--line); }
-.leg.is-active { background: linear-gradient(180deg, var(--violet-tint), transparent 70%); }
-.leg__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-.leg__num { font-family: var(--mono); font-size: 12px; color: var(--violet); }
-.leg__state { font-size: 12px; padding: 2px 8px; border: 1px solid var(--line-strong); color: var(--muted); }
-.leg.is-current .leg__state { border-color: var(--violet); color: var(--violet-ink); background: var(--violet-tint); }
-.leg.is-next .leg__state { border-style: dashed; }
-.leg__period { margin: 0 0 6px; font-size: 13px; color: var(--muted); }
-.leg__title { font-size: 20px; line-height: 1.15; letter-spacing: -.025em; color: var(--ink); margin-bottom: 12px; }
-.leg .chips { margin-top: 14px; }
+/* les étapes du parcours : de simples paragraphes, la date en petit au-dessus du titre */
+.legs { margin-top: clamp(40px, 5vw, 72px); }
+.leg { padding: clamp(24px, 3vw, 36px) 0; color: var(--ink-2); border-top: 1px solid var(--line); transition: background .35s var(--ease); }
+.leg:last-child { border-bottom: 1px solid var(--line); }
+.leg.is-active { background: linear-gradient(90deg, var(--violet-tint), transparent 80%); }
+.leg__mark { display: none; }
+.leg__when { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0 0 8px; }
+.leg__period { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.leg__kind { font-size: 13px; color: var(--muted); }
+.leg__state { font-family: var(--mono); font-size: 12px; color: var(--violet-ink); }
+.leg__title { font-size: clamp(24px, 2.3vw, 32px); line-height: 1.15; letter-spacing: -.03em; color: var(--ink); margin-bottom: 12px; }
+.leg.is-next .leg__title { color: var(--violet-ink); }
+.leg__body p { max-width: none; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.7; color: var(--ink-2); }
+
 
 .card-link {
     display: grid; gap: 8px; padding: clamp(28px, 4vw, 48px);
@@ -1854,8 +1863,6 @@ button.foot__handle { cursor: copy; }
     .resume__row dt { max-width: 100%; }
     .resume__dots { display: none; }
     .resume__row dd { text-align: left; }
-    .leg + .leg { padding-left: 0; border-left: 0; }
-    .leg { border-bottom: 1px solid var(--line); }
     .deck__thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .foot__main { grid-template-columns: minmax(0, 1fr); align-items: start; }
     .row__link, .split__main .row__link:has(.row__desc) { grid-template-columns: minmax(0, 1fr) auto; }
