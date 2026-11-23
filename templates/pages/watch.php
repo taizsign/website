@@ -9,6 +9,7 @@ $intro = $watch['intro'] ?? [];
 $eventYears = array_map(static fn ($e): string => $e->eventParts()['year'], $watch['event'] ?? []);
 $years = $eventYears === [] ? null : reset($eventYears) . ' → ' . end($eventYears);
 ?>
+<?= $this->partial('partials/gate', ['key' => 'watch', 'text' => $this->t("Cette veille a été réalisée pour les épreuves du BTS SIO de 2026 et n'a pas été mise à jour depuis.")]) ?>
 <section class="page-head">
     <div class="wrap">
         <p class="crumb" data-reveal><a href="<?= $this->url('home') ?>">~</a> / <?= $this->t('veille') ?></p>

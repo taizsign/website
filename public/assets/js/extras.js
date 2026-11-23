@@ -598,6 +598,43 @@ export function initTechSearch() {
     clear.addEventListener('click', () => { reset(); input.focus(); });
 }
 
+/**
+ * Avertissement à confirmer avant les pages datées (épreuve E5, veille).
+ * Une confirmation par page et par visite ; la page reste figée derrière tant qu'on n'a pas cliqué.
+ */
+export function initGate() {
+    const gate = document.querySelector('[data-gate]');
+    if (!gate) return;
+    const key = `gate:${gate.dataset.gate}`;
+    try {
+        if (sessionStorage.getItem(key) === '1') { gate.remove(); return; }
+    } catch { /* stockage indisponible : on demande à chaque fois */ }
+
+    const root = document.documentElement;
+    const ok = gate.querySelector('[data-gate-ok]');
+    gate.hidden = false;
+    root.classList.add('is-gated');
+    void gate.offsetWidth; // force le calcul pour que le fondu d'ouverture se joue
+    gate.classList.add('is-open');
+    ok.focus();
+
+    // la tabulation reste dans la fenêtre
+    gate.addEventListener('keydown', (event) => {
+        if (event.key !== 'Tab') return;
+        const items = [...gate.querySelectorAll('button, a[href]')];
+        const first = items[0], last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
+
+    ok.addEventListener('click', () => {
+        try { sessionStorage.setItem(key, '1'); } catch { /* rien */ }
+        gate.classList.remove('is-open');
+        root.classList.remove('is-gated');
+        setTimeout(() => gate.remove(), 350);
+    });
+}
+
 /** Vidéo YouTube chargée seulement au clic (pas de cookie avant). */
 export function initVideo() {
     document.querySelectorAll('[data-video]').forEach((box) => {

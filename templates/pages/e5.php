@@ -4,6 +4,7 @@
  * @var list<string> $slides
  */
 ?>
+<?= $this->partial('partials/gate', ['key' => 'e5', 'text' => $this->t("Ce support a été présenté aux épreuves du BTS SIO de 2026 et n'a pas été mis à jour depuis.")]) ?>
 <section class="page-head">
     <div class="wrap">
         <p class="crumb" data-reveal><a href="<?= $this->url('home') ?>">~</a> / <a href="<?= $this->url('journey') ?>"><?= $this->t('parcours') ?></a> / e5</p>

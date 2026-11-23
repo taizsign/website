@@ -15,6 +15,12 @@ return [
     // Commun : en-tête, pied de page, métadonnées
     'Aller au contenu'                         => 'Skip to content',
     'Accueil'                                  => 'Home',
+    'Contenu daté'                             => 'Dated content',
+    'Cette page date des <em>épreuves 2026</em>.' => 'This page dates from the <em>2026 exams</em>.',
+    "Ce support a été présenté aux épreuves du BTS SIO de 2026 et n'a pas été mis à jour depuis." => "These slides were presented at the 2026 BTS SIO exams and have not been updated since.",
+    "Cette veille a été réalisée pour les épreuves du BTS SIO de 2026 et n'a pas été mise à jour depuis." => "This tech watch was written for the 2026 BTS SIO exams and has not been updated since.",
+    'Accéder au contenu'                       => 'View the content',
+    "Retour à l'accueil"                       => 'Back to home',
     'Projets'                                  => 'Projects',
     'Compétences'                              => 'Skills',
     'Parcours'                                 => 'Journey',
