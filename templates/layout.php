@@ -23,6 +23,8 @@ $alternates = $this->alternates();
     <meta name="author" content="<?= $this->e($site['name']) ?>">
     <meta name="theme-color" content="#ffffff">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="<?= $this->e($site['name']) ?>">
+    <meta property="og:url" content="<?= $this->e($site['url'] . $alternates[$locale]['url']) ?>">
     <meta property="og:title" content="<?= $this->e($pageTitle) ?>">
     <meta property="og:description" content="<?= $this->e($pageDescription) ?>">
     <meta property="og:locale" content="<?= $this->e($alternates[$locale]['tag']) ?>">
@@ -37,6 +39,9 @@ $alternates = $this->alternates();
             <link rel="alternate" hreflang="<?= $this->e($code) ?>" href="<?= $this->e($site['url'] . $alternate['url']) ?>">
         <?php endforeach; ?>
         <link rel="alternate" hreflang="x-default" href="<?= $this->e($site['url'] . reset($alternates)['url']) ?>">
+    <?php endif; ?>
+    <?php if ($route === 'home'): ?>
+        <?= $this->partial('partials/schema') ?>
     <?php endif; ?>
     <link rel="icon" href="<?= $this->asset('img/favicon.svg') ?>" type="image/svg+xml">
     <link rel="preload" href="/assets/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>

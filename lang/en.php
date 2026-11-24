@@ -52,9 +52,11 @@ return [
     'Copier le pseudo Discord'                 => 'Copy Discord username',
 
     // config/app.php
-    'Raphaël Jacquis | systèmes, réseaux et bases de données' => 'Raphaël Jacquis | systems, networks and databases',
-    "Raphaël Jacquis, étudiant en BTS SIO SLAM. Je recherche une alternance en administration systèmes et réseaux à Bordeaux pour la rentrée 2027."
-        => "Raphaël Jacquis, BTS SIO student (software track). I'm looking for a work-study position in systems and network administration in Bordeaux, starting September 2027.",
+    'Raphaël Jacquis | Portfolio BTS SIO, systèmes et réseaux' => 'Raphaël Jacquis | BTS SIO portfolio, systems and networks',
+    "Portfolio de Raphaël Jacquis, étudiant en BTS SIO SLAM. Je recherche une alternance en administration systèmes et réseaux à Bordeaux pour la rentrée 2027."
+        => "Portfolio of Raphaël Jacquis, BTS SIO student (software track). I'm looking for a work-study position in systems and network administration in Bordeaux, starting September 2027.",
+    "Mes projets de BTS SIO, une application C# avec son API REST et un site Symfony, présentés avec leur architecture et leur code source."
+        => "My BTS SIO projects, a C# application with its REST API and a Symfony website, shown with their architecture and source code.",
     'Futur administrateur systèmes, réseaux & BDD' => 'Future systems, network & database administrator',
     'Script de déploiement / GitHub Pages'     => 'Setup script / GitHub Pages',
 

@@ -3,3 +3,5 @@
 /storage/portfolio.*.sqlite.*
 /storage/cache/*
 !/storage/cache/.gitkeep
+# les TP déployés à côté du site ont leurs propres dépôts
+/projets-tp/

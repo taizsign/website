@@ -12,8 +12,9 @@ final class ProjectController extends AbstractController
     public function index(Request $request): Response
     {
         return $this->render('pages/projects/index', [
-            'title'    => $this->t('Projets'),
-            'projects' => $this->container->projects()->all(),
+            'title'       => $this->t('Projets'),
+            'description' => $this->t('Mes projets de BTS SIO, une application C# avec son API REST et un site Symfony, présentés avec leur architecture et leur code source.'),
+            'projects'    => $this->container->projects()->all(),
         ]);
     }
 

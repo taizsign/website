@@ -6,8 +6,8 @@
 
 return [
     'name'         => 'Raphaël Jacquis',
-    'title'        => 'Raphaël Jacquis | systèmes, réseaux et bases de données',
-    'description'  => 'Raphaël Jacquis, étudiant en BTS SIO SLAM. Je recherche une alternance en administration systèmes et réseaux à Bordeaux pour la rentrée 2027.',
+    'title'        => 'Raphaël Jacquis | Portfolio BTS SIO, systèmes et réseaux',
+    'description'  => 'Portfolio de Raphaël Jacquis, étudiant en BTS SIO SLAM. Je recherche une alternance en administration systèmes et réseaux à Bordeaux pour la rentrée 2027.',
     'url'          => 'https://taizsys.xyz',
     'email'        => 'raphaelpv@protonmail.com',
     'github'       => 'https://github.com/taizsign',
