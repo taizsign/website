@@ -1,6 +1,6 @@
 {
     "name": "taizsign/portfolio",
-    "description": "Portfolio de Raphaël — PHP objet sans framework, SQLite",
+    "description": "Portfolio de Raphaël Jacquis, en PHP objet sans framework avec SQLite",
     "type": "project",
     "license": "proprietary",
     "require": {

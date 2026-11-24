@@ -43,7 +43,8 @@ export function initHero(section) {
 
     const hand = { k: 1, cos: 1, sin: 0, fx: 0, fy: 0, t: 0, box: [0, 0, 0, 0] };
     const halo = { x: 0, y: 0, r: 1 };
-    let W = 0, H = 0, dpr = 1, raf = 0, visible = true;
+    const meta = section.querySelector('.hero__meta');
+    let W = 0, H = 0, dpr = 1, raf = 0, visible = true, ceil = -1e9;
 
     function resize() {
         dpr = Math.min(devicePixelRatio || 1, 2);
@@ -64,7 +65,9 @@ export function initHero(section) {
         const ty = pr.top - cr.top + pr.height * 0.55;
 
         const narrow = W < 900;
-        let dx = narrow ? -0.55 : -1, dy = narrow ? 1 : (W < 1300 ? 0.7 : 0.16);
+        // sur petit écran, le bras monte jusqu'aux lignes du haut : il s'efface juste en dessous
+        ceil = narrow && meta ? meta.getBoundingClientRect().bottom - cr.top + 6 : -1e9;
+        let dx = narrow ? -1 : -1, dy = narrow ? 0.38 : (W < 1300 ? 0.7 : 0.16);
         const n = Math.hypot(dx, dy); dx /= n; dy /= n;
         const k = (narrow ? Math.min(W * 0.75, 420) : Math.min(W * 0.36, 600)) / HAND_W;
 
@@ -149,9 +152,11 @@ export function initHero(section) {
         const paths = Array.from({ length: LEVELS }, () => new Path2D());
         for (let j = y0; j < y1; j++) {
             const y = j * CELL;
+            const under = smooth(ceil, ceil + 48, y);
+            if (under === 0) continue;
             for (let i = x0; i < x1; i++) {
                 const x = i * CELL;
-                const f = Math.max(handField(x + CELL / 2, y + CELL / 2), haloField(x, y));
+                const f = under * Math.max(handField(x + CELL / 2, y + CELL / 2), haloField(x, y));
                 if (f < 0.06) continue;
                 const s = CELL * (0.25 + 0.6 * f);
                 const o = (CELL - s) / 2;

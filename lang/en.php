@@ -15,6 +15,7 @@ return [
     // Commun : en-tête, pied de page, métadonnées
     'Aller au contenu'                         => 'Skip to content',
     'Accueil'                                  => 'Home',
+    'Les dossiers'                             => 'Case studies',
     'mobile à'                                 => 'moving to',
     'Contenu daté'                             => 'Dated content',
     'Cette page date des <em>épreuves 2026</em>.' => 'This page dates from the <em>2026 exams</em>.',

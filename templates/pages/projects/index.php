@@ -49,6 +49,7 @@
 
 <section class="section section--tight">
     <div class="wrap">
+        <h2 class="sr-only"><?= $this->t('Les dossiers') ?></h2>
         <?= $this->partial('partials/project-list', ['projects' => $projects]) ?>
     </div>
 </section>
