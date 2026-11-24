@@ -24,7 +24,7 @@ final class JourneyController extends AbstractController
     public function e5(Request $request): Response
     {
         $dir = $this->container->root . '/public/assets/img/e5';
-        $slides = glob($dir . '/*.png') ?: [];
+        $slides = glob($dir . '/*.webp') ?: [];
         natsort($slides);
 
         return $this->render('pages/e5', [
