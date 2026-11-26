@@ -42,5 +42,5 @@ return [
         ['name' => 'ZDNet',       'url' => 'https://www.zdnet.fr/feeds/rss/actualites/', 'lang' => 'fr',
          'match' => '/\\b((?-i:IA|AI|LLM)|Copilot|ChatGPT|Claude|Gemini|Mistral|OpenAI|Anthropic|agents?|code|développeurs?|open source)\\b/iu'],
     ],
-    'feeds_skip' => '/black friday|bon plan|remise|promo|soldes|\\d\\s?€|j\'ai testé|\\btest (du|de|des)\\b|mon top|meilleur|lequel choisir|acheter/iu',
+    'feeds_skip' => '/black friday|bon plan|remise|promo|soldes|\\d\\s?€|j\'ai testé|\\btest (du|de|des)\\b|mon top|meilleur|lequel choisir|acheter|cadeaux?|\\bgifts?\\b/iu',
 ];

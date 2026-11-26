@@ -54,7 +54,9 @@ return [
     // config/app.php
     'Raphaël Jacquis | Portfolio BTS SIO, systèmes et réseaux' => 'Raphaël Jacquis | BTS SIO portfolio, systems and networks',
     "Portfolio de Raphaël Jacquis, étudiant en BTS SIO SLAM. Je recherche une alternance en administration systèmes et réseaux à Bordeaux pour la rentrée 2027."
-        => "Portfolio of Raphaël Jacquis, BTS SIO student (software track). I'm looking for a work-study position in systems and network administration in Bordeaux, starting September 2027.",
+        => 'Portfolio of Raphaël Jacquis, BTS SIO student. Looking for a work-study position in systems and network administration in Bordeaux from September 2027.',
+    "Le support présenté à l'épreuve E5 du BTS SIO en 2026, à feuilleter en plein écran."
+        => 'The slides I presented at the E5 exam of the BTS SIO in 2026, to browse full screen.',
     "Mes projets de BTS SIO, une application C# avec son API REST et un site Symfony, présentés avec leur architecture et leur code source."
         => "My BTS SIO projects, a C# application with its REST API and a Symfony website, shown with their architecture and source code.",
     'Futur administrateur systèmes, réseaux & BDD' => 'Future systems, network & database administrator',

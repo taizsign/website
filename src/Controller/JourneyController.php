@@ -28,8 +28,9 @@ final class JourneyController extends AbstractController
         natsort($slides);
 
         return $this->render('pages/e5', [
-            'title'  => $this->t('Épreuve E5'),
-            'slides' => array_map(static fn (string $f): string => 'img/e5/' . basename($f), array_values($slides)),
+            'title'       => $this->t('Épreuve E5'),
+            'description' => $this->t('Le support présenté à l\'épreuve E5 du BTS SIO en 2026, à feuilleter en plein écran.'),
+            'slides'      => array_map(static fn (string $f): string => 'img/e5/' . basename($f), array_values($slides)),
         ]);
     }
 }
