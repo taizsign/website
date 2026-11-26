@@ -251,8 +251,8 @@ return [
         => 'The systems and network side: what already runs in production under my own domain, and the tools I build for myself.',
     'En production'                            => 'In production',
     'Un VPS,<br>un domaine, trois services.'   => 'One VPS,<br>one domain, three services.',
-    "Un VPS OVH sous Ubuntu sert plusieurs sous-domaines de taizsys.xyz grâce aux hôtes virtuels nginx. Le code arrive par GitHub&nbsp;: déploiement SSH pour le VPS, GitHub Pages pour le script d'installation."
-        => 'An OVH VPS running Ubuntu serves several taizsys.xyz subdomains through nginx virtual hosts. The code comes from GitHub: SSH deployment for the VPS, GitHub Pages for the setup script.',
+    "Un VPS OVH sous Ubuntu sert plusieurs sous-domaines de raphael-jacquis.fr grâce aux hôtes virtuels nginx. Le code arrive par GitHub&nbsp;: déploiement SSH pour le VPS, GitHub Pages pour le script d'installation."
+        => 'An OVH VPS running Ubuntu serves several raphael-jacquis.fr subdomains through nginx virtual hosts. The code comes from GitHub: SSH deployment for the VPS, GitHub Pages for the setup script.',
     'zone DNS'                                 => 'DNS zone',
     'dépôts / Actions / Pages'                 => 'repos / Actions / Pages',
     'hôtes virtuels'                           => 'virtual hosts',

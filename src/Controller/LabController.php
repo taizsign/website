@@ -27,7 +27,7 @@ final class LabController extends AbstractController
     }
 
     /**
-     * Ce qui tourne réellement sous taizsys.xyz.
+     * Ce qui tourne réellement sous raphael-jacquis.fr.
      */
     private function infrastructure(): Topology
     {
@@ -35,9 +35,9 @@ final class LabController extends AbstractController
 
         return new Topology(
             nodes: [
-                'dns'     => ['id' => 'dns',     'x' => 30,  'y' => 40,  'w' => 190, 'label' => 'taizsys.xyz',     'sub' => $t('zone DNS'),                 'kind' => 'external'],
+                'dns'     => ['id' => 'dns',     'x' => 30,  'y' => 40,  'w' => 190, 'label' => 'raphael-jacquis.fr',     'sub' => $t('zone DNS'),                 'kind' => 'external'],
                 'gh'      => ['id' => 'gh',      'x' => 30,  'y' => 300, 'w' => 190, 'label' => 'GitHub',          'sub' => $t('dépôts / Actions / Pages'), 'kind' => 'external'],
-                'pages'   => ['id' => 'pages',   'x' => 300, 'y' => 300, 'w' => 200, 'label' => 'setup.taizsys.xyz', 'sub' => 'GitHub Pages / .ps1',     'kind' => 'service'],
+                'pages'   => ['id' => 'pages',   'x' => 300, 'y' => 300, 'w' => 250, 'label' => 'setup.raphael-jacquis.fr', 'sub' => 'GitHub Pages / .ps1',     'kind' => 'service'],
                 'nginx'   => ['id' => 'nginx',   'x' => 300, 'y' => 140, 'w' => 170, 'label' => 'nginx',           'sub' => $t('hôtes virtuels'),           'kind' => 'server'],
                 'symfony' => ['id' => 'symfony', 'x' => 550, 'y' => 60,  'w' => 180, 'label' => 'Mediatek86',      'sub' => 'Symfony / PHP-FPM',        'kind' => 'service'],
                 'docs'    => ['id' => 'docs',    'x' => 550, 'y' => 140, 'w' => 180, 'label' => 'Documentation',   'sub' => 'phpDocumentor',            'kind' => 'service'],

@@ -10,6 +10,7 @@ declare(strict_types=1);
  *   php bin/console db:query "SQL" [en]    exécute une requête en lecture et affiche le résultat
  *   php bin/console i18n:check             liste les textes de l'interface pas encore traduits
  *   php bin/console cache:clear            vide storage/cache (flux RSS)
+ *   php bin/console feeds:refresh          relit les flux RSS de la page Veille (tâche cron)
  *   php bin/console routes                 liste les routes, dans chaque langue
  */
 
@@ -18,6 +19,7 @@ require dirname(__DIR__) . '/src/bootstrap.php';
 use App\Container;
 use App\I18n\Translator;
 use App\Kernel;
+use App\Service\FeedReader;
 
 $root = dirname(__DIR__);
 $command = $argv[1] ?? 'help';
@@ -86,6 +88,18 @@ switch ($command) {
         printf("%d fichier(s) supprimé(s).\n", count($files));
         break;
 
+    case 'feeds:refresh':
+        // Lancé par cron : la page Veille lit toujours un cache frais et n'attend jamais un site tiers.
+        $config = require $root . '/config/app.php';
+        $reader = new FeedReader($root . '/storage/cache');
+        $failed = 0;
+        foreach ($config['feeds'] as $feed) {
+            $count = $reader->refresh($feed['url']);
+            $failed += $count === null ? 1 : 0;
+            printf("%-12s %s\n", $feed['name'], $count === null ? 'injoignable, ancien cache conservé' : "{$count} article(s)");
+        }
+        exit($failed > 0 ? 1 : 0);
+
     case 'routes':
         foreach (Kernel::routes()->all() as $route) {
             printf("%-14s %s\n", $route['name'], implode('   ', $route['patterns']));
@@ -93,5 +107,5 @@ switch ($command) {
         break;
 
     default:
-        echo "Commandes : db:build, db:query \"SELECT …\" [en], i18n:check, cache:clear, routes\n";
+        echo "Commandes : db:build, db:query \"SELECT …\" [en], i18n:check, cache:clear, feeds:refresh, routes\n";
 }

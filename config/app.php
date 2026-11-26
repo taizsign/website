@@ -8,7 +8,7 @@ return [
     'name'         => 'Raphaël Jacquis',
     'title'        => 'Raphaël Jacquis | Portfolio BTS SIO, systèmes et réseaux',
     'description'  => 'Portfolio de Raphaël Jacquis, étudiant en BTS SIO SLAM. Je recherche une alternance en administration systèmes et réseaux à Bordeaux pour la rentrée 2027.',
-    'url'          => 'https://taizsys.xyz',
+    'url'          => 'https://raphael-jacquis.fr',
     'email'        => 'raphaelpv@protonmail.com',
     'github'       => 'https://github.com/taizsign',
     'github_user'  => 'taizsign',
@@ -28,9 +28,9 @@ return [
 
     // Services surveillés sur la page Labo (sonde HTTP côté serveur).
     'uptime' => [
-        ['name' => 'mediatek.taizsys.xyz',      'url' => 'https://mediatek.taizsys.xyz/',      'role' => 'Mediatek86 / Symfony'],
-        ['name' => 'docs.mediatek.taizsys.xyz', 'url' => 'https://docs.mediatek.taizsys.xyz/', 'role' => 'Documentation / phpDocumentor'],
-        ['name' => 'setup.taizsys.xyz',         'url' => 'https://setup.taizsys.xyz/setup.ps1', 'role' => 'Script de déploiement / GitHub Pages'],
+        ['name' => 'mediatek.raphael-jacquis.fr',      'url' => 'https://mediatek.raphael-jacquis.fr/',      'role' => 'Mediatek86 / Symfony'],
+        ['name' => 'docs.mediatek.raphael-jacquis.fr', 'url' => 'https://docs.mediatek.raphael-jacquis.fr/', 'role' => 'Documentation / phpDocumentor'],
+        ['name' => 'setup.raphael-jacquis.fr',         'url' => 'https://setup.raphael-jacquis.fr/setup.ps1', 'role' => 'Script de déploiement / GitHub Pages'],
     ],
 
     // Flux lus par la page Veille (lang : langue des articles, ils ne sont pas traduits).

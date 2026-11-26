@@ -98,7 +98,7 @@ final class Uptime
                 CURLOPT_FOLLOWLOCATION => false,
                 CURLOPT_CONNECTTIMEOUT => self::TIMEOUT,
                 CURLOPT_TIMEOUT        => self::TIMEOUT,
-                CURLOPT_USERAGENT      => 'portfolio-uptime/1.0 (+https://taizsys.xyz)',
+                CURLOPT_USERAGENT      => 'portfolio-uptime/1.0 (+https://raphael-jacquis.fr)',
             ]);
             curl_multi_add_handle($multi, $handle);
             $handles[$target['url']] = $handle;

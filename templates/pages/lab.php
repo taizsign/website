@@ -39,12 +39,12 @@ $rackU = max(12, $totalU + 2);
 <section class="section section--tight">
     <div class="wrap">
         <div class="section__head">
-            <?= $this->rule($this->t('En production'), 'taizsys.xyz') ?>
+            <?= $this->rule($this->t('En production'), 'raphael-jacquis.fr') ?>
             <h2 class="h2" data-reveal><?= $this->t('Un VPS,<br>un domaine, trois services.') ?></h2>
         </div>
         <figure class="arch" data-reveal>
             <?= $this->topology($infra, 'topo-infra') ?>
-            <figcaption><?= $this->t("Un VPS OVH sous Ubuntu sert plusieurs sous-domaines de taizsys.xyz grâce aux hôtes virtuels nginx. Le code arrive par GitHub&nbsp;: déploiement SSH pour le VPS, GitHub Pages pour le script d'installation.") ?></figcaption>
+            <figcaption><?= $this->t("Un VPS OVH sous Ubuntu sert plusieurs sous-domaines de raphael-jacquis.fr grâce aux hôtes virtuels nginx. Le code arrive par GitHub&nbsp;: déploiement SSH pour le VPS, GitHub Pages pour le script d'installation.") ?></figcaption>
         </figure>
 
         <?php if ($showProbes): ?>
@@ -155,7 +155,7 @@ $rackU = max(12, $totalU + 2);
         <div class="split__main">
             <div class="term" data-reveal>
                 <div class="term__bar"><span></span><span></span><span></span><em><?= $this->t('PowerShell (administrateur)') ?></em></div>
-                <pre class="term__body"><span class="term__prompt">PS&gt;</span> irm https://setup.taizsys.xyz/setup.ps1 | iex</pre>
+                <pre class="term__body"><span class="term__prompt">PS&gt;</span> irm https://setup.raphael-jacquis.fr/setup.ps1 | iex</pre>
             </div>
             <ol class="steps" data-reveal>
                 <li><span><?= $this->t("<strong>Se relance en administrateur</strong> si besoin, et vérifie qu'on est au moins sous Windows 10.") ?></span></li>

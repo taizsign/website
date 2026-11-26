@@ -5,16 +5,16 @@
  * @var string $path
  * @var ?Throwable $error
  */
-$host = 'taizsys.xyz';
+$host = 'raphael-jacquis.fr';
 ?>
 <section class="page-head error">
     <div class="wrap">
         <?php if ($code === 404): ?>
             <pre class="trace" aria-hidden="true"><span>traceroute to <?= $this->e($host . $path) ?>, 30 hops max</span>
-<span> 1  box.local            0.42 ms</span>
-<span> 2  10.0.0.1             3.18 ms</span>
-<span> 3  bes-core.fai.net     8.77 ms</span>
-<span> 4  <?= $this->e($host) ?>          11.02 ms</span>
+<span> 1  box.local              0.42 ms</span>
+<span> 2  10.0.0.1               3.18 ms</span>
+<span> 3  bes-core.fai.net       8.77 ms</span>
+<span> 4  <?= $this->e(str_pad($host, 23)) ?>11.02 ms</span>
 <span> 5  * * *</span>
 <span> 6  * * *</span>
 <span class="trace__end"> 7  <?= $this->t('destination introuvable') ?></span></pre>

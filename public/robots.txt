@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://taizsys.xyz/sitemap.xml
+Sitemap: https://raphael-jacquis.fr/sitemap.xml

@@ -34,33 +34,55 @@ final class FeedReader
     }
 
     /**
+     * Relit le flux tout de suite et met le cache à jour. Lancé par cron
+     * (php bin/console feeds:refresh) pour qu'aucun visiteur n'attende les sites des flux.
+     *
+     * @return ?int le nombre d'articles lus, ou null si le flux n'a pas répondu
+     */
+    public function refresh(string $url): ?int
+    {
+        $items = $this->fetch($url);
+        if ($items === null) {
+            return null;
+        }
+
+        file_put_contents($this->cacheFile($url), json_encode($items, JSON_UNESCAPED_UNICODE), LOCK_EX);
+
+        return count($items);
+    }
+
+    /**
      * @return list<array{title: string, url: string, date: ?int}>
      */
     private function all(string $url): array
     {
-        $max = PHP_INT_MAX;
-        $cacheFile = $this->cacheDir . '/feed-' . md5($url) . '.json';
+        $cacheFile = $this->cacheFile($url);
+        $cached = is_file($cacheFile) ? json_decode((string) file_get_contents($cacheFile), true) : null;
 
-        if (is_file($cacheFile) && time() - filemtime($cacheFile) < self::TTL) {
-            $cached = json_decode((string) file_get_contents($cacheFile), true);
-            if (is_array($cached)) {
-                return array_slice($cached, 0, $max);
-            }
+        if (is_array($cached) && time() - filemtime($cacheFile) < self::TTL) {
+            return $cached;
         }
 
         $items = $this->fetch($url);
 
         if ($items !== null) {
             file_put_contents($cacheFile, json_encode($items, JSON_UNESCAPED_UNICODE), LOCK_EX);
-            return array_slice($items, 0, $max);
+            return $items;
         }
 
-        // Flux injoignable : on ressert l'ancien cache, même périmé, plutôt que rien.
-        if (is_file($cacheFile)) {
-            return array_slice(json_decode((string) file_get_contents($cacheFile), true) ?: [], 0, $max);
+        // Flux injoignable : on ressert l'ancien cache, même périmé, plutôt que rien,
+        // et on ne réessaie que dans une heure, pour ne pas faire attendre chaque visiteur.
+        if (is_array($cached)) {
+            @touch($cacheFile);
+            return $cached;
         }
 
         return [];
+    }
+
+    private function cacheFile(string $url): string
+    {
+        return $this->cacheDir . '/feed-' . md5($url) . '.json';
     }
 
     /**

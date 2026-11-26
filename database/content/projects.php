@@ -139,8 +139,8 @@ CS,
         'video'   => 'WEkONaJWiqM',
 
         'links' => [
-            ['Site en ligne', 'https://mediatek.taizsys.xyz/'],
-            ['Documentation technique', 'https://docs.mediatek.taizsys.xyz/'],
+            ['Site en ligne', 'https://mediatek.raphael-jacquis.fr/'],
+            ['Documentation technique', 'https://docs.mediatek.raphael-jacquis.fr/'],
             ['Dépôt GitHub', 'https://github.com/taizsign/mediatek86'],
         ],
 
